@@ -1,15 +1,17 @@
 import express from 'express';
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import usersService from "./service/users.js";
 
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 
-app.get("/", (req,res)=> {
-    res.send("hello!")
-})
+/*
+@desc: all routes apis
+*/
+app.use('/', usersService);
 
 const PORT = 5000;
 const DB_URI = "mongodb+srv://Aryamitra:arya123@dev-inside-db.1b4g9yd.mongodb.net/?retryWrites=true&w=majority"
