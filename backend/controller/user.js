@@ -14,7 +14,7 @@ export const registerUser = async (req, res) => {
         // See if user exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ "msg": "User already exists" });
+            return res.status(400).json({ msg: "User already exists" });
         }
 
         // Encrypt password
@@ -27,9 +27,9 @@ export const registerUser = async (req, res) => {
         user.save();
 
         // Return jsonwebtoken
-        const token = jwt.sign({"user" : { "email": user.email, "id": user._id }}, "meawmeaw", { expiresIn: "12h" });
-        return res.status(200).json({ "msg": "Success", "token": token });
+        const token = jwt.sign({user : { id: user._id }}, "meawmeaw", { expiresIn: "12h" });
+        return res.status(200).json({ msg: "Success", token: token });
     } catch (error) {
-        return res.status(204).json({ "msg": "Error" });
+        return res.status(204).json({ msg: "Error" });
     }
 }
