@@ -21,14 +21,40 @@ export const registerUser = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const encryptedPassword = await bcrypt.hash(password, salt);
 
-
         //saving user
         const user = await new User({ name: name, email: email, avatar: avatar, password: encryptedPassword });
         user.save();
 
         // Return jsonwebtoken
-        const token = jwt.sign({user : { id: user._id }}, "meawmeaw", { expiresIn: "12h" });
+        const token = jwt.sign({ user: { id: user._id } }, "meawmeaw", { expiresIn: "12h" });
         return res.status(200).json({ msg: "Success", token: token });
+
+    } catch (error) {
+        return res.status(204).json({ msg: "Error" });
+    }
+}
+
+export const loginUser = async (req, res) => {
+    try {
+        
+        const { email, password } = req.body;
+
+        // Check if the user exists
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ msg: "Invalid Credentials" });
+        }
+
+        // Check if the password matches
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ msg: "Invalid Credentials" });
+        }
+
+        // Return jsonwebtoken
+        const token = jwt.sign({ user: { id: user._id } }, "meawmeaw", { expiresIn: "12h" });
+        return res.status(200).json({ msg: "Success", token: token });
+
     } catch (error) {
         return res.status(204).json({ msg: "Error" });
     }
@@ -39,6 +65,6 @@ export const getProfileInfo = async (req, res) => {
         const user = await User.findById(req.user.id).select('-password');
         return res.json(user);
     } catch (error) {
-        res.status(404).json({msg: "Server issue"});
+        res.status(404).json({ msg: "Server issue" });
     }
 }

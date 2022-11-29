@@ -1,5 +1,5 @@
 import express from "express";
-import { registerUser, getProfileInfo } from "../controller/user.js";
+import { registerUser, loginUser, getProfileInfo } from "../controller/user.js";
 import { auth } from "../middleware/auth.js";
 const router = express.Router();
 
@@ -10,6 +10,14 @@ const router = express.Router();
 @desc: Register a new user
 */
 router.post("/register", registerUser);
+
+/*
+@route: /login
+@method: POST
+@access: Public
+@desc: Login existing user
+*/
+router.post("/login", loginUser);
 
 /*
 @route: /myprofile
