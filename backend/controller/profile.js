@@ -1,4 +1,5 @@
 import Profile from "../model/Profile.js";
+import User from "../model/User.js";
 
 export const getMyProfile = async (req, res) => {
     try {
@@ -18,7 +19,7 @@ export const getProfileById = async (req, res) => {
         if (!profile) return res.status(400).json({ msg: "No profile found" });
         return res.json(profile);
     } catch (error) {
-        if(error.kind === "ObjectId"){
+        if (error.kind === "ObjectId") {
             return res.status(400).json({ msg: "No profile found" });
         }
         res.status(500).json({ msg: "Server Error" });
@@ -71,6 +72,22 @@ export const createUpdateProfile = async (req, res) => {
             return res.json(profileFields);
         }
 
+    } catch (error) {
+        res.status(404).json({ msg: "Server Error" });
+    }
+}
+
+export const deleteProfile = async (req, res) => {
+    try {
+        //@todo: remove users post
+        
+        //Removing profile
+        await Profile.findOneAndRemove({user: req.user.id});
+
+        //Removing User
+        await User.findOneAndRemove({_id: req.user.id});
+
+        return res.json({msg: "Profile Deleted"})
     } catch (error) {
         res.status(404).json({ msg: "Server Error" });
     }

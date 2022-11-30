@@ -1,6 +1,6 @@
 import express from "express";
 import { auth } from "../middleware/auth.js";
-import { getMyProfile, createUpdateProfile, getAllProfiles, getProfileById } from "../controller/profile.js";
+import { getMyProfile, createUpdateProfile, getAllProfiles, getProfileById, deleteProfile } from "../controller/profile.js";
 const router = express.Router();
 
 /*
@@ -36,6 +36,13 @@ router.get("/allprofiles/profile/:id", getProfileById);
 */
 router.post("/createupdateprofile", auth, createUpdateProfile);
 
+/*
+@route: /deleteprofile
+@method: DELETE
+@access: Private
+@desc: Deleting profile
+*/
+router.delete("/deleteprofile", auth, deleteProfile);
 
 
 export default router;
