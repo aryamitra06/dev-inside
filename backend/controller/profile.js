@@ -2,11 +2,33 @@ import Profile from "../model/Profile.js";
 
 export const getMyProfile = async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar']);
+        const profile = await Profile.findOne({ user: req.user.id }).populate("user", ['name', 'avatar']);
         if (!profile) {
             return res.status(400).json({ msg: 'No profile found' });
         }
         return res.json(profile);
+    } catch (error) {
+        res.status(500).json({ msg: "Server Error" });
+    }
+}
+
+export const getProfileById = async (req, res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.params.id }).populate("user", ['name', 'avatar']);
+        if (!profile) return res.status(400).json({ msg: "No profile found" });
+        return res.json(profile);
+    } catch (error) {
+        if(error.kind === "ObjectId"){
+            return res.status(400).json({ msg: "No profile found" });
+        }
+        res.status(500).json({ msg: "Server Error" });
+    }
+}
+
+export const getAllProfiles = async (req, res) => {
+    try {
+        const profiles = await Profile.find().populate("user", ['name', 'avatar']);
+        return res.json(profiles);
     } catch (error) {
         res.status(500).json({ msg: "Server Error" });
     }

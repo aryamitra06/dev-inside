@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const profileSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "user"
+        ref: 'user'
     },
     company: {
         type: String
@@ -110,6 +110,6 @@ const profileSchema = mongoose.Schema({
     }
 });
 
-const Profile = mongoose.model('Profile', profileSchema);
+const Profile = mongoose.model('profile', profileSchema);
 
 export default Profile;
