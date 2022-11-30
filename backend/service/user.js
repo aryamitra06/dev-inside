@@ -20,12 +20,12 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 /*
-@route: /myprofile
+@route: /user
 @method: GET
 @access: Private
 @header: x-auth-token
 @desc: Fetching details of loggedin user
 */
-router.get("/myprofile", auth, getProfileInfo)
+router.get("/user", auth, getProfileInfo)
 
 export default router;
