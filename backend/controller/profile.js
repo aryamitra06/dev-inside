@@ -1,3 +1,5 @@
+import axios from "axios";
+import CircularJSON from "circular-json";
 import Profile from "../model/Profile.js";
 import User from "../model/User.js";
 
@@ -173,6 +175,21 @@ export const deleteProfileEducation = async (req, res) => {
             await profile.save();
             return res.json(profile);
         }
+    } catch (error) {
+        res.status(404).json({ msg: "Server Error" });
+    }
+}
+
+export const getGithubRepos = async (req, res) => {
+    try {
+        axios.get(`https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=cc12274ac8bf9f009c44&client_secret=2281750b65113c1f8571ae59768ddab6ec0a497c`,
+            { headers: { Accept: 'application/json', 'Accept-Encoding': 'identity' }, params: { trophies: true } })
+            .then((response) => {
+                return res.json(response.data);
+            }).catch((error) => {
+                return res.json({ msg: "Github profile not found" });
+            })
+
     } catch (error) {
         res.status(404).json({ msg: "Server Error" });
     }

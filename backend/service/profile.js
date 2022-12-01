@@ -10,7 +10,8 @@ import {
     addProfileExperience,
     deleteProfileExperience,
     addProfileEducation,
-    deleteProfileEducation
+    deleteProfileEducation,
+    getGithubRepos
 } from "../controller/profile.js";
 
 const router = express.Router();
@@ -95,5 +96,13 @@ router.post("/addeducation", auth, addProfileEducation)
 @desc: Delete profile education
 */
 router.delete("/deleteeducation/:id", auth, deleteProfileEducation);
+
+/*
+@route: /github/:username
+@method: GET
+@access: Public
+@desc: Get user repos from Github
+*/
+router.get("/github/:username", getGithubRepos);
 
 export default router;
