@@ -35,7 +35,7 @@ export const getAllProfiles = async (req, res) => {
     }
 }
 
-export const createUpdateProfile = async (req, res) => {
+export const createProfile = async (req, res) => {
     const { company, website, location, bio, status, githubusername, skills, youtube, facebook, twitter, instagram, linkedin } = req.body;
     const profileFields = {};
     profileFields.user = req.user.id;
@@ -58,36 +58,121 @@ export const createUpdateProfile = async (req, res) => {
     if (linkedin) profileFields.social.linkedin = linkedin;
 
     try {
-        // If the profile is available only that case user can update otherwise make new one
-        if (Profile.findOne({ user: req.user.id })) {
-            await Profile.findOneAndUpdate(
-                { user: req.user.id },
-                { $set: profileFields },
-                { new: true })
-            return res.json(profileFields);
-        }
-        else {
-            const profile = new Profile(profileFields);
-            await profile.save();
-            return res.json(profileFields);
-        }
+        const profile = new Profile(profileFields);
+        await profile.save();
+        return res.json(profileFields);
 
     } catch (error) {
         res.status(404).json({ msg: "Server Error" });
     }
 }
 
+export const updateProfile = async (req, res) => {
+
+    const { company, website, location, bio, status, githubusername, skills, youtube, facebook, twitter, instagram, linkedin } = req.body;
+    const profileFields = {};
+    profileFields.user = req.user.id;
+    if (company) profileFields.company = company;
+    if (website) profileFields.website = website;
+    if (location) profileFields.location = location;
+    if (bio) profileFields.bio = bio;
+    if (status) profileFields.status = status;
+    if (githubusername) profileFields.githubusername = githubusername;
+    if (skills) {
+        profileFields.skills = skills.split(',').map(skill => skill.trim());
+    }
+
+    // Social objects
+    profileFields.social = {};
+    if (youtube) profileFields.social.youtube = youtube;
+    if (facebook) profileFields.social.facebook = facebook;
+    if (twitter) profileFields.social.twitter = twitter;
+    if (instagram) profileFields.social.instagram = instagram;
+    if (linkedin) profileFields.social.linkedin = linkedin;
+
+    await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true })
+    return res.json(profileFields);
+}
+
 export const deleteProfile = async (req, res) => {
     try {
         //@todo: remove users post
-        
+
         //Removing profile
-        await Profile.findOneAndRemove({user: req.user.id});
+        await Profile.findOneAndRemove({ user: req.user.id });
 
         //Removing User
-        await User.findOneAndRemove({_id: req.user.id});
+        await User.findOneAndRemove({ _id: req.user.id });
 
-        return res.json({msg: "Profile Deleted"})
+        return res.json({ msg: "Profile Deleted" })
+    } catch (error) {
+        res.status(404).json({ msg: "Server Error" });
+    }
+}
+
+export const addProfileExperience = async (req, res) => {
+    const { title, company, location, from, to, current, description } = req.body;
+    const newExp = { title, company, location, from, to, current, description };
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+        profile.experience.unshift(newExp);
+        await profile.save();
+        return res.json(profile);
+    } catch (error) {
+        res.status(404).json({ msg: "Server Error" });
+    }
+}
+
+export const deleteProfileExperience = async (req, res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        // Get remove index
+        const removeIndex = profile.experience.map(item => item.id).indexOf(req.params.id);
+        if (removeIndex === -1) {
+            return res.json({ msg: "Experience not found" });
+        }
+        else {
+            profile.experience.splice(removeIndex, 1);
+            await profile.save();
+            return res.json(profile);
+        }
+    } catch (error) {
+        res.status(404).json({ msg: "Server Error" });
+    }
+}
+
+export const addProfileEducation = async (req, res) => {
+    const { school, degree, fieldofstudy, from, to, current, description } = req.body;
+    const newEdu = { school, degree, fieldofstudy, from, to, current, description };
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+        profile.education.unshift(newEdu);
+        await profile.save();
+        return res.json(profile);
+    } catch (error) {
+        res.status(404).json({ msg: "Server Error" });
+    }
+}
+
+export const deleteProfileEducation = async (req, res) => {
+
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        // Get remove index
+        const removeIndex = profile.education.map(item => item.id).indexOf(req.params.id);
+        if (removeIndex === -1) {
+            return res.json({ msg: "Education not found" });
+        }
+        else {
+            profile.education.splice(removeIndex, 1);
+            await profile.save();
+            return res.json(profile);
+        }
     } catch (error) {
         res.status(404).json({ msg: "Server Error" });
     }

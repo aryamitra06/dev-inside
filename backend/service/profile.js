@@ -1,6 +1,18 @@
 import express from "express";
 import { auth } from "../middleware/auth.js";
-import { getMyProfile, createUpdateProfile, getAllProfiles, getProfileById, deleteProfile } from "../controller/profile.js";
+import {
+    getMyProfile,
+    createProfile,
+    updateProfile,
+    getAllProfiles,
+    getProfileById,
+    deleteProfile,
+    addProfileExperience,
+    deleteProfileExperience,
+    addProfileEducation,
+    deleteProfileEducation
+} from "../controller/profile.js";
+
 const router = express.Router();
 
 /*
@@ -29,12 +41,20 @@ router.get("/allprofiles/profile/:id", getProfileById);
 
 
 /*
-@route: /createupdateprofile
+@route: /createprofile
 @method: POST
 @access: Private
 @desc: Creating new profile
 */
-router.post("/createupdateprofile", auth, createUpdateProfile);
+router.post("/createprofile", auth, createProfile);
+
+/*
+@route: /updateprofile
+@method: PUT
+@access: Private
+@desc: Updating existing profile
+*/
+router.put("/updateprofile", auth, updateProfile);
 
 /*
 @route: /deleteprofile
@@ -44,5 +64,36 @@ router.post("/createupdateprofile", auth, createUpdateProfile);
 */
 router.delete("/deleteprofile", auth, deleteProfile);
 
+/*
+@route: /addexperience
+@method: PUT
+@access: Private
+@desc: Add profile experience
+*/
+router.put("/addexperience", auth, addProfileExperience)
+
+/*
+@route: /deleteexperience
+@method: PUT
+@access: Private
+@desc: Delete profile experience
+*/
+router.delete("/deleteexperience/:id", auth, deleteProfileExperience)
+
+/*
+@route: /addeducation
+@method: POST
+@access: Private
+@desc: Add profile education
+*/
+router.post("/addeducation", auth, addProfileEducation)
+
+/*
+@route: /deleteeducation/:id
+@method: DELETE
+@access: Private
+@desc: Delete profile education
+*/
+router.delete("/deleteeducation/:id", auth, deleteProfileEducation);
 
 export default router;
