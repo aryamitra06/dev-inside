@@ -1,5 +1,5 @@
 import express from "express";
-import { addNewPost, getPosts, getPostById, deletePost, addNewComment, deleteComment } from "../controller/post.js";
+import { addNewPost, getPosts, getPostById, deletePost, addNewComment, deleteComment, likePost, unlikePost } from "../controller/post.js";
 import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -37,7 +37,7 @@ router.get("/post/:id", auth, getPostById);
 router.delete("/post/delete/:id", auth, deletePost);
 
 /*
-@route: comment/new/:id
+@route: /comment/new/:id
 @method: POST
 @access: Private
 @desc: Commenting on a post
@@ -45,11 +45,27 @@ router.delete("/post/delete/:id", auth, deletePost);
 router.post("/comment/new/:id", auth, addNewComment);
 
 /*
-@route: comment/delete/:post_id/:comment_id
+@route: /comment/delete/:post_id/:comment_id
 @method: DELETE
 @access: Private
 @desc: Deleting a comment
 */
 router.delete("/comment/delete/:post_id/:comment_id", auth, deleteComment);
+
+/*
+@route: /like/new/:id
+@method: POST
+@access: Private
+@desc: Liking a post
+*/
+router.post("/like/new/:id", auth, likePost);
+
+/*
+@route: /unlike/:id
+@method: POST
+@access: Private
+@desc: Unliking a post
+*/
+router.post("/unlike/:id", auth, unlikePost);
 
 export default router;
