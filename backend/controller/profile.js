@@ -1,5 +1,4 @@
 import axios from "axios";
-import CircularJSON from "circular-json";
 import Profile from "../model/Profile.js";
 import User from "../model/User.js";
 

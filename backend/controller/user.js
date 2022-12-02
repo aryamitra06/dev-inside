@@ -26,7 +26,7 @@ export const registerUser = async (req, res) => {
         user.save();
 
         // Return jsonwebtoken
-        const token = jwt.sign({ user: { id: user._id } }, "meawmeaw", { expiresIn: "12h" });
+        const token = jwt.sign({ user: { id: user._id } }, "meawmeaw", { expiresIn: "7d" });
         return res.status(200).json({ msg: "Success", token: token });
 
     } catch (error) {
