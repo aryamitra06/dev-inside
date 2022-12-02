@@ -1,5 +1,5 @@
 import express from "express";
-import { addNewPost, getPosts, getPostById, deletePost } from "../controller/post.js";
+import { addNewPost, getPosts, getPostById, deletePost, addNewComment, deleteComment } from "../controller/post.js";
 import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -35,5 +35,21 @@ router.get("/post/:id", auth, getPostById);
 @desc: Deleting post by id
 */
 router.delete("/post/delete/:id", auth, deletePost);
+
+/*
+@route: comment/new/:id
+@method: POST
+@access: Private
+@desc: Commenting on a post
+*/
+router.post("/comment/new/:id", auth, addNewComment);
+
+/*
+@route: comment/delete/:post_id/:comment_id
+@method: DELETE
+@access: Private
+@desc: Deleting a comment
+*/
+router.delete("/comment/delete/:post_id/:comment_id", auth, deleteComment);
 
 export default router;
