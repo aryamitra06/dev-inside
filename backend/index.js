@@ -2,7 +2,8 @@ import express from 'express';
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import userService from "./service/user.js";
-import profileService from "./service/profile.js"
+import profileService from "./service/profile.js";
+import postServices from "./service/post.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 */
 app.use('/', userService);
 app.use('/', profileService);
+app.use('/', postServices);
 
 
 const PORT = 5000;
