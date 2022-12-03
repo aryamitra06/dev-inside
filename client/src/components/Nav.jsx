@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import {
   Box,
   Flex,
@@ -14,9 +13,10 @@ import {
   MenuList,
   Container,
 } from '@chakra-ui/react';
-import { HamburgerIcon, SearchIcon, SunIcon, MoonIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import devinside_logo from "../static/devinside_logo.svg";
 import SettingsModal from './SettingsModal';
+import { Link } from 'react-router-dom';
 export default function Nav() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -36,11 +36,11 @@ export default function Nav() {
               <MenuItem onClick={onOpen}>Settings</MenuItem>
             </MenuList>
           </Menu>
-          <Image src={devinside_logo} height={10} width={10} />
+          <Link to={"/"}><Image src={devinside_logo} height={10} width={10} /></Link>
         </HStack>
         <HStack>
           <IconButton icon={<SearchIcon />} />
-          <Button colorScheme='blue' variant={"outline"} size={"sm"}>Create account</Button>
+          <Link to={"/signup"}><Button colorScheme='blue' variant={"outline"} size={"sm"}>Create account</Button></Link>
         </HStack>
       </Flex>
     )
