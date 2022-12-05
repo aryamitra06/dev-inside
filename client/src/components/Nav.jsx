@@ -17,8 +17,13 @@ import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import devinside_logo from "../static/devinside_logo.svg";
 import SettingsModal from './SettingsModal';
 import { Link } from 'react-router-dom';
+import decode from 'jwt-decode';
+
 export default function Nav() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const decodedToken = decode(localStorage.getItem("token"));
+  console.log(decodedToken.user.id);
 
   const Navbar = () => {
     return (

@@ -12,11 +12,18 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  Alert,
+  AlertIcon
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 
+import { useDispatch, useSelector } from "react-redux";
+import { signUpAction } from "../redux/actions/authAction";
+
 export default function Signup() {
+  const dispatch = useDispatch();
+  const { error, loading, response } = useSelector((state) => state.signup);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -31,8 +38,7 @@ export default function Signup() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    //api post form submit request
-    console.log(formData);
+    dispatch(signUpAction(formData));
   }
 
   return (
@@ -60,16 +66,16 @@ export default function Signup() {
               <Stack spacing={4}>
                 <FormControl id="Name" isRequired>
                   <FormLabel>Name</FormLabel>
-                  <Input type="text" name='name' value={name} onChange={(e) => onChange(e)} />
+                  <Input type="text" name='name' value={name} onChange={(e) => onChange(e)} isDisabled={loading} />
                 </FormControl>
                 <FormControl id="email" isRequired>
                   <FormLabel>Email address</FormLabel>
-                  <Input type="email" name='email' value={email} onChange={(e) => onChange(e)} />
+                  <Input type="email" name='email' value={email} onChange={(e) => onChange(e)} isDisabled={loading} />
                 </FormControl>
                 <FormControl id="password" isRequired>
                   <FormLabel>Password</FormLabel>
                   <InputGroup>
-                    <Input type={showPassword ? 'text' : 'password'} name='password' value={password} onChange={(e) => onChange(e)} />
+                    <Input type={showPassword ? 'text' : 'password'} name='password' value={password} onChange={(e) => onChange(e)} isDisabled={loading} />
                     <InputRightElement h={'full'}>
                       <Button
                         variant={'ghost'}
@@ -83,6 +89,7 @@ export default function Signup() {
                 </FormControl>
                 <Stack spacing={10} pt={2}>
                   <Button
+                    isDisabled={loading}
                     type='submit'
                     loadingText="Submitting"
                     size="lg"
@@ -99,6 +106,22 @@ export default function Signup() {
                 </Stack>
               </Stack>
             </Box>
+            {
+              error && (
+                <Alert status='error' borderRadius={"md"}>
+                  <AlertIcon />
+                  {error.msg}
+                </Alert>
+              )
+            }
+            {
+              response && (
+                <Alert status='success' borderRadius={"md"}>
+                  <AlertIcon />
+                  {response.msg}
+                </Alert>
+              )
+            }
           </Stack>
         </Flex>
       </form>
