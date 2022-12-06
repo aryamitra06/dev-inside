@@ -14,7 +14,8 @@ import {
   MenuList,
   Container,
   Text,
-  Avatar
+  Avatar,
+  Skeleton
 } from '@chakra-ui/react';
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import devinside_logo from "../static/devinside_logo.svg";
@@ -41,6 +42,7 @@ export default function Nav() {
   const response = useSelector((state)=> state.user);
 
 
+
   const Navbar = () => {
     return (
       <Flex h={14} alignItems={'center'} justifyContent={'space-between'}>
@@ -65,7 +67,13 @@ export default function Nav() {
             idGetter() ? (
               <HStack>
                 <Avatar name={response?.response?.name} size={"sm"} src={response?.response?.avatar} />
-                <Text>{response?.response?.name}</Text>
+                {
+                  response.loading ? (
+                    <Skeleton height='20px' width={"100px"}/>
+                  ) : (
+                    <Text>{response?.response?.name}</Text>
+                  )
+                }
                 <Button size={"sm"} variant={"outline"} colorScheme='blue' onClick={logOutHandler}>Logout</Button>
               </HStack>
             ) : (

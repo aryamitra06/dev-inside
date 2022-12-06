@@ -1,10 +1,6 @@
 import axios from "axios";
 import { USER_REQUEST, USER_SUCCESS, USER_FAIL } from "../constants/types";
 
-const API = axios.create({ baseURL: 'http://localhost:5000' });
-
-
-
 export const userAction = (token) => async (dispatch) => {
     try {
         dispatch({ type: USER_REQUEST });
