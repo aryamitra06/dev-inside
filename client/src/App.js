@@ -12,6 +12,7 @@ import Login from './pages/Login';
 
 import { Provider } from "react-redux";
 import store from './store';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route exact path="/" element={<Welcome />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
         </Routes>

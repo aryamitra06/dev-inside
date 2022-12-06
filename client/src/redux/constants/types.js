@@ -9,3 +9,7 @@ export const LOG_IN_FAIL = "LOG_IN_FAIL";
 export const USER_REQUEST = "USER_REQUEST";
 export const USER_SUCCESS = "USER_SUCCESS";
 export const USER_FAIL = "USER_FAIL";
+
+export const MY_PROFILE_REQUEST = "MY_PROFILE_REQUEST";
+export const MY_PROFILE_SUCCESS = "MY_PROFILE_SUCCESS";
+export const MY_PROFILE_FAIL = "MY_PROFILE_FAIL";

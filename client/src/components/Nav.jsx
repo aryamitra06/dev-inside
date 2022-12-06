@@ -15,14 +15,16 @@ import {
   Container,
   Text,
   Avatar,
-  Skeleton
+  Skeleton,
+  Tag,
+  TagLabel
 } from '@chakra-ui/react';
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import devinside_logo from "../static/devinside_logo.svg";
 import SettingsModal from './SettingsModal';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import {userAction} from "../redux/actions/userAction";
+import { userAction } from "../redux/actions/userAction";
 import { idGetter, tokenGetter } from '../utils/tokenIdGetter';
 
 export default function Nav() {
@@ -35,11 +37,11 @@ export default function Nav() {
     window.location.href = "/login";
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(userAction(tokenGetter()));
   }, [dispatch])
 
-  const response = useSelector((state)=> state.user);
+  const response = useSelector((state) => state.user);
 
 
 
@@ -55,7 +57,7 @@ export default function Nav() {
               variant='outline'
             />
             <MenuList>
-              <MenuItem>Developers</MenuItem>
+              <MenuItem><Link to={"/dashboard"}>Dashboard</Link></MenuItem>
               <MenuItem onClick={onOpen}>Settings</MenuItem>
             </MenuList>
           </Menu>
@@ -66,12 +68,20 @@ export default function Nav() {
           {
             idGetter() ? (
               <HStack>
-                <Avatar name={response?.response?.name} size={"sm"} src={response?.response?.avatar} />
                 {
                   response.loading ? (
-                    <Skeleton height='20px' width={"100px"}/>
+                    <Skeleton height='20px' width={"100px"} />
                   ) : (
-                    <Text>{response?.response?.name}</Text>
+                    <Tag size='lg' colorScheme='blue' borderRadius='full'>
+                      <Avatar
+                        src={response?.response?.avatar}
+                        size='xs'
+                        name={response?.response?.name}
+                        ml={-1}
+                        mr={2}
+                      />
+                      <TagLabel>{response?.response?.name}</TagLabel>
+                    </Tag>
                   )
                 }
                 <Button size={"sm"} variant={"outline"} colorScheme='blue' onClick={logOutHandler}>Logout</Button>
