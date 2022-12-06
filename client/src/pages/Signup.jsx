@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import {
   Flex,
   Box,
@@ -20,9 +20,12 @@ import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from "react-redux";
 import { signUpAction } from "../redux/actions/authAction";
+import { idGetter } from '../utils/tokenIdGetter';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { error, loading, response } = useSelector((state) => state.signup);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -40,6 +43,12 @@ export default function Signup() {
     e.preventDefault();
     dispatch(signUpAction(formData));
   }
+
+  useEffect(() => {
+    if (idGetter()) {
+      navigate("/");
+    }
+  }, [navigate])
 
   return (
     <Fragment>

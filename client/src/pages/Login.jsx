@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import {
     Flex,
     Box,
@@ -11,10 +11,19 @@ import {
     Button,
     Heading,
     Text,
-    useColorModeValue,
+    Alert,
+    AlertIcon,
+    useColorModeValue
 } from '@chakra-ui/react';
+import { useDispatch, useSelector } from "react-redux";
+import { logInAction } from '../redux/actions/authAction';
+import { idGetter } from '../utils/tokenIdGetter';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { error, loading, response } = useSelector((state) => state.login);
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -27,9 +36,14 @@ export default function Login() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        //api post form submit request
-        console.log(formData);
+        dispatch(logInAction(formData));
     }
+
+    useEffect(()=> {
+        if (idGetter()) {
+            navigate("/");
+        }
+    },[navigate])
 
     return (
         <form onSubmit={(e) => onSubmit(e)}>
@@ -51,13 +65,13 @@ export default function Login() {
                         boxShadow={'lg'}
                         p={8}>
                         <Stack spacing={4}>
-                            <FormControl id="email">
+                            <FormControl id="email" isRequired>
                                 <FormLabel>Email address</FormLabel>
-                                <Input type="email" name='email' value={email} onChange={(e) => onChange(e)} />
+                                <Input type="email" name='email' value={email} onChange={(e) => onChange(e)} isDisabled={loading} />
                             </FormControl>
-                            <FormControl id="password">
+                            <FormControl id="password" isRequired>
                                 <FormLabel>Password</FormLabel>
-                                <Input type="password" name='password' value={password} onChange={(e) => onChange(e)} />
+                                <Input type="password" name='password' value={password} onChange={(e) => onChange(e)} isDisabled={loading} />
                             </FormControl>
                             <Stack spacing={10}>
                                 <Stack
@@ -68,6 +82,7 @@ export default function Login() {
                                     <Link color={'blue.400'}>Forgot password?</Link>
                                 </Stack>
                                 <Button
+                                    isDisabled={loading}
                                     type='submit'
                                     bg={'blue.400'}
                                     color={'white'}
@@ -79,6 +94,22 @@ export default function Login() {
                             </Stack>
                         </Stack>
                     </Box>
+                    {
+                        error && (
+                            <Alert status='error' borderRadius={"md"}>
+                                <AlertIcon />
+                                {error.msg}
+                            </Alert>
+                        )
+                    }
+                    {
+                        response && (
+                            <Alert status='success' borderRadius={"md"}>
+                                <AlertIcon />
+                                {response.msg}
+                            </Alert>
+                        )
+                    }
                 </Stack>
             </Flex>
         </form>

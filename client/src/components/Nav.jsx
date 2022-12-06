@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -12,18 +13,33 @@ import {
   MenuItem,
   MenuList,
   Container,
+  Text,
+  Avatar
 } from '@chakra-ui/react';
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import devinside_logo from "../static/devinside_logo.svg";
 import SettingsModal from './SettingsModal';
 import { Link } from 'react-router-dom';
-import decode from 'jwt-decode';
+import { useDispatch, useSelector } from "react-redux";
+import {userAction} from "../redux/actions/userAction";
+import { idGetter, tokenGetter } from '../utils/tokenIdGetter';
 
 export default function Nav() {
+  const dispatch = useDispatch();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const decodedToken = decode(localStorage.getItem("token"));
-  console.log(decodedToken.user.id);
+  const logOutHandler = () => {
+    localStorage.clear();
+    window.location.href = "/login";
+  }
+
+  useEffect(()=> {
+    dispatch(userAction(tokenGetter()));
+  }, [dispatch])
+
+  const response = useSelector((state)=> state.user);
+
 
   const Navbar = () => {
     return (
@@ -45,7 +61,17 @@ export default function Nav() {
         </HStack>
         <HStack>
           <IconButton icon={<SearchIcon />} />
-          <Link to={"/signup"}><Button colorScheme='blue' variant={"outline"} size={"sm"}>Create account</Button></Link>
+          {
+            idGetter() ? (
+              <HStack>
+                <Avatar name={response?.response?.name} size={"sm"} src={response?.response?.avatar} />
+                <Text>{response?.response?.name}</Text>
+                <Button size={"sm"} variant={"outline"} colorScheme='blue' onClick={logOutHandler}>Logout</Button>
+              </HStack>
+            ) : (
+              <Link to={"/signup"}><Button colorScheme='blue' variant={"outline"} size={"sm"}>Create account</Button></Link>
+            )
+          }
         </HStack>
       </Flex>
     )

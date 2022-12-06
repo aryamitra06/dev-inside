@@ -1,4 +1,4 @@
-import { SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAIL } from "../constants/types";
+import { SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAIL, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAIL } from "../constants/types";
 
 const initialState = {
     response: null,
@@ -11,9 +11,25 @@ export const signUpReducer = (state = initialState, action) => {
         case SIGN_UP_REQUEST:
             return { response: null, loading: true, error: false };
         case SIGN_UP_SUCCESS:
-            localStorage.setItem('token', JSON.stringify(action.payload.token));
+            localStorage.setItem('token', action.payload.token);
             return { response: action.payload, loading: false, error: false };
         case SIGN_UP_FAIL:
+            localStorage.removeItem('token');
+            return { response: null, loading: false, error: action.payload }
+        default:
+            return state;
+    }
+}
+
+export const logInReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case LOG_IN_REQUEST:
+            return { response: null, loading: true, error: false };
+        case LOG_IN_SUCCESS:
+            localStorage.setItem('token', action.payload.token);
+            return { response: action.payload, loading: false, error: false };
+        case LOG_IN_FAIL:
+            localStorage.removeItem('token');
             return { response: null, loading: false, error: action.payload }
         default:
             return state;

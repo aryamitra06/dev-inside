@@ -19,7 +19,7 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route exact path="/hi" element={<Welcome />} />
+          <Route exact path="/" element={<Welcome />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
         </Routes>

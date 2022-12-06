@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 export const auth = async (req, res, next) => {
         //Get token from header
-        const token = req.header('x-auth-token');
+        const token = req.headers.authorization;
 
         //Check if not token
         if(!token){
