@@ -2,7 +2,7 @@ import { MY_PROFILE_REQUEST, MY_PROFILE_SUCCESS, MY_PROFILE_FAIL, CREATE_PROFILE
 
 const initialState = {
     response: {},
-    loading: false,
+    loading: true,
     error: false,
 }
 

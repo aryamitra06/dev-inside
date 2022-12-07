@@ -2,7 +2,7 @@ import { USER_REQUEST, USER_SUCCESS, USER_FAIL } from "../constants/types";
 
 const initialState = {
     response: {},
-    loading: false,
+    loading: true,
     error: false,
 }
 

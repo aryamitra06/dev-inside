@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import store from './store';
 import Dashboard from './pages/Dashboard';
 import CreateProfile from './pages/CreateProfile';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/dashboard/create-profile" element={<CreateProfile />} />
+          <Route exact path="/dashboard/edit-profile" element={<EditProfile />} />
         </Routes>
       </BrowserRouter>
     </Provider>

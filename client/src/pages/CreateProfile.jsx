@@ -14,7 +14,7 @@ export default function CreateProfile() {
         if (!idGetter()) {
             navigate("/");
         }
-        else if (profile.response.isProfileCreated) {
+        else if (profile.response.isProfileCreated === true) {
             navigate("/");
         }
     }, [navigate, dispatch, profile.response.isProfileCreated])

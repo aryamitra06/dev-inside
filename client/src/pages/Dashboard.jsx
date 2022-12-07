@@ -10,6 +10,7 @@ import { myProfileAction } from '../redux/actions/profileAction';
 
 export default function Dashboard() {
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(myProfileAction());
     }, [dispatch])
@@ -17,7 +18,7 @@ export default function Dashboard() {
     const profile = useSelector((state) => state.getprofile);
     const { avatar, date, name } = useSelector((state) => state.user.response);
 
-    console.log(profile.response);
+    console.log(profile.response.isProfileCreated);
 
     const ProfileSummaryCard = () => (
         <Card align='center' mt={3}>
@@ -30,12 +31,13 @@ export default function Dashboard() {
                     </VStack>
                 </Center>
             </CardBody>
-            <CardFooter>
-                <HStack>
-                <Button colorScheme='blue' size={{base: "sm", sm: "sm", md: "md", lg: "md", xl: "md"}}>Create Post</Button>
-                <Button colorScheme='teal' variant={"outline"} size={{base: "sm", sm: "sm", md: "md", lg: "md", xl: "md"}}>Edit Profile</Button>
-                </HStack>
-            </CardFooter>
+                {(profile.response.isProfileCreated === true) && (
+                    <HStack mb={5}>
+                        <Button colorScheme='blue' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }}>Create Post</Button>
+                        <Link to={"/dashboard/edit-profile"}><Button colorScheme='teal' variant={"outline"} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }}>Edit Profile</Button></Link>
+                    </HStack>
+                )
+                }
         </Card>
     )
     return (
@@ -44,8 +46,19 @@ export default function Dashboard() {
                 <Text fontSize={"3xl"} fontWeight={"bold"}>Dashboard</Text>
                 <Text fontSize={"lg"} mt={1}>{greetingTime(new Date())}!</Text>
                 {ProfileSummaryCard()}
+                <Box display={"flex"} justifyContent={"flex-end"}>
+                    {
+                        (profile.response.isProfileCreated === true) && (
+                            <HStack mt={3}>
+                                <Link to={"/add-education"}><Button size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }}>Add Education</Button></Link>
+                                <Link to={"/add-experience"}><Button size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }}>Add Experience</Button></Link>
+                            </HStack>
+                        )
+                    }
+                </Box>
                 {
-                    profile.error.msg ? (
+                    //no profile found
+                    (profile.response.isProfileCreated === undefined) && (
                         <Box>
                             <Alert status='error' mt={4} borderRadius={"md"}>
                                 <AlertIcon />
@@ -55,9 +68,6 @@ export default function Dashboard() {
                                 <Link to={"/dashboard/create-profile"}><Button leftIcon={<AddIcon />} colorScheme='blue' variant='solid' mt={4}>Create Profile</Button></Link>
                             </Center>
                         </Box>
-
-                    ) : (
-                        <></>
                     )
                 }
             </Container>
