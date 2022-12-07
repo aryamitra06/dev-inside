@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const profileSchema = mongoose.Schema({
+    isProfileCreated: {
+        type: Boolean
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "user"

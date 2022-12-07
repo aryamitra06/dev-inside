@@ -13,7 +13,8 @@ import {
   Text,
   useColorModeValue,
   Alert,
-  AlertIcon
+  AlertIcon,
+  Select
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
@@ -31,9 +32,10 @@ export default function Signup() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    gender: "",
     password: ""
   });
-  const { name, email, password } = formData;
+  const { name, email, gender, password } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -80,6 +82,13 @@ export default function Signup() {
                 <FormControl id="email" isRequired>
                   <FormLabel>Email address</FormLabel>
                   <Input type="email" name='email' value={email} onChange={(e) => onChange(e)} isDisabled={loading} />
+                </FormControl>
+                <FormControl id="gender" isRequired>
+                  <FormLabel>Gender</FormLabel>
+                  <Select placeholder='Select option' name='gender' value={gender} onChange={(e) => onChange(e)} isDisabled={loading}>
+                    <option value='male'>Male</option>
+                    <option value='female'>Female</option>
+                  </Select>
                 </FormControl>
                 <FormControl id="password" isRequired>
                   <FormLabel>Password</FormLabel>

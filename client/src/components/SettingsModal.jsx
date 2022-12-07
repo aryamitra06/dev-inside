@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Text, Switch, useColorMode, HStack, Card, CardBody } from '@chakra-ui/react'
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Button, Text, Switch, useColorMode, HStack, Card, CardBody } from '@chakra-ui/react'
 
 export default function SettingsModal({ isOpen, onClose }) {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -25,13 +25,21 @@ export default function SettingsModal({ isOpen, onClose }) {
                                 </HStack>
                             </CardBody>
                         </Card>
+                        <Card mb={3}>
+                            <CardBody>
+                                <Text mb={2} fontWeight={"semibold"} fontSize={"lg"}>Delete Profile</Text>
+                                <HStack>
+                                    <Button colorScheme={"red"}>Delete</Button>
+                                </HStack>
+                            </CardBody>
+                        </Card>
                     </ModalBody>
-                    <ModalFooter>
+                    {/* <ModalFooter>
                         <Button variant='ghost' mr={2} onClick={onClose}>Cancel</Button>
                         <Button colorScheme='blue' onClick={() => { onClose(); }}>
                             Save
                         </Button>
-                    </ModalFooter>
+                    </ModalFooter> */}
                 </ModalContent>
             </Modal>
         </>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -13,11 +13,16 @@ import {
   MenuItem,
   MenuList,
   Container,
-  Text,
   Avatar,
   Skeleton,
   Tag,
-  TagLabel
+  TagLabel,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverBody
 } from '@chakra-ui/react';
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import devinside_logo from "../static/devinside_logo.svg";
@@ -72,16 +77,38 @@ export default function Nav() {
                   response.loading ? (
                     <Skeleton height='20px' width={"100px"} />
                   ) : (
-                    <Tag size='lg' colorScheme='blue' borderRadius='full'>
-                      <Avatar
-                        src={response?.response?.avatar}
-                        size='xs'
-                        name={response?.response?.name}
-                        ml={-1}
-                        mr={2}
-                      />
-                      <TagLabel>{response?.response?.name}</TagLabel>
-                    </Tag>
+                    <Fragment>
+                      <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>
+                        <Tag size='lg' colorScheme='blue' borderRadius='full'>
+                          <Avatar
+                            src={response?.response?.avatar}
+                            size='xs'
+                            name={response?.response?.name}
+                            ml={-1}
+                            mr={2}
+                          />
+                          <TagLabel>{response?.response?.name}</TagLabel>
+                        </Tag>
+                      </Box>
+                      <Box display={{ base: "block", sm: "block", md: "none", lg: "none", xl: "none" }}>
+                        <Popover>
+                          <PopoverTrigger>
+                            <Avatar
+                              src={response?.response?.avatar}
+                              size='sm'
+                              name={response?.response?.name}
+                              ml={-1}
+                              mr={2}
+                            />
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverBody>{response?.response?.name}</PopoverBody>
+                          </PopoverContent>
+                        </Popover>
+                      </Box>
+                    </Fragment>
                   )
                 }
                 <Button size={"sm"} variant={"outline"} colorScheme='blue' onClick={logOutHandler}>Logout</Button>

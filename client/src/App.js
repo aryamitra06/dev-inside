@@ -6,13 +6,13 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Welcome from "./pages/Welcome"
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 
 import { Provider } from "react-redux";
 import store from './store';
 import Dashboard from './pages/Dashboard';
+import CreateProfile from './pages/CreateProfile';
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/dashboard/create-profile" element={<CreateProfile />} />
         </Routes>
       </BrowserRouter>
     </Provider>

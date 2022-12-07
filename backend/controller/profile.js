@@ -40,6 +40,7 @@ export const createProfile = async (req, res) => {
     const { company, website, location, bio, status, githubusername, skills, youtube, facebook, twitter, instagram, linkedin } = req.body;
     const profileFields = {};
     profileFields.user = req.user.id;
+    profileFields.isProfileCreated = true;
     if (company) profileFields.company = company;
     if (website) profileFields.website = website;
     if (location) profileFields.location = location;

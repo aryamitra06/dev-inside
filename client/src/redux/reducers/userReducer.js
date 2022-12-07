@@ -1,7 +1,7 @@
 import { USER_REQUEST, USER_SUCCESS, USER_FAIL } from "../constants/types";
 
 const initialState = {
-    response: null,
+    response: {},
     loading: false,
     error: false,
 }
@@ -9,11 +9,11 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case USER_REQUEST:
-            return { response: null, loading: true, error: false };
+            return { response: {}, loading: true, error: false };
         case USER_SUCCESS:
             return { response: action.payload, loading: false, error: false };
         case USER_FAIL:
-            return { response: null, loading: false, error: action.payload }
+            return { response: {}, loading: false, error: action.payload }
         default:
             return state;
     }

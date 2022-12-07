@@ -6,10 +6,11 @@ import jwt from "jsonwebtoken";
 export const registerUser = async (req, res) => {
     try {
 
-        const { name, email, password } = req.body;
+        const { name, email, password, gender } = req.body;
 
         // Get users gravatar
-        const avatar = gravatar.url(email, { s: '200', r: 'pg', d: 'mm' });
+        // const avatar = gravatar.url(email, { s: '200', r: 'pg', d: 'mm' });
+        const avatar = `https://avatars.dicebear.com/api/${gender}/${name}.svg`;
 
         // See if user exists
         const existingUser = await User.findOne({ email });
@@ -22,7 +23,7 @@ export const registerUser = async (req, res) => {
         const encryptedPassword = await bcrypt.hash(password, salt);
 
         //saving user
-        const user = await new User({ name: name, email: email, avatar: avatar, password: encryptedPassword });
+        const user = await new User({ name: name, email: email, gender: gender, avatar: avatar, password: encryptedPassword });
         user.save();
 
         // Return jsonwebtoken
