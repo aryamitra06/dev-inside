@@ -66,7 +66,7 @@ export default function EditProfileForm({ profile }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(editProfileAction(formData))
+        dispatch(editProfileAction(formData));
     }
 
     return (
@@ -158,15 +158,10 @@ export default function EditProfileForm({ profile }) {
                     </InputGroup>
                 </SimpleGrid>
                 <Box display={"flex"} justifyContent={"flex-end"} gap={2} mb={3}>
-                    <Link to={"/dashboard"}><Button>Back to Dashboard</Button></Link>
+                    <Link to={"/dashboard"}><Button isDisabled={loading}>Back to Dashboard</Button></Link>
                     <Button colorScheme='blue' type='submit' isDisabled={loading}>Save</Button>
                 </Box>
             </form>
-            {
-                response.success && (
-                    <Alert/>
-                )
-            }
         </>
     )
 }

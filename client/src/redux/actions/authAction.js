@@ -6,7 +6,7 @@ export const signUpAction = (authData) => async (dispatch) => {
         dispatch({ type: SIGN_UP_REQUEST });
         const response = await axios.post("http://localhost:5000/register", authData);
         dispatch({ type: SIGN_UP_SUCCESS, payload: response.data });
-        setTimeout(() => { window.location.href = "/" });
+        setTimeout(() => { window.location.href = "/dashboard" });
     } catch (error) {
         dispatch({ type: SIGN_UP_FAIL, payload: error.response.data })
         setTimeout(() => { window.location.href = "/signup" });
@@ -18,7 +18,7 @@ export const logInAction = (authData) => async (dispatch) => {
         dispatch({ type: LOG_IN_REQUEST });
         const response = await axios.post("http://localhost:5000/login", authData);
         dispatch({ type: LOG_IN_SUCCESS, payload: response.data });
-        setTimeout(() => { window.location.href = "/" });
+        setTimeout(() => { window.location.href = "/dashboard" });
     } catch (error) {
         dispatch({ type: LOG_IN_FAIL, payload: error.response.data })
         setTimeout(() => { window.location.href = "/login" });

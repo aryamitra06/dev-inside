@@ -38,7 +38,7 @@ export default function Nav() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const logOutHandler = () => {
-    localStorage.clear();
+    localStorage.removeItem('token');
     window.location.href = "/login";
   }
 
