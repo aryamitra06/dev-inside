@@ -62,7 +62,7 @@ export default function Nav() {
               variant='outline'
             />
             <MenuList>
-              <MenuItem><Link to={"/dashboard"}>Dashboard</Link></MenuItem>
+              <Link to={"/dashboard"}><MenuItem>Dashboard</MenuItem></Link>
               <MenuItem onClick={onOpen}>Settings</MenuItem>
             </MenuList>
           </Menu>

@@ -70,33 +70,34 @@ export const createProfile = async (req, res) => {
 }
 
 export const updateProfile = async (req, res) => {
-
-    const { company, website, location, bio, status, githubusername, skills, youtube, facebook, twitter, instagram, linkedin } = req.body;
-    const profileFields = {};
-    profileFields.user = req.user.id;
-    if (company) profileFields.company = company;
-    if (website) profileFields.website = website;
-    if (location) profileFields.location = location;
-    if (bio) profileFields.bio = bio;
-    if (status) profileFields.status = status;
-    if (githubusername) profileFields.githubusername = githubusername;
-    if (skills) {
+    try {
+        const { company, website, location, bio, status, githubusername, skills, youtube, facebook, twitter, instagram, linkedin } = req.body;
+        const profileFields = {};
+        profileFields.user = req.user.id;
+        profileFields.company = company;
+        profileFields.website = website;
+        profileFields.location = location;
+        profileFields.bio = bio;
+        profileFields.status = status;
+        profileFields.githubusername = githubusername;
         profileFields.skills = skills.split(',').map(skill => skill.trim());
+
+        // Social objects
+        profileFields.social = {};
+        if (youtube) profileFields.social.youtube = youtube;
+        if (facebook) profileFields.social.facebook = facebook;
+        if (twitter) profileFields.social.twitter = twitter;
+        if (instagram) profileFields.social.instagram = instagram;
+        if (linkedin) profileFields.social.linkedin = linkedin;
+
+        await Profile.findOneAndUpdate(
+            { user: req.user.id },
+            { $set: profileFields },
+            { new: true })
+        return res.status(200).json({ success: true, error: false });
+    } catch (error) {
+        return res.status(400).json({ success: false, error: true });
     }
-
-    // Social objects
-    profileFields.social = {};
-    if (youtube) profileFields.social.youtube = youtube;
-    if (facebook) profileFields.social.facebook = facebook;
-    if (twitter) profileFields.social.twitter = twitter;
-    if (instagram) profileFields.social.instagram = instagram;
-    if (linkedin) profileFields.social.linkedin = linkedin;
-
-    await Profile.findOneAndUpdate(
-        { user: req.user.id },
-        { $set: profileFields },
-        { new: true })
-    return res.json(profileFields);
 }
 
 export const deleteProfile = async (req, res) => {

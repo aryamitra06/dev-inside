@@ -55,7 +55,7 @@ router.post("/createprofile", auth, createProfile);
 @access: Private
 @desc: Updating existing profile
 */
-router.put("/updateprofile", auth, updateProfile);
+router.put("/editprofile", auth, updateProfile);
 
 /*
 @route: /deleteprofile

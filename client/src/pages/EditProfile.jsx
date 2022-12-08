@@ -9,12 +9,14 @@ export default function EditProfile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const profile = useSelector((state) => state.getprofile);
+
     useEffect(() => {
         dispatch(myProfileAction());
         if (!idGetter()) {
             navigate("/");
         }
     }, [navigate, dispatch])
+
 
     return (
         <Fragment>
@@ -32,7 +34,7 @@ export default function EditProfile() {
                             ) : (
                                 <>
                                     <Text fontSize={"3xl"} fontWeight={"bold"} mb={3}>Edit Profile</Text>
-                                    <EditProfileForm />
+                                    <EditProfileForm profile={profile}/>
                                 </>
                             )
                         }
