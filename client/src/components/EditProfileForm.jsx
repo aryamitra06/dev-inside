@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { editProfileAction } from "../redux/actions/profileAction";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import Alert from './Alert';
 
 export default function EditProfileForm({ profile }) {
     const dispatch = useDispatch();

@@ -110,7 +110,7 @@ export default function Dashboard() {
             <Container maxW={"7xl"} mt={4}>
                 <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
                     <Text fontSize={"3xl"} fontWeight={"bold"}>Dashboard</Text>
-                    <Button leftIcon={<AiFillEye />} size={"sm"}>View Public</Button>
+                    <Button leftIcon={<AiFillEye />} size={"sm"} isDisabled={profile.loading}>View Public</Button>
                 </Box>
                 <Box display={"flex"} gap={1}>
                     <Text fontSize={"xl"} mt={1} color={'gray.400'}>{greetingTime(new Date())},</Text>
@@ -121,18 +121,17 @@ export default function Dashboard() {
                         <>
                             <Stack mt={3}>
                                 <HStack>
-                                    <Skeleton width={"20%"} height={"40px"} />
-                                    <Skeleton width={"20%"} height={"40px"} />
-                                    <Skeleton width={"20%"} height={"40px"} />
+                                    <Skeleton width={{base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%"}} height={"40px"} />
+                                    <Skeleton width={{base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%"}} height={"40px"} />
+                                    <Skeleton width={{base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%"}} height={"40px"} />
                                 </HStack>
-                                <Skeleton width={"100%"} height={"40px"} />
-                                <Skeleton width={"100%"} height={"80px"} />
-                                <Skeleton width={"100%"} height={"30px"} />
-                                <Skeleton width={"75%"} height={"50px"} />
-                                <Skeleton width={"75%"} height={"100px"} />
-                                <Skeleton width={"75%"} height={"50px"} />
-                                <Skeleton width={"75%"} height={"100px"} />
-                                <Skeleton width={"15%"} height={"30px"} />
+                                <HStack>
+                                    <Skeleton width={{base: "35%", sm: "20%", md: "20%", lg: "20%", xl: "20%"}} height={"50px"} />
+                                    <Skeleton width={{base: "35%", sm: "20%", md: "20%", lg: "20%", xl: "20%"}} height={"50px"} />
+                                </HStack>
+                                <Skeleton width={{base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%"}} height={"100px"} />
+                                <Skeleton width={{base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%"}} height={"100px"} />
+                                <Skeleton width={{base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%"}} height={"100px"} />
                             </Stack>
                         </>
                     ) : (
