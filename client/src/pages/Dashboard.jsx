@@ -7,15 +7,17 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import React, { Fragment, useEffect } from 'react'
 import greetingTime from "greeting-time";
-import { myProfileAction } from '../redux/actions/profileAction';
+import { myProfileAction, stateReseter } from '../redux/actions/profileAction';
 import ExpCard from '../components/ExpCard';
 import EduCard from '../components/EduCard';
+import { ADD_EXP_REQUEST, ADD_EXP_SUCCESS } from '../redux/constants/types';
 
 export default function Dashboard() {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(myProfileAction());
+        dispatch(stateReseter({type: "STATE_RESETER"}));
     }, [dispatch])
 
     const profile = useSelector((state) => state.getprofile);

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { logInReducer, signUpReducer } from "./authReducer";
-import { createProfileReducer, editProfileReducer, myProfileReducer } from "./profileReducer";
+import { addExpReducer, createProfileReducer, editProfileReducer, myProfileReducer } from "./profileReducer";
 import { userReducer } from "./userReducer";
 export const rootReducer = combineReducers({
     signup: signUpReducer,
@@ -8,5 +8,6 @@ export const rootReducer = combineReducers({
     user: userReducer,
     getprofile: myProfileReducer,
     createprofile: createProfileReducer,
-    editprofile: editProfileReducer
+    editprofile: editProfileReducer,
+    addexp: addExpReducer
 });
