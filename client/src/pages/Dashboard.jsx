@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { Fragment, useEffect } from 'react'
 import greetingTime from "greeting-time";
 import { myProfileAction } from '../redux/actions/profileAction';
+import ExpCard from '../components/ExpCard';
+import EduCard from '../components/EduCard';
 
 export default function Dashboard() {
     const dispatch = useDispatch();
@@ -47,8 +49,8 @@ export default function Dashboard() {
                             <>
                                 <HStack>
                                     <Link to={"/dashboard/edit-profile"}><Button colorScheme={"cyan"} variant={"outline"} size={"sm"}>Edit Profile</Button></Link>
-                                    <Link to={"/dashboard/edit-profile"}><Button colorScheme={"cyan"} variant={"ghost"} size={"sm"} leftIcon={<MdAdd />}>Experience</Button></Link>
-                                    <Link to={"/dashboard/edit-profile"}><Button colorScheme={"cyan"} variant={"ghost"} size={"sm"} leftIcon={<MdAdd />}>Education</Button></Link>
+                                    <Link to={"/dashboard/add-experience"}><Button colorScheme={"cyan"} variant={"ghost"} size={"sm"} leftIcon={<MdAdd />}>Experience</Button></Link>
+                                    <Link to={"/dashboard/add-education"}><Button colorScheme={"cyan"} variant={"ghost"} size={"sm"} leftIcon={<MdAdd />}>Education</Button></Link>
                                 </HStack>
                             </>
                         )
@@ -62,44 +64,7 @@ export default function Dashboard() {
         return (
             <>
                 <SimpleGrid columns={1} spacing={3}>
-                    <Card>
-                        <CardBody>
-                            <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-                                <Box display={"flex"} alignItems={"center"} gap={2}>
-                                    <MdWork size={"55px"} color={"#B2B2B2"} />
-                                    <Box>
-                                        <Text fontWeight={"bold"} fontSize={"md"}>Company Name</Text>
-                                        <Text fontSize={"xs"} color={"gray.400"}>Full Stack Developer &bull; 2/1/2013 - 3/1/2019</Text>
-                                        <Text fontSize={"xs"} color={"gray.400"}>Kolkata, India</Text>
-                                    </Box>
-                                </Box>
-                                <Box>
-                                    <IconButton color={"red.400"} variant={"ghost"}><AiFillDelete /></IconButton>
-                                </Box>
-                            </Box>
-                            <Text fontSize={"sm"} mt={2}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, et laboriosam eveniet laudantium,
-                                debitis ullam repellat.</Text>
-                        </CardBody>
-                    </Card>
-                    <Card>
-                        <CardBody>
-                            <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-                                <Box display={"flex"} alignItems={"center"} gap={2}>
-                                    <MdWork size={"55px"} color={"#B2B2B2"} />
-                                    <Box>
-                                        <Text fontWeight={"bold"} fontSize={"md"}>Company Name</Text>
-                                        <Text fontSize={"xs"} color={"gray.400"}>Full Stack Developer &bull; 2/1/2013 - 3/1/2019</Text>
-                                        <Text fontSize={"xs"} color={"gray.400"}>Kolkata, India</Text>
-                                    </Box>
-                                </Box>
-                                <Box>
-                                    <IconButton color={"red.400"} variant={"ghost"}><AiFillDelete /></IconButton>
-                                </Box>
-                            </Box>
-                            <Text fontSize={"sm"} mt={2}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, et laboriosam eveniet laudantium,
-                                debitis ullam repellat.</Text>
-                        </CardBody>
-                    </Card>
+                    <ExpCard />
                 </SimpleGrid>
             </>
         )
@@ -109,44 +74,7 @@ export default function Dashboard() {
         return (
             <>
                 <SimpleGrid columns={1} spacing={3}>
-                    <Card>
-                        <CardBody>
-                            <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-                                <Box display={"flex"} alignItems={"center"} gap={2}>
-                                    <MdSchool size={"55px"} color={"#B2B2B2"} />
-                                    <Box>
-                                        <Text fontWeight={"bold"} fontSize={"md"}>School Name</Text>
-                                        <Text fontSize={"xs"} color={"gray.400"}>Higher Secondary &bull; 2/1/2013 - 3/1/2019</Text>
-                                        <Text fontSize={"xs"} color={"gray.400"}>Kolkata, India</Text>
-                                    </Box>
-                                </Box>
-                                <Box>
-                                    <IconButton color={"red.400"} variant={"ghost"}><AiFillDelete /></IconButton>
-                                </Box>
-                            </Box>
-                            <Text fontSize={"sm"} mt={2}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, et laboriosam eveniet laudantium,
-                                debitis ullam repellat.</Text>
-                        </CardBody>
-                    </Card>
-                    <Card>
-                        <CardBody>
-                            <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-                                <Box display={"flex"} alignItems={"center"} gap={2}>
-                                    <MdSchool size={"55px"} color={"#B2B2B2"} />
-                                    <Box>
-                                        <Text fontWeight={"bold"} fontSize={"md"}>School Name</Text>
-                                        <Text fontSize={"xs"} color={"gray.400"}>Higher Secondary &bull; 2/1/2013 - 3/1/2019</Text>
-                                        <Text fontSize={"xs"} color={"gray.400"}>Kolkata, India</Text>
-                                    </Box>
-                                </Box>
-                                <Box>
-                                    <IconButton color={"red.400"} variant={"ghost"}><AiFillDelete /></IconButton>
-                                </Box>
-                            </Box>
-                            <Text fontSize={"sm"} mt={2}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, et laboriosam eveniet laudantium,
-                                debitis ullam repellat.</Text>
-                        </CardBody>
-                    </Card>
+                    <EduCard />
                 </SimpleGrid>
             </>
         )
