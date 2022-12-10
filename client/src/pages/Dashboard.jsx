@@ -22,11 +22,11 @@ export default function Dashboard() {
         }
         dispatch(myProfileAction());
         dispatch(stateReseter());
-    }, [dispatch]);
+    }, [dispatch, navigate]);
 
     const profile = useSelector((state) => state.getprofile);
 
-    console.log(profile?.response);
+    const profileRes = profile?.response;
     const isProfileCreated = profile?.response?.isProfileCreated;
 
     const ProfileCreatedCheker = () => {
@@ -70,7 +70,11 @@ export default function Dashboard() {
         return (
             <>
                 <SimpleGrid columns={1} spacing={3}>
-                    <ExpCard />
+                    {
+                        profileRes?.experience?.map((e) => (
+                            <ExpCard key={e._id} data={e} />
+                        ))
+                    }
                 </SimpleGrid>
             </>
         )
@@ -80,7 +84,11 @@ export default function Dashboard() {
         return (
             <>
                 <SimpleGrid columns={1} spacing={3}>
-                    <EduCard />
+                    {
+                        profileRes?.education?.map((e) => (
+                            <EduCard key={e._id} data={e} />
+                        ))
+                    }
                 </SimpleGrid>
             </>
         )

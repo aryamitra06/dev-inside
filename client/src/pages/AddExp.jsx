@@ -10,7 +10,7 @@ export default function AddExp() {
     if (!tokenGetter()) {
       navigate("/");
     }
-  }, [])
+  }, [navigate])
 
   return (
     <Fragment>

@@ -10,7 +10,7 @@ export default function AddEdu() {
     if (!tokenGetter()) {
       navigate("/");
     }
-  }, [])
+  }, [navigate])
 
   return (
     <Fragment>

@@ -1,9 +1,11 @@
 import React from 'react'
 import { Card, CardBody, Box, Text, IconButton } from '@chakra-ui/react'
+import moment from "moment";
 import { MdSchool } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
 
-export default function EduCard() {
+export default function EduCard({data}) {
+    console.log(data);
     return (
         <Card>
             <CardBody>
@@ -11,17 +13,16 @@ export default function EduCard() {
                     <Box display={"flex"} alignItems={"center"} gap={2}>
                         <MdSchool size={"55px"} color={"#B2B2B2"} />
                         <Box>
-                            <Text fontWeight={"bold"} fontSize={"md"}>School Name</Text>
-                            <Text fontSize={"xs"} color={"gray.400"}>Higher Secondary &bull; 2/1/2013 - 3/1/2019</Text>
-                            <Text fontSize={"xs"} color={"gray.400"}>Kolkata, India</Text>
+                            <Text fontWeight={"bold"} fontSize={"md"}>{data?.school}</Text>
+                            <Text fontSize={"xs"} color={"gray.400"} fontWeight={"bold"}>{data?.fieldofstudy}</Text>
+                            <Text fontSize={"xs"} color={"gray.400"}>{data?.degree} &bull; {moment(data?.from).format('MMMM Do YYYY')} - {data?.current === false ? moment(data?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
                         </Box>
                     </Box>
                     <Box>
                         <IconButton color={"red.400"} variant={"ghost"}><AiFillDelete /></IconButton>
                     </Box>
                 </Box>
-                <Text fontSize={"sm"} mt={2}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, et laboriosam eveniet laudantium,
-                    debitis ullam repellat.</Text>
+                <Text fontSize={"sm"} mt={2}>{data?.description}</Text>
             </CardBody>
         </Card>
     )
