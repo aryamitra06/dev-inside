@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, {  useState } from 'react'
 import { SimpleGrid, FormControl, FormLabel, Input, Select, FormHelperText, Textarea, Tag, InputGroup, InputLeftElement, Button, Box } from '@chakra-ui/react'
 import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -57,11 +57,12 @@ export default function EditProfileForm({ profile }) {
             linkedin: profile?.response?.social?.linkedin,
             instagram: profile?.response?.social?.instagram
         })
+        // eslint-disable-next-line
     }, [])
 
     const editProfileRes = useSelector((state) => state.editprofile);
 
-    const { response, loading, error } = editProfileRes;
+    const { loading } = editProfileRes;
 
     const onSubmit = (e) => {
         e.preventDefault();

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { SimpleGrid, FormControl, FormLabel, Input, Select, FormHelperText, Textarea, Text, Tag, InputGroup, InputLeftElement, Button, Box } from '@chakra-ui/react'
+import { SimpleGrid, FormControl, FormLabel, Input, Select, FormHelperText, Textarea, Tag, InputGroup, InputLeftElement, Button, Box } from '@chakra-ui/react'
 import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { createProfileAction } from '../redux/actions/profileAction';

@@ -65,7 +65,7 @@ export const addExpReducer = (state = initialState3, action) => {
         case ADD_EXP_FAIL:
             return { response: {}, loading: false, error: action.payload, success: false };
         case "RESET_STATE":
-            return { response: {}, loading: false, error: false, success: false };
+            return initialState3;
         default:
             return state;
     }

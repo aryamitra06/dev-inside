@@ -1,24 +1,23 @@
-import { Container, Text, Alert, AlertIcon, Box, Progress, Skeleton, Button, HStack, Stack, Tabs, TabList, Tab, TabPanels, TabPanel, Card, CardBody, IconButton, SimpleGrid } from '@chakra-ui/react';
+import { Container, Text, Alert, AlertIcon, Box, Progress, Skeleton, Button, HStack, Stack, Tabs, TabList, Tab, TabPanels, TabPanel, SimpleGrid } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
-import moment from "moment";
-import { MdAdd, MdWork, MdSchool } from 'react-icons/md';
-import { AiFillDelete, AiFillEye } from 'react-icons/ai';
+import { MdAdd } from 'react-icons/md';
+import { AiFillEye } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 
 import React, { Fragment, useEffect } from 'react'
 import greetingTime from "greeting-time";
-import { myProfileAction, stateReseter } from '../redux/actions/profileAction';
+import { myProfileAction } from '../redux/actions/profileAction';
 import ExpCard from '../components/ExpCard';
 import EduCard from '../components/EduCard';
-import { ADD_EXP_REQUEST, ADD_EXP_SUCCESS } from '../redux/constants/types';
+import { stateReseter } from '../redux/actions/stateResterAction';
 
 export default function Dashboard() {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(myProfileAction());
-        dispatch(stateReseter({type: "STATE_RESETER"}));
-    }, [dispatch])
+        dispatch(stateReseter());
+    }, [dispatch]);
 
     const profile = useSelector((state) => state.getprofile);
 

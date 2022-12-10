@@ -34,14 +34,10 @@ export const editProfileAction = (formData) => async (dispatch) => {
 
 export const addExpAction = (formData) => async (dispatch) => {
     try {
-        dispatch({type: ADD_EXP_REQUEST});
-        const response = await axios.put("http://localhost:5000/addexperience", formData, { headers: { authorization: tokenGetter() } } );
+        dispatch({ type: ADD_EXP_REQUEST });
+        const response = await axios.put("http://localhost:5000/addexperience", formData, { headers: { authorization: tokenGetter() } });
         dispatch({ type: ADD_EXP_SUCCESS, payload: response.data });
     } catch (error) {
-        dispatch({type: ADD_EXP_FAIL, payload: error.response.data });
+        dispatch({ type: ADD_EXP_FAIL, payload: error.response.data });
     }
-}
-
-export const stateReseter = () => (dispatch) => {
-    dispatch({ type: "RESET_STATE"});
 }

@@ -27,7 +27,6 @@ export default function AddExpForm() {
         location,
         from,
         to,
-        current,
         description
     } = formData;
 
@@ -47,7 +46,7 @@ export default function AddExpForm() {
         else {
             formData.current = false;
         }
-        dispatch(addExpAction(formData))
+        dispatch(addExpAction(formData));
     }
 
     const response = useSelector((state) => state.addexp);

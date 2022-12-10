@@ -45,8 +45,7 @@ const profileSchema = mongoose.Schema({
                 type: String
             },
             from: {
-                type: Date,
-                required: true
+                type: Date
             },
             to: {
                 type: Date
@@ -75,8 +74,7 @@ const profileSchema = mongoose.Schema({
                 required: true
             },
             from: {
-                type: Date,
-                required: true
+                type: Date
             },
             to: {
                 type: Date
