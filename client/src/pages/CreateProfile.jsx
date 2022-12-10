@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { Container, Text } from '@chakra-ui/react'
 import CreateProfileForm from '../components/CreateProfileForm'
 import { useNavigate } from "react-router-dom";
-import { idGetter } from '../utils/tokenIdGetter';
+import { tokenGetter } from '../utils/tokenIdGetter';
 import { useSelector, useDispatch } from 'react-redux';
 import { myProfileAction } from '../redux/actions/profileAction';
 export default function CreateProfile() {
@@ -11,7 +11,7 @@ export default function CreateProfile() {
     const profile = useSelector((state) => state.getprofile);
     useEffect(() => {
         dispatch(myProfileAction());
-        if (!idGetter()) {
+        if (!tokenGetter()) {
             navigate("/");
         }
         else if (profile.response.isProfileCreated === true) {

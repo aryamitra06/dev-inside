@@ -1,5 +1,5 @@
 import { Container, Text, Alert, AlertIcon, Box, Progress, Skeleton, Button, HStack, Stack, Tabs, TabList, Tab, TabPanels, TabPanel, SimpleGrid } from '@chakra-ui/react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdAdd } from 'react-icons/md';
 import { AiFillEye } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,11 +10,16 @@ import { myProfileAction } from '../redux/actions/profileAction';
 import ExpCard from '../components/ExpCard';
 import EduCard from '../components/EduCard';
 import { stateReseter } from '../redux/actions/stateResterAction';
+import { tokenGetter } from '../utils/tokenIdGetter';
 
 export default function Dashboard() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (!tokenGetter()) {
+            navigate("/");
+        }
         dispatch(myProfileAction());
         dispatch(stateReseter());
     }, [dispatch]);
@@ -22,13 +27,13 @@ export default function Dashboard() {
     const profile = useSelector((state) => state.getprofile);
 
     console.log(profile?.response);
-    const isProfileCreated = profile?.response?.isProfileCreated
+    const isProfileCreated = profile?.response?.isProfileCreated;
 
     const ProfileCreatedCheker = () => {
         return (
             <Fragment>
                 {
-                    isProfileCreated === undefined && (
+                    isProfileCreated !== true && (
                         <Alert status='error' mt={2}>
                             <AlertIcon />
                             Profile is not created.
@@ -44,7 +49,7 @@ export default function Dashboard() {
             <Fragment>
                 <HStack mt={5}>
                     {
-                        isProfileCreated === undefined ? (
+                        isProfileCreated !== true ? (
                             <Link to={"/dashboard/create-profile"}><Button colorScheme={"blue"} variant={"outline"}>Create Profile</Button></Link>
                         ) : (
                             <>
@@ -111,35 +116,45 @@ export default function Dashboard() {
             <Container maxW={"7xl"} mt={4}>
                 <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
                     <Text fontSize={"3xl"} fontWeight={"bold"}>Dashboard</Text>
-                    <Button leftIcon={<AiFillEye />} size={"sm"} isDisabled={profile.loading}>View Public</Button>
+                    {
+                        isProfileCreated === true && (
+                            <Button leftIcon={<AiFillEye />} size={"sm"} isDisabled={profile.loading}>View Public</Button>
+                        )
+                    }
                 </Box>
                 <Box display={"flex"} gap={1}>
-                    <Text fontSize={"xl"} mt={1} color={'gray.400'}>{greetingTime(new Date())},</Text>
-                    {profile.loading ? <Skeleton width={20} height={5} mt={3} /> : <Text fontSize={"xl"} mt={1} color={'gray.400'}>{profile?.response?.user?.name}!</Text>}
+                    {
+                        isProfileCreated === true && (
+                            <>
+                                <Text fontSize={"xl"} mt={1} color={'gray.400'}>{greetingTime(new Date())},</Text>
+                                {profile.loading ? <Skeleton width={20} height={5} mt={3} /> : <Text fontSize={"xl"} mt={1} color={'gray.400'}>{profile?.response?.user?.name}</Text>}
+                            </>
+                        )
+                    }
                 </Box>
                 {
                     profile.loading ? (
                         <>
                             <Stack mt={3}>
                                 <HStack>
-                                    <Skeleton width={{base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%"}} height={"40px"} />
-                                    <Skeleton width={{base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%"}} height={"40px"} />
-                                    <Skeleton width={{base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%"}} height={"40px"} />
+                                    <Skeleton width={{ base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%" }} height={"40px"} />
+                                    <Skeleton width={{ base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%" }} height={"40px"} />
+                                    <Skeleton width={{ base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%" }} height={"40px"} />
                                 </HStack>
                                 <HStack>
-                                    <Skeleton width={{base: "35%", sm: "20%", md: "20%", lg: "20%", xl: "20%"}} height={"50px"} />
-                                    <Skeleton width={{base: "35%", sm: "20%", md: "20%", lg: "20%", xl: "20%"}} height={"50px"} />
+                                    <Skeleton width={{ base: "35%", sm: "20%", md: "20%", lg: "20%", xl: "20%" }} height={"50px"} />
+                                    <Skeleton width={{ base: "35%", sm: "20%", md: "20%", lg: "20%", xl: "20%" }} height={"50px"} />
                                 </HStack>
-                                <Skeleton width={{base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%"}} height={"100px"} />
-                                <Skeleton width={{base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%"}} height={"100px"} />
-                                <Skeleton width={{base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%"}} height={"100px"} />
+                                <Skeleton width={{ base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%" }} height={"100px"} />
+                                <Skeleton width={{ base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%" }} height={"100px"} />
+                                <Skeleton width={{ base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%" }} height={"100px"} />
                             </Stack>
                         </>
                     ) : (
                         <>
                             {ProfileCreatedCheker()}
                             {ProfileActions()}
-                            {ProfileTabs()}
+                            {isProfileCreated === true && ProfileTabs()}
                         </>
                     )
                 }
