@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard';
 import CreateProfile from './pages/CreateProfile';
 import EditProfile from './pages/EditProfile';
 import AddExp from './pages/AddExp';
+import AddEdu from './pages/AddEdu';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/dashboard/create-profile" element={<CreateProfile />} />
           <Route exact path="/dashboard/edit-profile" element={<EditProfile />} />
           <Route exact path="/dashboard/add-experience" element={<AddExp />} />
+          <Route exact path="/dashboard/add-education" element={<AddEdu />} />
         </Routes>
       </BrowserRouter>
     </Provider>

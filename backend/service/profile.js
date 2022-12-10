@@ -83,11 +83,11 @@ router.delete("/deleteexperience/:id", auth, deleteProfileExperience)
 
 /*
 @route: /addeducation
-@method: POST
+@method: PUT
 @access: Private
 @desc: Add profile education
 */
-router.post("/addeducation", auth, addProfileEducation)
+router.put("/addeducation", auth, addProfileEducation)
 
 /*
 @route: /deleteeducation/:id

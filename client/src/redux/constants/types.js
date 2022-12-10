@@ -25,3 +25,7 @@ export const EDIT_PROFILE_FAIL = "EDIT_PROFILE_FAIL";
 export const ADD_EXP_REQUEST = "ADD_EXP_REQUEST";
 export const ADD_EXP_SUCCESS = "ADD_EXP_SUCCESS";
 export const ADD_EXP_FAIL = "ADD_EXP_FAIL";
+
+export const ADD_EDU_REQUEST = "ADD_EDU_REQUEST";
+export const ADD_EDU_SUCCESS = "ADD_EDU_SUCCESS";
+export const ADD_EDU_FAIL = "ADD_EDU_FAIL";
