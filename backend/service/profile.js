@@ -33,12 +33,12 @@ router.get("/me", auth, getMyProfile);
 router.get("/allprofiles", getAllProfiles);
 
 /*
-@route: /allprofiles/profile/:id
+@route: /profile/:id
 @method: GET
 @access: Public
 @desc: Getting profile by id
 */
-router.get("/allprofiles/profile/:id", getProfileById);
+router.get("/profile/:id", getProfileById);
 
 
 /*

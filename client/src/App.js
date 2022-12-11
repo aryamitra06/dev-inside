@@ -16,6 +16,7 @@ import CreateProfile from './pages/CreateProfile';
 import EditProfile from './pages/EditProfile';
 import AddExp from './pages/AddExp';
 import AddEdu from './pages/AddEdu';
+import ViewPublicProfile from './pages/ViewPublicProfile';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/dashboard/edit-profile" element={<EditProfile />} />
           <Route exact path="/dashboard/add-experience" element={<AddExp />} />
           <Route exact path="/dashboard/add-education" element={<AddEdu />} />
+          <Route exact path="/profile/:id" element={<ViewPublicProfile />} />
         </Routes>
       </BrowserRouter>
     </Provider>
