@@ -1,10 +1,42 @@
-import React from 'react'
-import { Card, CardBody, Box, Text, IconButton } from '@chakra-ui/react'
+import React, {useEffect} from 'react'
+import { Card, CardBody, Box, Text, IconButton, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import { HamburgerIcon } from "@chakra-ui/icons";
 import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
 import { MdSchool } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
+import { toggleAction } from "../redux/actions/utilsAction";
+import { deleteEduAction } from '../redux/actions/profileAction';
 
-export default function EduCard({data}) {
+export default function EduCard({ data }) {
+    const dispatch = useDispatch();
+    const deleteRes = useSelector((state) => state.deleteedu);
+    const deleteEduHandler = () => {
+        dispatch(deleteEduAction(data?._id));
+    }
+
+    useEffect(() => {
+        if (deleteRes.success === true) {
+            dispatch(toggleAction(prev => !prev));
+        }
+    }, [deleteRes.success, dispatch])
+
+    const ActionMenu = () => (
+        <Menu>
+            <MenuButton
+                as={IconButton}
+                aria-label='Options'
+                icon={<HamburgerIcon />}
+                variant='ghost'
+            />
+            <MenuList>
+                <MenuItem icon={<AiFillDelete />} onClick={deleteEduHandler} isDisabled={deleteRes.loading === true}>
+                    Delete
+                </MenuItem>
+            </MenuList>
+        </Menu>
+    )
+
     return (
         <Card>
             <CardBody>
@@ -18,7 +50,7 @@ export default function EduCard({data}) {
                         </Box>
                     </Box>
                     <Box>
-                        <IconButton color={"red.400"} variant={"ghost"}><AiFillDelete /></IconButton>
+                        {ActionMenu()}
                     </Box>
                 </Box>
                 <Text fontSize={"sm"} mt={2}>{data?.description}</Text>

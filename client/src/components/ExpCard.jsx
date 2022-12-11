@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { Card, CardBody, Box, Text, IconButton } from '@chakra-ui/react'
+import { Card, CardBody, Box, Text, IconButton, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import { HamburgerIcon } from "@chakra-ui/icons";
 import moment from "moment";
 import { MdWork } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
@@ -21,6 +22,22 @@ export default function ExpCard({ data }) {
         }
     }, [deleteRes.success, dispatch])
 
+    const ActionMenu = () => (
+        <Menu>
+            <MenuButton
+                as={IconButton}
+                aria-label='Options'
+                icon={<HamburgerIcon />}
+                variant='ghost'
+            />
+            <MenuList>
+                <MenuItem icon={<AiFillDelete />} onClick={deleteExpHandler} isDisabled={deleteRes.loading === true}>
+                    Delete
+                </MenuItem>
+            </MenuList>
+        </Menu>
+    )
+
     return (
         <Card>
             <CardBody>
@@ -34,7 +51,7 @@ export default function ExpCard({ data }) {
                         </Box>
                     </Box>
                     <Box>
-                        <IconButton color={"red.400"} variant={"ghost"} onClick={deleteExpHandler} isDisabled={deleteRes.loading === true}><AiFillDelete /></IconButton>
+                        {ActionMenu()}
                     </Box>
                 </Box>
                 <Text fontSize={"sm"} mt={2}>{data?.description}</Text>

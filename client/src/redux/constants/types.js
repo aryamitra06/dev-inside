@@ -34,6 +34,10 @@ export const DELETE_EXP_REQUEST = "DELETE_EXP_REQUEST";
 export const DELETE_EXP_SUCCESS = "DELETE_EXP_SUCCESS";
 export const DELETE_EXP_FAIL = "DELETE_EXP_FAIL";
 
+export const DELETE_EDU_REQUEST = "DELETE_EDU_REQUEST";
+export const DELETE_EDU_SUCCESS = "DELETE_EDU_SUCCESS";
+export const DELETE_EDU_FAIL = "DELETE_EDU_FAIL";
+
 //utility
 export const RESET_STATE = "RESET_STATE";
 export const TOGGLE = "TOGGLE";

@@ -1,4 +1,4 @@
-import { MY_PROFILE_REQUEST, MY_PROFILE_SUCCESS, MY_PROFILE_FAIL, CREATE_PROFILE_REQUEST, CREATE_PROFILE_SUCCESS, CREATE_PROFILE_FAIL, EDIT_PROFILE_REQUEST, EDIT_PROFILE_SUCCESS, EDIT_PROFILE_FAIL, ADD_EXP_REQUEST, ADD_EXP_SUCCESS, ADD_EXP_FAIL, ADD_EDU_REQUEST, ADD_EDU_SUCCESS, ADD_EDU_FAIL, DELETE_EXP_REQUEST, DELETE_EXP_SUCCESS, DELETE_EXP_FAIL, RESET_STATE } from "../constants/types";
+import { MY_PROFILE_REQUEST, MY_PROFILE_SUCCESS, MY_PROFILE_FAIL, CREATE_PROFILE_REQUEST, CREATE_PROFILE_SUCCESS, CREATE_PROFILE_FAIL, EDIT_PROFILE_REQUEST, EDIT_PROFILE_SUCCESS, EDIT_PROFILE_FAIL, ADD_EXP_REQUEST, ADD_EXP_SUCCESS, ADD_EXP_FAIL, ADD_EDU_REQUEST, ADD_EDU_SUCCESS, ADD_EDU_FAIL, DELETE_EXP_REQUEST, DELETE_EXP_SUCCESS, DELETE_EXP_FAIL, RESET_STATE, DELETE_EDU_REQUEST, DELETE_EDU_SUCCESS, DELETE_EDU_FAIL } from "../constants/types";
 
 const initialState1 = {
     response: {},
@@ -93,6 +93,21 @@ export const deleteExpReducer = (state = initialState3, action) => {
         case DELETE_EXP_SUCCESS:
             return { response: action.payload, loading: false, error: false, success: true };
         case DELETE_EXP_FAIL:
+            return { response: {}, loading: false, error: action.payload, success: false };
+        case RESET_STATE:
+            return initialState3;
+        default:
+            return state;
+    }
+}
+
+export const deleteEduReducer = (state = initialState3, action) => {
+    switch (action.type) {
+        case DELETE_EDU_REQUEST:
+            return { response: {}, loading: true, error: false, success: false };
+        case DELETE_EDU_SUCCESS:
+            return { response: action.payload, loading: false, error: false, success: true };
+        case DELETE_EDU_FAIL:
             return { response: {}, loading: false, error: action.payload, success: false };
         case RESET_STATE:
             return initialState3;
