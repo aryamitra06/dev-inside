@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-import { Alert, AlertIcon, Container, Text, Progress } from '@chakra-ui/react'
+import { Alert, AlertIcon, Container, Text, Progress, Skeleton, SimpleGrid } from '@chakra-ui/react'
 import EditProfileForm from '../components/EditProfileForm'
 import { useNavigate } from "react-router-dom";
 import { idGetter } from '../utils/tokenIdGetter';
@@ -26,21 +26,39 @@ export default function EditProfile() {
                 ) : (
                     <Container maxW={"7xl"} mt={4}>
                         {
-                            profile.response.isProfileCreated === undefined ? (
-                                <Alert status='error' borderRadius={"md"}>
+                            profile.response.isProfileCreated !== true && (
+                                <Alert status='error'>
                                     <AlertIcon />
                                     Please create your profile before edit.
                                 </Alert>
-                            ) : (
-                                <>
-                                    <Text fontSize={"3xl"} fontWeight={"bold"} mb={3}>Edit Profile</Text>
-                                    <EditProfileForm profile={profile}/>
-                                </>
                             )
                         }
                     </Container>
                 )
             }
+            <Container maxW={"7xl"} mt={4}>
+                <Text fontSize={"3xl"} fontWeight={"bold"} mb={3}>Edit Profile</Text>
+                {
+                    profile.loading ? (
+                        <>
+                        <SimpleGrid columns={2} gap={5}>
+                        <Skeleton height={"150px"}/>
+                        <Skeleton height={"150px"}/>
+                        <Skeleton height={"100px"}/>
+                        <Skeleton height={"100px"}/>
+                        <Skeleton height={"70px"}/>
+                        <Skeleton height={"70px"}/>
+                        <Skeleton height={"50px"}/>
+                        <Skeleton height={"50px"}/>
+                        </SimpleGrid>
+                        </>
+                    ) : (
+                        <>
+                            <EditProfileForm profile={profile} />
+                        </>
+                    )
+                }
+            </Container>
         </Fragment>
     )
 }

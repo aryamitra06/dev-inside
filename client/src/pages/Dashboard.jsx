@@ -1,18 +1,18 @@
+import React, { Fragment, useEffect, useState } from 'react'
 import { Container, Text, Alert, AlertIcon, Box, Progress, Skeleton, Button, HStack, Stack, Tabs, TabList, Tab, TabPanels, TabPanel, SimpleGrid } from '@chakra-ui/react';
 import { Link, useNavigate } from "react-router-dom";
 import { MdAdd } from 'react-icons/md';
 import { AiFillEye } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-
-import React, { Fragment, useEffect } from 'react'
 import greetingTime from "greeting-time";
 import { myProfileAction } from '../redux/actions/profileAction';
 import ExpCard from '../components/ExpCard';
 import EduCard from '../components/EduCard';
-import { stateReseter } from '../redux/actions/stateResterAction';
+import { stateReseter } from '../redux/actions/utilsAction';
 import { tokenGetter } from '../utils/tokenIdGetter';
 
 export default function Dashboard() {
+    const toggleState = useSelector((state) => state.togglevalue);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export default function Dashboard() {
         }
         dispatch(myProfileAction());
         dispatch(stateReseter());
-    }, [dispatch, navigate]);
+    }, [dispatch, navigate, toggleState]);
 
     const profile = useSelector((state) => state.getprofile);
 

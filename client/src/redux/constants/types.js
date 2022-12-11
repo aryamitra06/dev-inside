@@ -29,3 +29,11 @@ export const ADD_EXP_FAIL = "ADD_EXP_FAIL";
 export const ADD_EDU_REQUEST = "ADD_EDU_REQUEST";
 export const ADD_EDU_SUCCESS = "ADD_EDU_SUCCESS";
 export const ADD_EDU_FAIL = "ADD_EDU_FAIL";
+
+export const DELETE_EXP_REQUEST = "DELETE_EXP_REQUEST";
+export const DELETE_EXP_SUCCESS = "DELETE_EXP_SUCCESS";
+export const DELETE_EXP_FAIL = "DELETE_EXP_FAIL";
+
+//utility
+export const RESET_STATE = "RESET_STATE";
+export const TOGGLE = "TOGGLE";

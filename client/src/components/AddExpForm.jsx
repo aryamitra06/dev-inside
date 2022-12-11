@@ -50,7 +50,6 @@ export default function AddExpForm() {
     }
 
     const response = useSelector((state) => state.addexp);
-    console.log(response);
 
     useEffect(()=>{
         if(response.success === true){

@@ -5,7 +5,6 @@ import { MdSchool } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
 
 export default function EduCard({data}) {
-    console.log(data);
     return (
         <Card>
             <CardBody>

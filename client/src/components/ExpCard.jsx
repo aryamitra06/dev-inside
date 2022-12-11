@@ -1,10 +1,26 @@
-import React from 'react'
-import { Card, CardBody, Box,Text,IconButton } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
+import { Card, CardBody, Box, Text, IconButton } from '@chakra-ui/react'
 import moment from "moment";
 import { MdWork } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
-export default function ExpCard({data}) {
-    console.log(data);
+import { useDispatch, useSelector } from "react-redux";
+import { deleteExpAction } from '../redux/actions/profileAction';
+import { toggleAction } from "../redux/actions/utilsAction";
+
+export default function ExpCard({ data }) {
+    const dispatch = useDispatch();
+    const deleteRes = useSelector((state) => state.deleteexp);
+
+    const deleteExpHandler = () => {
+        dispatch(deleteExpAction(data?._id));
+    }
+
+    useEffect(() => {
+        if (deleteRes.success === true) {
+            dispatch(toggleAction(prev => !prev));
+        }
+    }, [deleteRes.success, dispatch])
+
     return (
         <Card>
             <CardBody>
@@ -18,7 +34,7 @@ export default function ExpCard({data}) {
                         </Box>
                     </Box>
                     <Box>
-                        <IconButton color={"red.400"} variant={"ghost"}><AiFillDelete /></IconButton>
+                        <IconButton color={"red.400"} variant={"ghost"} onClick={deleteExpHandler} isDisabled={deleteRes.loading === true}><AiFillDelete /></IconButton>
                     </Box>
                 </Box>
                 <Text fontSize={"sm"} mt={2}>{data?.description}</Text>

@@ -123,7 +123,7 @@ export const addProfileExperience = async (req, res) => {
         const profile = await Profile.findOne({ user: req.user.id });
         profile.experience.unshift(newExp);
         await profile.save();
-        return res.json(profile);
+        return res.json({msg: "Success"});
     } catch (error) {
         res.status(404).json({ msg: "Server Error" });
     }
@@ -141,7 +141,7 @@ export const deleteProfileExperience = async (req, res) => {
         else {
             profile.experience.splice(removeIndex, 1);
             await profile.save();
-            return res.json(profile);
+            return res.json({msg: "Success"});
         }
     } catch (error) {
         res.status(404).json({ msg: "Server Error" });
@@ -155,7 +155,7 @@ export const addProfileEducation = async (req, res) => {
         const profile = await Profile.findOne({ user: req.user.id });
         profile.education.unshift(newEdu);
         await profile.save();
-        return res.json(profile);
+        return res.json({msg: "Success"});
     } catch (error) {
         res.status(404).json({ msg: "Server Error" });
     }
@@ -174,7 +174,7 @@ export const deleteProfileEducation = async (req, res) => {
         else {
             profile.education.splice(removeIndex, 1);
             await profile.save();
-            return res.json(profile);
+            return res.json({msg: "Success"});
         }
     } catch (error) {
         res.status(404).json({ msg: "Server Error" });
