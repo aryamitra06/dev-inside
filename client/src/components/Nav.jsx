@@ -33,6 +33,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../redux/actions/userAction";
 import { idGetter, tokenGetter } from '../utils/tokenIdGetter';
+import {AiOutlineLogout} from "react-icons/ai";
 
 export default function Nav() {
   const dispatch = useDispatch();
@@ -64,11 +65,12 @@ export default function Nav() {
               variant='outline'
             />
             <MenuList>
-              <Link to={"/dashboard"}><MenuItem>Dashboard</MenuItem></Link>
+              {tokenGetter() && <Link to={`/profile/${idGetter()}`}><MenuItem>My Profile</MenuItem></Link>}
+              {tokenGetter() && <Link to={"/dashboard"}><MenuItem>Dashboard</MenuItem></Link>}
               <MenuItem onClick={onOpen}>Settings</MenuItem>
             </MenuList>
           </Menu>
-          <Link to={"/"}><Image src={colorMode==="dark" ? logo_dark_mode : logo_light_mode} height={"55px"} /></Link>
+          <Link to={"/"}><Image src={colorMode === "dark" ? logo_dark_mode : logo_light_mode} height={"55px"} /></Link>
         </HStack>
         <HStack>
           <IconButton icon={<SearchIcon />} />
@@ -113,10 +115,13 @@ export default function Nav() {
                     </Fragment>
                   )
                 }
-                <Button size={"sm"} variant={"outline"} colorScheme='blue' onClick={logOutHandler}>Logout</Button>
+                <IconButton size={"sm"} variant={"ghost"} colorScheme='blue' onClick={logOutHandler}><AiOutlineLogout/></IconButton>
               </HStack>
             ) : (
+              <>
               <Link to={"/signup"}><Button colorScheme='blue' variant={"outline"} size={"sm"}>Create account</Button></Link>
+              <Link to={"/login"}><Button colorScheme='blue' variant={"outline"} size={"sm"}>Login</Button></Link>
+              </>
             )
           }
         </HStack>

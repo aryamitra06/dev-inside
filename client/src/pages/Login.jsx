@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Flex,
     Box,
@@ -7,7 +7,6 @@ import {
     Input,
     Checkbox,
     Stack,
-    Link,
     Button,
     Heading,
     Text,
@@ -18,7 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { logInAction } from '../redux/actions/authAction';
 import { idGetter } from '../utils/tokenIdGetter';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -39,11 +38,11 @@ export default function Login() {
         dispatch(logInAction(formData));
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         if (idGetter()) {
             navigate("/");
         }
-    },[navigate])
+    }, [navigate])
 
     return (
         <form onSubmit={(e) => onSubmit(e)}>
@@ -73,14 +72,14 @@ export default function Login() {
                                 <FormLabel>Password</FormLabel>
                                 <Input type="password" name='password' value={password} onChange={(e) => onChange(e)} isDisabled={loading} />
                             </FormControl>
-                            <Stack spacing={10}>
-                                <Stack
+                            <Stack spacing={10} pt={2}>
+                                {/* <Stack
                                     direction={{ base: 'column', sm: 'row' }}
                                     align={'start'}
                                     justify={'space-between'}>
                                     <Checkbox>Remember me</Checkbox>
                                     <Link color={'blue.400'}>Forgot password?</Link>
-                                </Stack>
+                                </Stack> */}
                                 <Button
                                     isDisabled={loading}
                                     type='submit'
@@ -91,6 +90,9 @@ export default function Login() {
                                     }}>
                                     Sign in
                                 </Button>
+                            </Stack>
+                            <Stack pt={6}>
+                                <Text align={'center'}>OR <Link to={"/signup"} style={{ fontWeight: "bold" }}>Create an Account</Link></Text>
                             </Stack>
                         </Stack>
                     </Box>

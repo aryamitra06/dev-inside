@@ -25,21 +25,7 @@ export default function SettingsModal({ isOpen, onClose }) {
                                 </HStack>
                             </CardBody>
                         </Card>
-                        <Card mb={3}>
-                            <CardBody>
-                                <Text mb={2} fontWeight={"semibold"} fontSize={"lg"}>Delete Profile</Text>
-                                <HStack>
-                                    <Button colorScheme={"red"}>Delete</Button>
-                                </HStack>
-                            </CardBody>
-                        </Card>
                     </ModalBody>
-                    {/* <ModalFooter>
-                        <Button variant='ghost' mr={2} onClick={onClose}>Cancel</Button>
-                        <Button colorScheme='blue' onClick={() => { onClose(); }}>
-                            Save
-                        </Button>
-                    </ModalFooter> */}
                 </ModalContent>
             </Modal>
         </>
