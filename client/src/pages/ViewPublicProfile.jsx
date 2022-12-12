@@ -20,6 +20,7 @@ export default function ViewPublicProfile() {
             <Stack>
                 <Skeleton height={"250px"} />
                 <Skeleton height={"150px"} />
+                <Skeleton height={"150px"} />
                 <SimpleGrid columns={2} spacing={2}>
                     <Skeleton height={"200px"} />
                     <Skeleton height={"200px"} />

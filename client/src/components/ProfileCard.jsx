@@ -31,7 +31,7 @@ export default function ProfileCard({ data }) {
                 >
                     Bio
                 </Text>
-                <Text>{data?.bio}</Text>
+                <Text>{data?.bio || <>Not available</>}</Text>
             </CardBody>
         </Card>
     )
@@ -50,7 +50,7 @@ export default function ProfileCard({ data }) {
                 {
                     data?.skills?.map((e) => (
                         <Tag fontWeight={"bold"} m={1} key={e}>{e}</Tag>
-                    ))
+                    )) || <>Not available</>
                 }
             </CardBody>
         </Card>
@@ -69,7 +69,7 @@ export default function ProfileCard({ data }) {
                 {
                     data?.experience?.map((e) => (
                         <Fragment key={e?._id}>
-                            <Card mt={3}>
+                            <Card mt={3} variant='outline' overflow='hidden'>
                                 <CardBody>
                                     <Text fontWeight={"bold"} fontSize={"sm"}>{e?.company}</Text>
                                     <Text fontSize={"xs"} color={"gray.400"}>{e?.title} &bull; {moment(e?.from).format('MMMM Do YYYY')} - {e?.current === false ? moment(e?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
@@ -78,7 +78,7 @@ export default function ProfileCard({ data }) {
                                 </CardBody>
                             </Card>
                         </Fragment>
-                    ))
+                    )) || <>Not available</>
                 }
             </CardBody>
         </Card>
@@ -98,7 +98,7 @@ export default function ProfileCard({ data }) {
                 {
                     data?.education?.map((e) => (
                         <Fragment key={e?._id}>
-                            <Card mt={3}>
+                            <Card mt={3} variant='outline' overflow='hidden'>
                                 <CardBody>
                                     <Text fontWeight={"bold"} fontSize={"sm"}>{e?.school}</Text>
                                     <Text fontSize={"xs"} color={"gray.400"} fontWeight={"bold"}>{data?.fieldofstudy}</Text>
@@ -107,7 +107,7 @@ export default function ProfileCard({ data }) {
                                 </CardBody>
                             </Card>
                         </Fragment>
-                    ))
+                    )) || <>Not available</>
                 }
             </CardBody>
         </Card>
