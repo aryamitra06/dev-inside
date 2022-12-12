@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { logInReducer, signUpReducer } from "./authReducer";
-import { addEduReducer, addExpReducer, createProfileReducer, deleteEduReducer, deleteExpReducer, editProfileReducer, myProfileReducer } from "./profileReducer";
+import { addEduReducer, addExpReducer, createProfileReducer, deleteEduReducer, deleteExpReducer, editProfileReducer, myProfileReducer, profileByIdReducer } from "./profileReducer";
 import { userReducer } from "./userReducer";
 import { toggleReducer } from "./utilsReducer";
 export const rootReducer = combineReducers({
@@ -14,5 +14,6 @@ export const rootReducer = combineReducers({
     addedu: addEduReducer,
     deleteexp: deleteExpReducer,
     deleteedu: deleteEduReducer,
+    profilebyid: profileByIdReducer,
     togglevalue: toggleReducer
 });

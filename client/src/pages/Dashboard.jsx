@@ -126,7 +126,7 @@ export default function Dashboard() {
                     <Text fontSize={"3xl"} fontWeight={"bold"}>Dashboard</Text>
                     {
                         isProfileCreated === true && (
-                            <Button leftIcon={<AiFillEye />} size={"sm"} isDisabled={profile.loading}>View Public</Button>
+                            <Link to={`/profile/${profileRes?.user?._id}`}><Button leftIcon={<AiFillEye />} size={"sm"} isDisabled={profile.loading}>View Public</Button></Link>
                         )
                     }
                 </Box>
