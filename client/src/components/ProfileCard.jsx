@@ -131,7 +131,7 @@ export default function ProfileCard({ data }) {
             </Card>
             {BioSection()}
             {SkillsSection()}
-            <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={3} mb={4}>
+            <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={{base: 0, sm: 0, md: 3, lg: 3, xl: 3}} mb={4}>
                 {ExpSection()}
                 {EduCard()}
             </SimpleGrid>
