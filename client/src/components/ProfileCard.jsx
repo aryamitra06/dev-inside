@@ -1,4 +1,4 @@
-import { Avatar, AvatarBadge, Badge, Box, Card, CardBody, Center, Divider, HStack, IconButton, SimpleGrid, Tag, Text, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Card, CardBody, Center, HStack, IconButton, SimpleGrid, Tag, Text, VStack } from '@chakra-ui/react';
 import React, { Fragment } from 'react'
 import moment from "moment";
 import { MdCelebration } from "react-icons/md";
@@ -7,16 +7,15 @@ import { BsTwitter, BsInstagram, BsFacebook, BsYoutube, BsLinkedin } from "react
 
 export default function ProfileCard({ data }) {
 
-    console.log(data);
     const SocialHandles = () => (
         <Box>
             <HStack>
-                <IconButton isRound><GoGlobe /></IconButton>
-                <IconButton isRound><BsLinkedin /></IconButton>
-                <IconButton isRound><BsTwitter /></IconButton>
-                <IconButton isRound><BsInstagram /></IconButton>
-                <IconButton isRound><BsFacebook /></IconButton>
-                <IconButton isRound><BsYoutube /></IconButton>
+                {data?.website && <a href={data?.website} target="_blank" rel="noreferrer"><IconButton isRound><GoGlobe /></IconButton></a>}
+                {data?.social?.linkedin && <a href={data?.social?.linkedin} target="_blank" rel="noreferrer"><IconButton isRound><BsLinkedin /></IconButton></a>}
+                {data?.social?.twitter && <a href={data?.social?.twitter} target="_blank" rel="noreferrer"><IconButton isRound><BsTwitter /></IconButton></a>}
+                {data?.social?.instagram && <a href={data?.social?.instagram} target="_blank" rel="noreferrer"><IconButton isRound><BsInstagram /></IconButton></a>}
+                {data?.social?.facebook && <a href={data?.social?.facebook} target="_blank" rel="noreferrer"><IconButton isRound><BsFacebook /></IconButton></a>}
+                {data?.social?.youtube && <a href={data?.social?.youtube} target="_blank" rel="noreferrer"><IconButton isRound><BsYoutube /></IconButton></a>}
             </HStack>
         </Box>
     )

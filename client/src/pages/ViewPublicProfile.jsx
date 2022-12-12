@@ -10,10 +10,10 @@ export default function ViewPublicProfile() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(profileByIdAction(id));
-    }, [dispatch])
+    }, [dispatch, id])
 
     const profile = useSelector((state) => state.profilebyid);
-    const { error, loading, response, success } = profile;
+    const { error, loading, response } = profile;
 
     const ProfileSkeleton = () => (
         <Fragment>
