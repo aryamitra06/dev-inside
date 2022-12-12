@@ -121,9 +121,9 @@ export default function ProfileCard({ data }) {
                             <Avatar src={data?.user?.avatar} size={"2xl"} className="avatar">
                             </Avatar>
                             <Text fontSize={"3xl"} fontWeight={"bold"} color={"white"}>{data?.user?.name}</Text>
-                            <Tag size={"lg"} variant='subtle' colorScheme='cyan'>{data?.status} at {data?.company}</Tag>
+                            <Tag size={{base: "md", sm: "md", md: "lg", lg: "lg", xl: "lg"}} variant='subtle' colorScheme='cyan'>{data?.status} {data?.company && <>at</>} {data?.company}</Tag>
                             <Text fontSize={"lg"} color={"gray.300"} display={"flex"} alignItems={"center"} gap={1}><MdCelebration /> Joined {moment(data?.date).format("MMM Do YY")}</Text>
-                            <Text fontSize={"md"} color={"gray.300"}>{data?.location}</Text>
+                            <Text fontSize={"md"} color={"gray.300"}>{data?.location || <>Earth</>}</Text>
                             {SocialHandles()}
                         </VStack>
                     </Center>

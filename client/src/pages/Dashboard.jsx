@@ -29,11 +29,27 @@ export default function Dashboard() {
     const profileRes = profile?.response;
     const isProfileCreated = profile?.response?.isProfileCreated;
 
+    const profileError = profile?.error;
+
+    console.log(profileError);
+
+    const ErrorMsg = () => (
+        <Fragment>
+            {
+                profileError && (
+                    <Alert status='error'>
+                        <AlertIcon />
+                        {profileError?.msg}
+                    </Alert>
+                )
+            }
+        </Fragment>
+    )
     const ProfileCreatedCheker = () => {
         return (
             <Fragment>
                 {
-                    isProfileCreated !== true && (
+                    (isProfileCreated !== true) && (
                         <Alert status='error' mt={2}>
                             <AlertIcon />
                             Profile is not created.
@@ -130,6 +146,7 @@ export default function Dashboard() {
                         )
                     }
                 </Box>
+                {ErrorMsg()}
                 <Box display={"flex"} gap={1}>
                     {
                         isProfileCreated === true && (
@@ -160,8 +177,8 @@ export default function Dashboard() {
                         </>
                     ) : (
                         <>
-                            {ProfileCreatedCheker()}
-                            {ProfileActions()}
+                            {!profileError && ProfileCreatedCheker()}
+                            {!profileError && ProfileActions()}
                             {isProfileCreated === true && ProfileTabs()}
                         </>
                     )

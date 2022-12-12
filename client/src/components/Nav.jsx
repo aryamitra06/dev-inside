@@ -22,10 +22,12 @@ import {
   PopoverContent,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverBody
+  PopoverBody,
+  useColorMode
 } from '@chakra-ui/react';
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
-import devinside_logo from "../static/devinside_logo.svg";
+import logo_dark_mode from "../static/logo_dark_mode.svg";
+import logo_light_mode from "../static/logo_light_mode.svg";
 import SettingsModal from './SettingsModal';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +36,7 @@ import { idGetter, tokenGetter } from '../utils/tokenIdGetter';
 
 export default function Nav() {
   const dispatch = useDispatch();
-
+  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const logOutHandler = () => {
@@ -66,7 +68,7 @@ export default function Nav() {
               <MenuItem onClick={onOpen}>Settings</MenuItem>
             </MenuList>
           </Menu>
-          <Link to={"/"}><Image src={devinside_logo} height={10} width={10} /></Link>
+          <Link to={"/"}><Image src={colorMode==="dark" ? logo_dark_mode : logo_light_mode} height={"55px"} /></Link>
         </HStack>
         <HStack>
           <IconButton icon={<SearchIcon />} />
