@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Button, Text, Switch, useColorMode, HStack, Card, CardBody } from '@chakra-ui/react'
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Text, Switch, useColorMode, HStack, Card, CardBody } from '@chakra-ui/react'
 
 export default function SettingsModal({ isOpen, onClose }) {
     const { colorMode, toggleColorMode } = useColorMode();

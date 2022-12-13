@@ -23,7 +23,10 @@ import {
   PopoverArrow,
   PopoverCloseButton,
   PopoverBody,
-  useColorMode
+  useColorMode,
+  Input,
+  InputGroup,
+  InputLeftElement
 } from '@chakra-ui/react';
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import logo_dark_mode from "../static/logo_dark_mode.svg";
@@ -33,11 +36,11 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../redux/actions/userAction";
 import { idGetter, tokenGetter } from '../utils/tokenIdGetter';
-import {AiOutlineLogout} from "react-icons/ai";
+import { AiOutlineLogout } from "react-icons/ai";
 
 export default function Nav() {
   const dispatch = useDispatch();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const logOutHandler = () => {
@@ -51,7 +54,15 @@ export default function Nav() {
 
   const response = useSelector((state) => state.user);
 
-
+  const SearchInput = () => (
+    <InputGroup>
+      <InputLeftElement
+        pointerEvents='none'
+        children={<SearchIcon color='gray.300' />}
+      />
+      <Input type='text' placeholder='Search...' variant={"outline"} isDisabled={response.loading} />
+    </InputGroup>
+  )
 
   const Navbar = () => {
     return (
@@ -70,16 +81,24 @@ export default function Nav() {
               <MenuItem onClick={onOpen}>Settings</MenuItem>
             </MenuList>
           </Menu>
-          <Link to={"/"}><Image src={colorMode === "dark" ? logo_dark_mode : logo_light_mode} height={"55px"} /></Link>
+          <Link to={"/"}><Image src={colorMode === "dark" ? logo_dark_mode : logo_light_mode} height={"65px"} /></Link>
         </HStack>
         <HStack>
-          <IconButton icon={<SearchIcon />} />
+          <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>
+            {SearchInput()}
+          </Box>
+          <Box display={{ base: "block", sm: "block", md: "none", lg: "none", xl: "none" }}>
+            <IconButton icon={<SearchIcon />} isDisabled={response.loading} />
+          </Box>
           {
             idGetter() ? (
               <HStack>
                 {
                   response.loading ? (
-                    <Skeleton height='20px' width={"100px"} />
+                    <>
+                      <Skeleton height='35px' width={"200px"} display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }} />
+                      <Skeleton height='35px' width={"35px"} display={{ base: "block", sm: "block", md: "none", lg: "none", xl: "none" }} borderRadius={"100%"} />
+                    </>
                   ) : (
                     <Fragment>
                       <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>
@@ -108,19 +127,23 @@ export default function Nav() {
                           <PopoverContent>
                             <PopoverArrow />
                             <PopoverCloseButton />
-                            <PopoverBody>{response?.response?.name}</PopoverBody>
+                            <PopoverBody>
+                              <Box display={"flex"} alignItems={"center"} gap={2}>
+                                {response?.response?.name}
+                                <IconButton size={"md"} variant={"ghost"} colorScheme='blue' onClick={logOutHandler} display={{ base: "flex", sm: "flex", md: "none", lg: "none", xl: "none" }}><AiOutlineLogout /></IconButton>
+                              </Box>
+                            </PopoverBody>
                           </PopoverContent>
                         </Popover>
                       </Box>
                     </Fragment>
                   )
                 }
-                <IconButton size={"sm"} variant={"ghost"} colorScheme='blue' onClick={logOutHandler}><AiOutlineLogout/></IconButton>
+                <IconButton size={"md"} variant={"ghost"} colorScheme='blue' onClick={logOutHandler} display={{ base: "none", sm: "none", md: "flex", lg: "flex", xl: "flex" }}><AiOutlineLogout /></IconButton>
               </HStack>
             ) : (
               <>
-              <Link to={"/signup"}><Button colorScheme='blue' variant={"outline"} size={"sm"}>Create account</Button></Link>
-              <Link to={"/login"}><Button colorScheme='blue' variant={"outline"} size={"sm"}>Login</Button></Link>
+                <Link to={"/login"}><Button colorScheme='blue' variant={"outline"} size={"sm"}>Login</Button></Link>
               </>
             )
           }
@@ -128,6 +151,7 @@ export default function Nav() {
       </Flex>
     )
   }
+
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>

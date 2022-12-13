@@ -49,7 +49,7 @@ export default function EditProfileForm({ profile }) {
             website: profile?.response?.website,
             location: profile?.response?.location,
             status: profile?.response?.status,
-            skills: profile?.response?.skills.join(", "),
+            skills: profile?.response?.skills?.join(", "),
             githubusername: profile?.response?.githubusername,
             facebook: profile?.response?.social?.facebook,
             twitter: profile?.response?.social?.twitter,
@@ -61,7 +61,6 @@ export default function EditProfileForm({ profile }) {
     }, [])
 
     const editProfileRes = useSelector((state) => state.editprofile);
-
     const { loading } = editProfileRes;
 
     const onSubmit = (e) => {

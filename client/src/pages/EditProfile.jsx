@@ -26,7 +26,7 @@ export default function EditProfile() {
                 ) : (
                     <Container maxW={"7xl"} mt={4}>
                         {
-                            profile.response.isProfileCreated !== true && (
+                            !profile?.error?.msg && profile?.response?.isProfileCreated !== true && (
                                 <Alert status='error'>
                                     <AlertIcon />
                                     Please create your profile before edit.
@@ -41,20 +41,28 @@ export default function EditProfile() {
                 {
                     profile.loading ? (
                         <>
-                        <SimpleGrid columns={2} gap={5}>
-                        <Skeleton height={"150px"}/>
-                        <Skeleton height={"150px"}/>
-                        <Skeleton height={"100px"}/>
-                        <Skeleton height={"100px"}/>
-                        <Skeleton height={"70px"}/>
-                        <Skeleton height={"70px"}/>
-                        <Skeleton height={"50px"}/>
-                        <Skeleton height={"50px"}/>
-                        </SimpleGrid>
+                            <SimpleGrid columns={2} gap={5}>
+                                <Skeleton height={"150px"} />
+                                <Skeleton height={"150px"} />
+                                <Skeleton height={"100px"} />
+                                <Skeleton height={"100px"} />
+                                <Skeleton height={"70px"} />
+                                <Skeleton height={"70px"} />
+                                <Skeleton height={"50px"} />
+                                <Skeleton height={"50px"} />
+                            </SimpleGrid>
                         </>
                     ) : (
                         <>
-                            <EditProfileForm profile={profile} />
+                            {!profile?.error?.msg ? (
+                                <EditProfileForm profile={profile} />
+                            ) : (
+                                <Alert status='error'>
+                                    <AlertIcon />
+                                    {profile?.error?.msg}
+                                </Alert>
+                            )
+                            }
                         </>
                     )
                 }

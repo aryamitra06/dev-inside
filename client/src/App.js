@@ -17,6 +17,7 @@ import EditProfile from './pages/EditProfile';
 import AddExp from './pages/AddExp';
 import AddEdu from './pages/AddEdu';
 import ViewPublicProfile from './pages/ViewPublicProfile';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
+          <Route exact path="/" element={<HomePage />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Container, Text, Alert, AlertIcon, Box, Progress, Skeleton, Button, HStack, Stack, Tabs, TabList, Tab, TabPanels, TabPanel, SimpleGrid } from '@chakra-ui/react';
 import { Link, useNavigate } from "react-router-dom";
 import { MdAdd } from 'react-icons/md';
@@ -70,9 +70,9 @@ export default function Dashboard() {
                         ) : (
                             <>
                                 <HStack>
-                                    <Link to={"/dashboard/edit-profile"}><Button colorScheme={"cyan"} variant={"outline"} size={"sm"}>Edit Profile</Button></Link>
-                                    <Link to={"/dashboard/add-experience"}><Button colorScheme={"cyan"} variant={"ghost"} size={"sm"} leftIcon={<MdAdd />}>Experience</Button></Link>
-                                    <Link to={"/dashboard/add-education"}><Button colorScheme={"cyan"} variant={"ghost"} size={"sm"} leftIcon={<MdAdd />}>Education</Button></Link>
+                                    <Link to={"/dashboard/edit-profile"}><Button colorScheme={"blue"} variant={"solid"} size={{base: "sm", sm: "sm", md: "md", lg: "md", xl: "md"}}>Edit Profile</Button></Link>
+                                    <Link to={"/dashboard/add-experience"}><Button colorScheme={"blue"} variant={"ghost"} size={{base: "sm", sm: "sm", md: "md", lg: "md", xl: "md"}} leftIcon={<MdAdd />}>Experience</Button></Link>
+                                    <Link to={"/dashboard/add-education"}><Button colorScheme={"blue"} variant={"ghost"} size={{base: "sm", sm: "sm", md: "md", lg: "md", xl: "md"}} leftIcon={<MdAdd />}>Education</Button></Link>
                                 </HStack>
                             </>
                         )
@@ -112,7 +112,7 @@ export default function Dashboard() {
 
     const ProfileTabs = () => {
         return (
-            <Tabs mt={6} width={{ base: "100%", sm: "100%", md: "70%", lg: "70%", xl: "70%" }} variant='soft-rounded' colorScheme='blue'>
+            <Tabs mt={6} width={{ base: "100%", sm: "100%", md: "70%", lg: "70%", xl: "70%" }}  colorScheme='blue'>
                 <TabList>
                     <Tab>Experience</Tab>
                     <Tab>Education</Tab>

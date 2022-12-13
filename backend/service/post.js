@@ -18,7 +18,7 @@ router.post("/newpost", auth, addNewPost);
 @access: Private
 @desc: Getting posts
 */
-router.get("/posts", auth, getPosts);
+router.get("/posts", getPosts);
 
 /*
 @route: /post/:id

@@ -42,6 +42,10 @@ export const PROFILE_BY_ID_REQUEST = "PROFILE_BY_ID_REQUEST";
 export const PROFILE_BY_ID_SUCCESS = "PROFILE_BY_ID_SUCCESS";
 export const PROFILE_BY_ID_FAIL = "PROFILE_BY_ID_FAIL";
 
+export const ALL_POSTS_REQUEST = "ALL_POSTS_REQUEST";
+export const ALL_POSTS_SUCCESS = "ALL_POSTS_SUCCESS";
+export const ALL_POSTS_FAIL = "ALL_POSTS_FAIL";
+
 //utility
 export const RESET_STATE = "RESET_STATE";
 export const TOGGLE = "TOGGLE";
