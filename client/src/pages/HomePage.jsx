@@ -3,11 +3,14 @@ import { Container, Grid, GridItem} from '@chakra-ui/react';
 import AllPosts from './AllPosts';
 import { useDispatch, useSelector } from "react-redux";
 import { allPostsAction } from '../redux/actions/postAction';
+import {stateReseter} from "../redux/actions/utilsAction";
+
 export default function HomePage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(allPostsAction());
+        dispatch(stateReseter());
     }, [dispatch])
 
     const postRes = useSelector((state) => state.allposts);

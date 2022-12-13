@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { SimpleGrid, FormControl, FormLabel, Input, Select, FormHelperText, Textarea, Tag, InputGroup, InputLeftElement, Button, Box } from '@chakra-ui/react'
 import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,10 +44,18 @@ export default function CreateProfileForm() {
     const onSubmit = (e) => {
         e.preventDefault();
         dispatch(createProfileAction(formData));
-        navigate("/dashboard");
     }
 
-    const response = useSelector((state)=> state.createprofile)
+
+    const response = useSelector((state)=> state.createprofile);
+
+    useEffect(() => {
+        if(response?.success === true){
+            navigate("/dashboard");
+        }
+    }, [navigate, response?.success])
+    
+
     
     return (
         <Fragment>

@@ -33,11 +33,11 @@ export const myProfileReducer = (state = initialState1, action) => {
 export const createProfileReducer = (state = initialState2, action) => {
     switch (action.type) {
         case CREATE_PROFILE_REQUEST:
-            return { response: {}, loading: true, error: false };
+            return { response: {}, loading: true, error: false, success: false };
         case CREATE_PROFILE_SUCCESS:
-            return { response: action.payload, loading: false, error: false };
+            return { response: action.payload, loading: false, error: false, success: true };
         case CREATE_PROFILE_FAIL:
-            return { response: {}, loading: false, error: action.payload }
+            return { response: {}, loading: false, error: action.payload, success: false }
         default:
             return state;
     }

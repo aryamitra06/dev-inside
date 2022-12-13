@@ -5,8 +5,7 @@ const postSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
     },
     cover: {
-        type: String,
-        required: true
+        type: String
     },
     title: {
         type: String,

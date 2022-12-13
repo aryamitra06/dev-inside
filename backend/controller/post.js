@@ -1,5 +1,4 @@
 import Post from "../model/Post.js";
-import Profile from "../model/Profile.js";
 import User from "../model/User.js";
 
 export const addNewPost = async (req, res) => {

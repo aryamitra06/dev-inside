@@ -23,7 +23,7 @@ export default function CreateProfile() {
         <Fragment>
             <Container maxW={"7xl"} mt={4}>
                 <Text fontSize={"3xl"} fontWeight={"bold"} mb={3}>Create Profile</Text>
-                <CreateProfileForm />
+                <CreateProfileForm/>
             </Container>
         </Fragment>
     )

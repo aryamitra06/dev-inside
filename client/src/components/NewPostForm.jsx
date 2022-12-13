@@ -1,0 +1,63 @@
+import { SimpleGrid, FormControl, FormLabel, Input, FormHelperText, Textarea, Button } from '@chakra-ui/react'
+import React, { Fragment, useState,useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { newPostAction } from "../redux/actions/postAction";
+export default function NewPostForm() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        title: "",
+        desc: "",
+        cover: ""
+    });
+    const {
+        title,
+        desc,
+        cover
+    } = formData;
+
+    const onChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        dispatch(newPostAction(formData));
+    }
+
+    const newPostRes = useSelector((state) => state.newpost);
+    const { response, loading, success } = newPostRes;
+    console.log("Success => " + success);
+
+    useEffect(() => {
+        if (success === true) {
+            navigate("/");
+        }
+    }, [success, navigate])
+
+    return (
+        <Fragment>
+            <form onSubmit={onSubmit}>
+                <SimpleGrid columns={1} spacing={5}>
+                    <FormControl>
+                        <FormLabel>Cover image URL</FormLabel>
+                        <Input type="url" name="cover" value={cover} onChange={(e) => onChange(e)} isDisabled={loading} />
+                        <FormHelperText>Could be the image url for your post's cover</FormHelperText>
+                    </FormControl>
+                    <FormControl isRequired>
+                        <FormLabel>Title</FormLabel>
+                        <Input type="text" name="title" maxLength={100} value={title} onChange={(e) => onChange(e)} isDisabled={loading} />
+                        <FormHelperText>Could be the title of your post (100 characters maximum)</FormHelperText>
+                    </FormControl>
+                    <FormControl isRequired>
+                        <FormLabel>Description</FormLabel>
+                        <Textarea type="text" name="desc" height={200} value={desc} onChange={(e) => onChange(e)} isDisabled={loading} />
+                        <FormHelperText>Could be the description of your post</FormHelperText>
+                    </FormControl>
+                </SimpleGrid>
+                <Button mt={3} colorScheme={"blue"} type="submit" isDisabled={loading}>Publish</Button>
+            </form>
+        </Fragment>
+    )
+}

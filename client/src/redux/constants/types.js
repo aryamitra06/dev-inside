@@ -46,6 +46,10 @@ export const ALL_POSTS_REQUEST = "ALL_POSTS_REQUEST";
 export const ALL_POSTS_SUCCESS = "ALL_POSTS_SUCCESS";
 export const ALL_POSTS_FAIL = "ALL_POSTS_FAIL";
 
+export const NEW_POST_REQUEST = "NEW_POST_REQUEST";
+export const NEW_POST_SUCCESS = "NEW_POST_SUCCESS";
+export const NEW_POST_FAIL = "NEW_POST_FAIL";
+
 //utility
 export const RESET_STATE = "RESET_STATE";
 export const TOGGLE = "TOGGLE";

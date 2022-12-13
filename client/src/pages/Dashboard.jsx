@@ -26,18 +26,18 @@ export default function Dashboard() {
 
     const profile = useSelector((state) => state.getprofile);
 
+    console.log(profile);
+
     const profileRes = profile?.response;
     const isProfileCreated = profile?.response?.isProfileCreated;
-
     const profileError = profile?.error;
 
-    console.log(profileError);
-
+    //server error
     const ErrorMsg = () => (
         <Fragment>
             {
                 profileError && (
-                    <Alert status='error'>
+                    <Alert status='error' mt={3}>
                         <AlertIcon />
                         {profileError?.msg}
                     </Alert>

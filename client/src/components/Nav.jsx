@@ -24,14 +24,10 @@ import {
   PopoverCloseButton,
   PopoverBody,
   useColorMode,
-  Text,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Card,
   CardBody
 } from '@chakra-ui/react';
-import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
+import { HamburgerIcon } from '@chakra-ui/icons';
 import logo_dark_mode from "../static/logo_dark_mode.svg";
 import logo_light_mode from "../static/logo_light_mode.svg";
 import SettingsModal from './SettingsModal';
