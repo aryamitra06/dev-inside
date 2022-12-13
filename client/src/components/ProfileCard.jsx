@@ -66,6 +66,11 @@ export default function ProfileCard({ data }) {
                     Experience
                 </Text>
                 {
+                    data?.experience?.length === 0 && (
+                        <>Not available</>
+                    )
+                }
+                {
                     data?.experience?.map((e) => (
                         <Fragment key={e?._id}>
                             <Card mt={3} variant='outline' overflow='hidden'>
@@ -77,7 +82,7 @@ export default function ProfileCard({ data }) {
                                 </CardBody>
                             </Card>
                         </Fragment>
-                    )) || <>Not available</>
+                    ))
                 }
             </CardBody>
         </Card>
@@ -95,6 +100,11 @@ export default function ProfileCard({ data }) {
                     Education
                 </Text>
                 {
+                    data?.education?.length === 0 && (
+                        <>Not available</>
+                    )
+                }
+                {
                     data?.education?.map((e) => (
                         <Fragment key={e?._id}>
                             <Card mt={3} variant='outline' overflow='hidden'>
@@ -106,7 +116,7 @@ export default function ProfileCard({ data }) {
                                 </CardBody>
                             </Card>
                         </Fragment>
-                    )) || <>Not available</>
+                    ))
                 }
             </CardBody>
         </Card>
