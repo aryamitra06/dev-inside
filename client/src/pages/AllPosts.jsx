@@ -10,17 +10,17 @@ export default function AllPosts({ postRes }) {
   return (
     <Fragment>
       {
-        error ? (
+        error || response?.length === 0 ? (
           <>
           </>
         ) : (
-      <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"} mb={3}>
-        <Box display={"flex"} gap={2}>
-        {loading ? <Skeleton width={"80px"} height={"30px"}/> : <Tag size={"lg"} variant={"solid"} colorScheme={"blue"}>Latest</Tag>}
-        {loading ? <Skeleton width={"80px"} height={"30px"}/> : <Tag size={"lg"} variant={"outline"} colorScheme={"red"}>Popular</Tag>}
-        </Box>
-        <Input type='text' placeholder='Search...' width={{base: "180px", sm: "200px", md: "250px", lg: "250px", xl: "250px"}} variant={"outline"} isDisabled={loading} size={"sm"} />
-      </Box>
+          <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"} mb={3}>
+            <Box display={"flex"} gap={2}>
+              {loading ? <Skeleton width={"80px"} height={"30px"} /> : <Tag size={"lg"} variant={"solid"} colorScheme={"blue"}>Latest</Tag>}
+              {loading ? <Skeleton width={"80px"} height={"30px"} /> : <Tag size={"lg"} variant={"outline"} colorScheme={"red"}>Popular</Tag>}
+            </Box>
+            <Input type='text' placeholder='Search...' width={{ base: "180px", sm: "200px", md: "250px", lg: "250px", xl: "250px" }} variant={"outline"} isDisabled={loading} size={"sm"} />
+          </Box>
         )
       }
       {
@@ -42,9 +42,24 @@ export default function AllPosts({ postRes }) {
                 </>
               ) : (
                 <>
-                  {response?.map((e) => (
-                    <PostCard key={e?._id} data={e} />
-                  ))}
+                  {
+                    response?.length === 0 ? (
+                      <>
+                        <Alert status='warning'>
+                          <AlertIcon />
+                          No post found
+                        </Alert>
+                      </>
+                    ) : (
+                      <>
+                        {
+                          response?.map((e) => (
+                            <PostCard key={e?._id} data={e} />
+                          ))
+                        }
+                      </>
+                    )
+                  }
                 </>
               )
             }
