@@ -8,13 +8,15 @@ export const addNewPost = async (req, res) => {
 
         const newPost = new Post({
             user: req.user.id,
-            text: req.body.text,
+            title: req.body.title,
+            desc: req.body.desc,
+            cover: req.body.cover,
             name: user.name,
             avatar: user.avatar
         });
 
         const post = await newPost.save();
-        res.json(post);
+        res.status(200).json(post);
 
     } catch (error) {
         res.status(500).json({ msg: "Server error" });

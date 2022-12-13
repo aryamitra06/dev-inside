@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { Container, Grid, GridItem } from '@chakra-ui/react';
+import { Container, Grid, GridItem} from '@chakra-ui/react';
 import AllPosts from './AllPosts';
 import { useDispatch, useSelector } from "react-redux";
 import { allPostsAction } from '../redux/actions/postAction';
@@ -10,7 +10,7 @@ export default function HomePage() {
         dispatch(allPostsAction());
     }, [dispatch])
 
-    const postRes = useSelector((state)=> state.allposts);
+    const postRes = useSelector((state) => state.allposts);
     return (
         <Fragment>
             <Container maxW={"7xl"} mt={3}>

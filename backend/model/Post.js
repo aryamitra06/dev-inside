@@ -4,7 +4,15 @@ const postSchema = mongoose.Schema({
     user: {
         type: Schema.Types.ObjectId,
     },
-    text: {
+    cover: {
+        type: String,
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    desc: {
         type: String,
         required: true
     },

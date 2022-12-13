@@ -57,16 +57,6 @@ export default function Nav() {
 
   const response = useSelector((state) => state.user);
 
-  // const SearchInput = () => (
-  //   <InputGroup>
-  //     <InputLeftElement
-  //       pointerEvents='none'
-  //       children={<SearchIcon color='gray.300' />}
-  //     />
-  //     <Input type='text' placeholder='Search...' variant={"outline"} isDisabled={response.loading} />
-  //   </InputGroup>
-  // )
-
   const Navbar = () => {
     return (
       <Flex h={14} alignItems={'center'} justifyContent={'space-between'}>
@@ -87,7 +77,7 @@ export default function Nav() {
           <Link to={"/"}><Image src={colorMode === "dark" ? logo_dark_mode : logo_light_mode} height={{base: "50px", sm: "50px", md: "65px", lg: "65px", xl: "65px"}} /></Link>
         </HStack>
         <HStack>
-          {tokenGetter() && <Button variant={"solid"} colorScheme={"blue"} size={"sm"} isDisabled={response.loading}>Create Post</Button>}
+          {tokenGetter() && <Link to={"/new"}><Button variant={"solid"} colorScheme={"blue"} size={"sm"} isDisabled={response.loading}>Create Post</Button></Link>}
           {
             idGetter() ? (
               <HStack>
