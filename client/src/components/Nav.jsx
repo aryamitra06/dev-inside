@@ -24,9 +24,12 @@ import {
   PopoverCloseButton,
   PopoverBody,
   useColorMode,
+  Text,
   Input,
   InputGroup,
-  InputLeftElement
+  InputLeftElement,
+  Card,
+  CardBody
 } from '@chakra-ui/react';
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import logo_dark_mode from "../static/logo_dark_mode.svg";
@@ -54,15 +57,15 @@ export default function Nav() {
 
   const response = useSelector((state) => state.user);
 
-  const SearchInput = () => (
-    <InputGroup>
-      <InputLeftElement
-        pointerEvents='none'
-        children={<SearchIcon color='gray.300' />}
-      />
-      <Input type='text' placeholder='Search...' variant={"outline"} isDisabled={response.loading} />
-    </InputGroup>
-  )
+  // const SearchInput = () => (
+  //   <InputGroup>
+  //     <InputLeftElement
+  //       pointerEvents='none'
+  //       children={<SearchIcon color='gray.300' />}
+  //     />
+  //     <Input type='text' placeholder='Search...' variant={"outline"} isDisabled={response.loading} />
+  //   </InputGroup>
+  // )
 
   const Navbar = () => {
     return (
@@ -81,15 +84,10 @@ export default function Nav() {
               <MenuItem onClick={onOpen}>Settings</MenuItem>
             </MenuList>
           </Menu>
-          <Link to={"/"}><Image src={colorMode === "dark" ? logo_dark_mode : logo_light_mode} height={"65px"} /></Link>
+          <Link to={"/"}><Image src={colorMode === "dark" ? logo_dark_mode : logo_light_mode} height={{base: "50px", sm: "50px", md: "65px", lg: "65px", xl: "65px"}} /></Link>
         </HStack>
         <HStack>
-          <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>
-            {SearchInput()}
-          </Box>
-          <Box display={{ base: "block", sm: "block", md: "none", lg: "none", xl: "none" }}>
-            <IconButton icon={<SearchIcon />} isDisabled={response.loading} />
-          </Box>
+          {tokenGetter() && <Button variant={"solid"} colorScheme={"blue"} size={"sm"} isDisabled={response.loading}>Create Post</Button>}
           {
             idGetter() ? (
               <HStack>
@@ -102,16 +100,31 @@ export default function Nav() {
                   ) : (
                     <Fragment>
                       <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>
-                        <Tag size='lg' colorScheme='blue' borderRadius='full'>
-                          <Avatar
-                            src={response?.response?.avatar}
-                            size='xs'
-                            name={response?.response?.name}
-                            ml={-1}
-                            mr={2}
-                          />
-                          <TagLabel>{response?.response?.name}</TagLabel>
-                        </Tag>
+                        <Popover>
+                          <PopoverTrigger>
+                            <Tag size='lg' colorScheme='blue' borderRadius='full' cursor={"pointer"}>
+                              <Avatar
+                                src={response?.response?.avatar}
+                                size='xs'
+                                name={response?.response?.name}
+                                ml={-1}
+                                mr={2}
+                              />
+                              <TagLabel>{response?.response?.name}</TagLabel>
+                            </Tag>
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverBody>
+                              <Card variant={"filled"}>
+                                <CardBody>
+                                  <Button leftIcon={<AiOutlineLogout />} colorScheme='blue' onClick={logOutHandler} w={"100%"}>Logout</Button>
+                                </CardBody>
+                              </Card>
+                            </PopoverBody>
+                          </PopoverContent>
+                        </Popover>
                       </Box>
                       <Box display={{ base: "block", sm: "block", md: "none", lg: "none", xl: "none" }}>
                         <Popover>
@@ -128,10 +141,11 @@ export default function Nav() {
                             <PopoverArrow />
                             <PopoverCloseButton />
                             <PopoverBody>
-                              <Box display={"flex"} alignItems={"center"} gap={2}>
-                                {response?.response?.name}
-                                <IconButton size={"md"} variant={"ghost"} colorScheme='blue' onClick={logOutHandler} display={{ base: "flex", sm: "flex", md: "none", lg: "none", xl: "none" }}><AiOutlineLogout /></IconButton>
-                              </Box>
+                            <Card variant={"filled"}>
+                                <CardBody>
+                                  <Button leftIcon={<AiOutlineLogout />} colorScheme='blue' onClick={logOutHandler} w={"100%"}>Logout</Button>
+                                </CardBody>
+                              </Card>
                             </PopoverBody>
                           </PopoverContent>
                         </Popover>
@@ -139,7 +153,6 @@ export default function Nav() {
                     </Fragment>
                   )
                 }
-                <IconButton size={"md"} variant={"ghost"} colorScheme='blue' onClick={logOutHandler} display={{ base: "none", sm: "none", md: "flex", lg: "flex", xl: "flex" }}><AiOutlineLogout /></IconButton>
               </HStack>
             ) : (
               <>
