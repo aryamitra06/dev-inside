@@ -75,7 +75,7 @@ export default function CreateProfileForm() {
                 </FormControl>
                 <FormControl>
                     <FormLabel>Website</FormLabel>
-                    <Input type='text' name='website' value={website} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
+                    <Input type='url' name='website' value={website} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
                     <FormHelperText>Could be your own or a company website</FormHelperText>
                 </FormControl>
                 <FormControl>
@@ -114,35 +114,35 @@ export default function CreateProfileForm() {
                         pointerEvents='none'
                         children={<FaFacebookF color='gray.300' />}
                     />
-                    <Input type='text' placeholder='Facebook URL' name='facebook' value={facebook} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
+                    <Input type='url' placeholder='Facebook URL' name='facebook' value={facebook} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
                 </InputGroup>
                 <InputGroup>
                     <InputLeftElement
                         pointerEvents='none'
                         children={<FaTwitter color='gray.300' />}
                     />
-                    <Input type='text' placeholder='Twitter URL' name='twitter' value={twitter} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
+                    <Input type='url' placeholder='Twitter URL' name='twitter' value={twitter} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
                 </InputGroup>
                 <InputGroup>
                     <InputLeftElement
                         pointerEvents='none'
                         children={<FaYoutube color='gray.300' />}
                     />
-                    <Input type='text' placeholder='YouTube URL' name='youtube' value={youtube} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
+                    <Input type='url' placeholder='YouTube URL' name='youtube' value={youtube} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
                 </InputGroup>
                 <InputGroup>
                     <InputLeftElement
                         pointerEvents='none'
                         children={<FaLinkedin color='gray.300' />}
                     />
-                    <Input type='text' placeholder='Linkedin URL' name='linkedin' value={linkedin} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
+                    <Input type='url' placeholder='Linkedin URL' name='linkedin' value={linkedin} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
                 </InputGroup>
                 <InputGroup>
                     <InputLeftElement
                         pointerEvents='none'
                         children={<FaInstagram color='gray.300' />}
                     />
-                    <Input type='text' placeholder='Instagram URL' name='instagram' value={instagram} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
+                    <Input type='url' placeholder='Instagram URL' name='instagram' value={instagram} onChange={(e) => onChange(e)} isDisabled={response.loading}/>
                 </InputGroup>
             </SimpleGrid>
             <Box display={"flex"} justifyContent={"flex-end"}>
