@@ -26,7 +26,7 @@ router.get("/posts", getPosts);
 @access: Private
 @desc: Getting post by id
 */
-router.get("/post/:id", auth, getPostById);
+router.get("/post/:id", getPostById);
 
 /*
 @route: /post/delete/:id
