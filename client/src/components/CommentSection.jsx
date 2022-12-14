@@ -18,11 +18,11 @@ function CommentSection() {
                     <Card variant={"outline"} p={3}>
                         <HStack justifyContent={"space-between"}>
                             <Box display={"flex"} gap={2} alignItems={"center"}>
-                                <Text fontWeight={"bold"}>Aryamitra Chaudhuri</Text>
-                                <Text color={"gray.400"}>&bull; 14 Dec</Text>
+                                <Text fontWeight={"bold"} fontSize={{base: "sm", sm: "sm", md: "md", lg: "md", xl: "md"}}>Aryamitra Chaudhuri</Text>
+                                <Text color={"gray.400"} fontSize={{base: "xs"}}>&bull; 14 Dec</Text>
                             </Box>
                             <Menu>
-                                <MenuButton as={IconButton} icon={<BsThreeDotsVertical />}>
+                                <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} size={"sm"}>
                                 </MenuButton>
                                 <MenuList>
                                     <MenuItem>Delete</MenuItem>
@@ -48,7 +48,7 @@ function CommentSection() {
                 </Box>
             </Box>
             {AllComments()}
-            <Box mb={10} />
+            <Box mb={5} />
         </Fragment>
     )
 }

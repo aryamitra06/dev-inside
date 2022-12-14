@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Card, CardBody, Box, Text, IconButton, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import moment from "moment";
 import { MdWork } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
@@ -27,8 +27,8 @@ export default function ExpCard({ data }) {
             <MenuButton
                 as={IconButton}
                 aria-label='Options'
-                icon={<HamburgerIcon />}
-                variant='ghost'
+                icon={<BsThreeDotsVertical />}
+                size={"sm"}
             />
             <MenuList>
                 <MenuItem icon={<AiFillDelete />} onClick={deleteExpHandler} isDisabled={deleteRes.loading === true}>
@@ -46,11 +46,11 @@ export default function ExpCard({ data }) {
                         <MdWork size={"55px"} color={"#B2B2B2"} />
                         <Box>
                             <Text fontWeight={"bold"} fontSize={"md"}>{data?.company}</Text>
-                            <Text fontSize={"sm"} color={"gray.400"}>{data?.title} &bull; {moment(data?.from).format('MMMM Do YYYY')} - {data?.current === false ? moment(data?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
+                            <Text fontSize={"sm"} color={"gray.600"}>{data?.title} &bull; {moment(data?.from).format('MMMM Do YYYY')} - {data?.current === false ? moment(data?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
                             <Text fontSize={"sm"} color={"gray.400"}>{data?.location}</Text>
                         </Box>
                     </Box>
-                    <Box>
+                    <Box alignSelf={"flex-start"}>
                         {ActionMenu()}
                     </Box>
                 </Box>

@@ -16,10 +16,10 @@ export default function PostByIdCard() {
                 <CardBody>
                     <Flex spacing='4' mt={4}>
                         <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                            <Avatar name={""} src={""} cursor={"pointer"} className="avatar" />
+                            <Avatar/>
                             <Box>
-                                <Heading size='sm' cursor={"pointer"}>{"data?.name"}</Heading>
-                                <Text>{moment("data?.date").format("MMM DD YYYY")} &bull; {"stats?.text"}</Text>
+                                <Heading size='sm' cursor={"pointer"}>Aryamitra Chaudhuri</Heading>
+                                <Text fontSize={"sm"} color={"gray.500"}>{moment("data?.date").format("MMM DD YYYY")} &bull; {"stats?.text"}</Text>
                             </Box>
                         </Flex>
                         <Menu>

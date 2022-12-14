@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { Card, CardBody, Box, Text, IconButton, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { MdSchool } from 'react-icons/md';
@@ -26,8 +26,8 @@ export default function EduCard({ data }) {
             <MenuButton
                 as={IconButton}
                 aria-label='Options'
-                icon={<HamburgerIcon />}
-                variant='ghost'
+                icon={<BsThreeDotsVertical />}
+                size={"sm"}
             />
             <MenuList>
                 <MenuItem icon={<AiFillDelete />} onClick={deleteEduHandler} isDisabled={deleteRes.loading === true}>
@@ -45,11 +45,11 @@ export default function EduCard({ data }) {
                         <MdSchool size={"55px"} color={"#B2B2B2"} />
                         <Box>
                             <Text fontWeight={"bold"} fontSize={"md"}>{data?.school}</Text>
-                            <Text fontSize={"sm"} color={"gray.400"} fontWeight={"bold"}>{data?.fieldofstudy}</Text>
+                            <Text fontSize={"sm"} color={"gray.600"} fontWeight={"bold"}>{data?.fieldofstudy}</Text>
                             <Text fontSize={"sm"} color={"gray.400"}>{data?.degree} &bull; {moment(data?.from).format('MMMM Do YYYY')} - {data?.current === false ? moment(data?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
                         </Box>
                     </Box>
-                    <Box>
+                    <Box alignSelf={"flex-start"}>
                         {ActionMenu()}
                     </Box>
                 </Box>

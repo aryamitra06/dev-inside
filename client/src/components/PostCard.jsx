@@ -40,11 +40,11 @@ export default function PostCard({ data }) {
                         <Avatar name={data?.name} src={data?.avatar} onClick={profileNavigator} cursor={"pointer"} className="avatar" />
                         <Box>
                             <Heading size='sm' onClick={profileNavigator} cursor={"pointer"}>{data?.name}</Heading>
-                            <Text>{moment(data?.date).format("MMM DD YYYY")} &bull; {stats?.text}</Text>
+                            <Text fontSize={"sm"} color={"gray.500"}>{moment(data?.date).format("MMM DD YYYY")} &bull; {stats?.text}</Text>
                         </Box>
                     </Flex>
                     <Menu>
-                        <MenuButton as={IconButton} icon={<BsThreeDotsVertical />}>
+                        <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} size={"sm"}>
                         </MenuButton>
                         <MenuList>
                             <MenuItem>Delete</MenuItem>

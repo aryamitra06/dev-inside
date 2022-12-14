@@ -75,8 +75,8 @@ export default function ProfileCard({ data }) {
                         <Fragment key={e?._id}>
                             <Card mt={3} variant='outline' overflow='hidden'>
                                 <CardBody>
-                                    <Text fontWeight={"bold"} fontSize={"sm"}>{e?.company}</Text>
-                                    <Text fontSize={"sm"} color={"gray.400"}>{e?.title} &bull; {moment(e?.from).format('MMMM Do YYYY')} - {e?.current === false ? moment(e?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
+                                    <Text fontWeight={"bold"} fontSize={"md"}>{e?.company}</Text>
+                                    <Text fontSize={"sm"} color={"gray.600"}>{e?.title} &bull; {moment(e?.from).format('MMMM Do YYYY')} - {e?.current === false ? moment(e?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
                                     <Text fontSize={"sm"} color={"gray.400"}>{e?.location}</Text>
                                     <Text fontSize={"sm"} mt={2}>{e?.description}</Text>
                                 </CardBody>
@@ -109,8 +109,8 @@ export default function ProfileCard({ data }) {
                         <Fragment key={e?._id}>
                             <Card mt={3} variant='outline' overflow='hidden'>
                                 <CardBody>
-                                    <Text fontWeight={"bold"} fontSize={"sm"}>{e?.school}</Text>
-                                    <Text fontSize={"sm"} color={"gray.400"} fontWeight={"bold"}>{data?.fieldofstudy}</Text>
+                                    <Text fontWeight={"bold"} fontSize={"md"}>{e?.school}</Text>
+                                    <Text fontSize={"sm"} color={"gray.600"} fontWeight={"bold"}>{data?.fieldofstudy}</Text>
                                     <Text fontSize={"sm"} color={"gray.400"}>{e?.degree} &bull; {moment(e?.from).format('MMMM Do YYYY')} - {e?.current === false ? moment(e?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
                                     <Text fontSize={"sm"} mt={2}>{e?.description}</Text>
                                 </CardBody>
