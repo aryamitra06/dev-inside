@@ -19,6 +19,7 @@ import AddEdu from './pages/AddEdu';
 import ViewPublicProfile from './pages/ViewPublicProfile';
 import HomePage from './pages/HomePage';
 import NewPost from './pages/NewPost';
+import PostById from './pages/PostById';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/new" element={<NewPost />} />
+          <Route exact path="/post/:id" element={<PostById />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />

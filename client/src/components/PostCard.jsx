@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, CardBody, CardHeader, Flex, Avatar, Box, Heading, Text, IconButton, Button, Image } from '@chakra-ui/react'
+import { Card, CardBody, CardHeader, Flex, Avatar, Box, Heading, Text, IconButton, Button, Image, Menu, MenuItem, MenuButton, MenuList } from '@chakra-ui/react'
 import moment from "moment";
 import readingTime from "reading-time/lib/reading-time";
 import { BiLike, BiChat, BiShare } from "react-icons/bi";
@@ -43,12 +43,13 @@ export default function PostCard({ data }) {
                             <Text>{moment(data?.date).format("MMM DD YYYY")} &bull; {stats?.text}</Text>
                         </Box>
                     </Flex>
-                    <IconButton
-                        variant='ghost'
-                        colorScheme='gray'
-                        aria-label='See menu'
-                        icon={<BsThreeDotsVertical />}
-                    />
+                    <Menu>
+                        <MenuButton as={IconButton} icon={<BsThreeDotsVertical />}>
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>Delete</MenuItem>
+                        </MenuList>
+                    </Menu>
                 </Flex>
             </CardHeader>
             <CardBody onClick={fullPostNavigator} cursor={"pointer"}>
