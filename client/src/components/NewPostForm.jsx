@@ -1,5 +1,5 @@
 import { SimpleGrid, FormControl, FormLabel, Input, FormHelperText, Textarea, Button, HStack } from '@chakra-ui/react'
-import React, { Fragment, useState,useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from 'react-router-dom';
 import { newPostAction } from "../redux/actions/postAction";
@@ -27,7 +27,7 @@ export default function NewPostForm() {
     }
 
     const newPostRes = useSelector((state) => state.newpost);
-    const { response, loading, success } = newPostRes;
+    const { loading, success } = newPostRes;
     console.log("Success => " + success);
 
     useEffect(() => {
@@ -57,8 +57,8 @@ export default function NewPostForm() {
                     </FormControl>
                 </SimpleGrid>
                 <HStack mt={3} justifyContent={"flex-end"}>
-                <Link to={"/"}><Button isDisabled={loading}>Back to Feed</Button></Link>
-                <Button colorScheme={"blue"} type="submit" isDisabled={loading}>Publish</Button>
+                    <Link to={"/"}><Button isDisabled={loading}>Back to Feed</Button></Link>
+                    <Button colorScheme={"blue"} type="submit" isDisabled={loading}>Publish</Button>
                 </HStack>
             </form>
         </Fragment>
