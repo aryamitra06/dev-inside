@@ -1,4 +1,4 @@
-import { ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, RESET_STATE } from "../constants/types";
+import { ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_BY_ID_FAIL, POST_BY_ID_REQUEST, POST_BY_ID_SUCCESS, RESET_STATE } from "../constants/types";
 
 const initialState1 = {
     response: {},
@@ -41,3 +41,15 @@ export const newPostReducer = (state = initialState3, action) => {
     }
 }
 
+export const postByIdReducer = (state = initialState1, action) => {
+    switch (action.type) {
+        case POST_BY_ID_REQUEST:
+            return { response: {}, loading: true, error: false };
+        case POST_BY_ID_SUCCESS:
+            return { response: action.payload, loading: false, error: false };
+        case POST_BY_ID_FAIL:
+            return { response: {}, loading: false, error: action.payload }
+        default:
+            return state;
+    }
+}

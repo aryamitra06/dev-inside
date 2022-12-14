@@ -1,14 +1,16 @@
 import { Avatar, Box, Button, Card, CardBody, Center, Tag, Text } from '@chakra-ui/react'
 import React, { Fragment } from 'react'
 
-export default function PostProfileOverviewCard() {
+export default function PostProfileOverviewCard({data}) {
+  const {response, loading, error} = data;
+  console.log(response);
   return (
     <Fragment>
       <Card variant={"outline"} borderRadius={"xl"} overflow={"hidden"} mb={5} boxShadow={"lg"}>
         <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"13px"}/>
         <Box display={"flex"} alignItems={"center"} flexDirection={"column"} justifyContent={"center"} mt={6}>
           <Avatar />
-          <Text mt={1} fontSize={"xl"} fontWeight={"bold"}>Aryamitra Chaudhuri</Text>
+          <Text mt={1} fontSize={"xl"} fontWeight={"bold"}>{response?.user?.name}</Text>
         </Box>
         <Center>
         </Center>

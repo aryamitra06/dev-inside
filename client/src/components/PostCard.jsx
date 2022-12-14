@@ -11,7 +11,7 @@ export default function PostCard({ data }) {
     const [expandText, setExpandText] = useState(data?.desc?.slice(0, 300));
     const [showLessBtn, setShowLessBtn] = useState(false);
 
-    const stats = readingTime(data?.desc);
+    const stats = readingTime(data?.desc || "");
 
     const readMoreHandler = () => {
         setExpandText(data?.desc);
@@ -24,7 +24,7 @@ export default function PostCard({ data }) {
     }
 
     const fullPostNavigator = () => {
-        navigate(`post/${data?._id}`);
+        navigate(`post/${data?.user}/${data?._id}`);
     }
 
     const profileNavigator = () => {

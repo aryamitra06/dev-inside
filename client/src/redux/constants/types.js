@@ -50,6 +50,10 @@ export const NEW_POST_REQUEST = "NEW_POST_REQUEST";
 export const NEW_POST_SUCCESS = "NEW_POST_SUCCESS";
 export const NEW_POST_FAIL = "NEW_POST_FAIL";
 
+export const POST_BY_ID_REQUEST = "POST_BY_ID_REQUEST";
+export const POST_BY_ID_SUCCESS = "POST_BY_ID_SUCCESS";
+export const POST_BY_ID_FAIL = "POST_BY_ID_FAIL";
+
 //utility
 export const RESET_STATE = "RESET_STATE";
 export const TOGGLE = "TOGGLE";
