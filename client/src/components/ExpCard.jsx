@@ -46,8 +46,8 @@ export default function ExpCard({ data }) {
                         <MdWork size={"55px"} color={"#B2B2B2"} />
                         <Box>
                             <Text fontWeight={"bold"} fontSize={"md"}>{data?.company}</Text>
-                            <Text fontSize={"sm"} color={"gray.600"}>{data?.title} &bull; {moment(data?.from).format('MMMM Do YYYY')} - {data?.current === false ? moment(data?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
-                            <Text fontSize={"sm"} color={"gray.400"}>{data?.location}</Text>
+                            <Text fontSize={"sm"} color={"gray.400"}>{data?.title} &bull; {moment(data?.from).format('MMMM Do YYYY')} - {data?.current === false ? moment(data?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
+                            <Text fontSize={"sm"} color={"gray.500"}>{data?.location}</Text>
                         </Box>
                     </Box>
                     <Box alignSelf={"flex-start"}>

@@ -37,7 +37,7 @@ export default function PostCard({ data }) {
             <CardHeader>
                 <Flex spacing='4'>
                     <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                        <Avatar name={data?.name} src={data?.avatar} onClick={profileNavigator} cursor={"pointer"} className="avatar" />
+                        <Avatar name={data?.name} src={data?.avatar} onClick={profileNavigator} cursor={"pointer"} />
                         <Box>
                             <Heading size='sm' onClick={profileNavigator} cursor={"pointer"}>{data?.name}</Heading>
                             <Text fontSize={"sm"} color={"gray.500"}>{moment(data?.date).format("MMM DD YYYY")} &bull; {stats?.text}</Text>

@@ -48,7 +48,7 @@ export default function Nav() {
   }
 
   useEffect(() => {
-    dispatch(userAction(tokenGetter()));
+    dispatch(userAction());
   }, [dispatch])
 
   const response = useSelector((state) => state.user);
