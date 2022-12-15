@@ -15,7 +15,7 @@ export default function PostById() {
         dispatch(postByIdAction(postid))
         dispatch(profileByIdAction(userid))
         dispatch(userAction());
-    }, [dispatch])
+    }, [dispatch,postid,userid])
     
     
         const postRes = useSelector((state) => state.postbyid);

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { Container, Grid, GridItem} from '@chakra-ui/react';
+import { Container, Grid, GridItem, Progress} from '@chakra-ui/react';
 import AllPosts from './AllPosts';
 import { useDispatch, useSelector } from "react-redux";
 import { allPostsAction } from '../redux/actions/postAction';
@@ -16,6 +16,11 @@ export default function HomePage() {
     const postRes = useSelector((state) => state.allposts);
     return (
         <Fragment>
+            {
+                postRes?.loading && (
+                    <Progress size='xs' isIndeterminate />
+                )
+            }
             <Container maxW={"7xl"} mt={3}>
                 <Grid
                     templateRows='repeat(1, 1fr)'

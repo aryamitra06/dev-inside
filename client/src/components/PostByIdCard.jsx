@@ -5,6 +5,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Card, CardBody, Image, Text, Button, Flex, Avatar, Box, Heading, IconButton, Menu, MenuButton, MenuList, MenuItem, Stack, Skeleton, Alert, AlertIcon } from '@chakra-ui/react'
 import { BiLike, BiChat, BiShare } from "react-icons/bi";
 import CommentSection from './CommentSection';
+import { Link } from 'react-router-dom';
 
 const PostByIdCard = ({ data, loggedInUser }) => {
     const { response, loading, error } = data;
@@ -41,7 +42,7 @@ const PostByIdCard = ({ data, loggedInUser }) => {
                                                 <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
                                                     <Avatar src={response?.avatar} />
                                                     <Box>
-                                                        <Heading size='sm' cursor={"pointer"}>{response?.name}</Heading>
+                                                        <Link to={`/profile/${response?.user}`}><Heading size='sm' cursor={"pointer"}>{response?.name}</Heading></Link>
                                                         <Text fontSize={"sm"} color={"gray.500"}>{moment(response?.date).format("MMM DD YYYY")} &bull; {stats.text}</Text>
                                                     </Box>
                                                 </Flex>
