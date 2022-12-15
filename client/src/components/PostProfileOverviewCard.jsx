@@ -9,9 +9,9 @@ const PostProfileOverviewCard = ({ data }) => {
       {
         loading ? (
           <Stack>
-            <Skeleton height={"200px"}/>
-            <Skeleton height={"100px"}/>
-            <Skeleton height={"70px"}/>
+            <Skeleton height={"200px"} />
+            <Skeleton height={"100px"} />
+            <Skeleton height={"70px"} />
           </Stack>
         ) : (
           <>
@@ -25,8 +25,8 @@ const PostProfileOverviewCard = ({ data }) => {
                 <Card variant={"outline"} borderRadius={"xl"} overflow={"hidden"} mb={5} boxShadow={"lg"}>
                   <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"13px"} />
                   <Box display={"flex"} alignItems={"center"} flexDirection={"column"} justifyContent={"center"} mt={6}>
-                    <Avatar src={response?.user?.avatar}/>
-                    <Text mt={1} fontSize={"xl"} fontWeight={"bold"}>{response?.user?.name}</Text>
+                    <Link to={`/profile/${response?.user?._id}`}><Avatar src={response?.user?.avatar} size={"lg"} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} shadow={"md"} /></Link>
+                    <Link to={`/profile/${response?.user?._id}`}><Text mt={1} fontSize={"xl"} fontWeight={"bold"}>{response?.user?.name}</Text></Link>
                   </Box>
                   <Center>
                   </Center>

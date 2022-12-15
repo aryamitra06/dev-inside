@@ -128,7 +128,7 @@ export default function ProfileCard({ data }) {
                 <CardBody bgGradient='linear(to-l, #5433FF, #20BDFF)' borderRadius={"lg"}>
                     <Center>
                         <VStack>
-                            <Avatar src={data?.user?.avatar} size={{base: "xl", sm: "xl", md: "2xl", lg: "2xl", xl: "2xl"}} bgGradient='linear(to-l, #5433FF, #20BDFF)'>
+                            <Avatar src={data?.user?.avatar} size={{base: "xl", sm: "xl", md: "2xl", lg: "2xl", xl: "2xl"}} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"4px"} shadow={"xl"}>
                             </Avatar>
                             <Text fontSize={"3xl"} fontWeight={"bold"} color={"white"}>{data?.user?.name}</Text>
                             <Tag size={{base: "md", sm: "md", md: "lg", lg: "lg", xl: "lg"}} variant='subtle' colorScheme='cyan'>{data?.status} {data?.company && <>at</>} {data?.company}</Tag>

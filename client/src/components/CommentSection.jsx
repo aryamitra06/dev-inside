@@ -1,7 +1,7 @@
-import { Avatar, Box, Button, Card, IconButton, HStack, Text, Textarea, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
+import { Avatar, Box, Button, Card, IconButton, HStack, Text, Textarea, Menu, MenuButton, MenuList, MenuItem, Alert, AlertIcon } from '@chakra-ui/react'
 import React, { Fragment, memo, useState } from 'react'
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { avatarGetter } from "../utils/tokenExtractor";
+import { avatarGetter, tokenGetter } from "../utils/tokenExtractor";
 function CommentSection() {
     const [showBtn, setShowBtn] = useState(false);
 
@@ -37,16 +37,27 @@ function CommentSection() {
     )
     return (
         <Fragment>
-            <Text fontSize={"2xl"} fontWeight={"bold"} p={5}>Comments (10)</Text>
-            <Box pl={5} pr={5} mb={3}>
-                <Box display={"flex"} gap={3}>
-                    <Avatar size={"sm"} src={avatarGetter()} />
-                    <Box width={"100%"}>
-                        <Textarea placeholder='Add to the discussion' width={"100%"} mb={2} onClick={displaySubmitBtn}></Textarea>
-                        {showBtn && <Button colorScheme={"blue"}>Submit</Button>}
+            <Text fontSize={"2xl"} fontWeight={"bold"} p={5}>Discussions (10)</Text>
+            {
+                tokenGetter() ? (
+                    <Box pl={5} pr={5} mb={3}>
+                        <Box display={"flex"} gap={3}>
+                            <Avatar size={"sm"} src={avatarGetter()} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} />
+                            <Box width={"100%"}>
+                                <Textarea placeholder='Add to the discussion' width={"100%"} mb={2} onClick={displaySubmitBtn}></Textarea>
+                                {showBtn && <Button colorScheme={"blue"}>Submit</Button>}
+                            </Box>
+                        </Box>
                     </Box>
-                </Box>
-            </Box>
+                ) : (
+                    <Box pl={5} pr={5} mb={6}>
+                        <Alert status='info'>
+                            <AlertIcon />
+                            Login/Signup to comment!
+                        </Alert>
+                    </Box>
+                )
+            }
             {AllComments()}
             <Box mb={5} />
         </Fragment>
