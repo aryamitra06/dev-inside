@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import { Container } from "@chakra-ui/react";
 import AddExpForm from '../components/AddExpForm';
-import { tokenGetter } from '../utils/tokenIdGetter';
+import { tokenGetter } from '../utils/tokenExtractor';
 import { useNavigate } from 'react-router-dom';
 export default function AddExp() {
   const navigate = useNavigate();

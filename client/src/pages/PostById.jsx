@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { postByIdAction } from "../redux/actions/postAction";
 import { profileByIdAction } from '../redux/actions/profileAction';
 import { useParams } from "react-router-dom";
-import { userAction } from '../redux/actions/userAction';
 
 export default function PostById() {
     const { userid, postid } = useParams();
@@ -14,13 +13,11 @@ export default function PostById() {
     useEffect(() => {
         dispatch(postByIdAction(postid))
         dispatch(profileByIdAction(userid))
-        dispatch(userAction());
-    }, [dispatch,postid,userid])
-    
-    
-        const postRes = useSelector((state) => state.postbyid);
-        const profileRes = useSelector((state) => state.profilebyid);
-        const loggedInUser = useSelector((state) => state.user);
+    }, [dispatch, postid, userid])
+
+
+    const postRes = useSelector((state) => state.postbyid);
+    const profileRes = useSelector((state) => state.profilebyid);
 
     return (
         <Fragment>
@@ -36,10 +33,10 @@ export default function PostById() {
                     gap={5}
                 >
                     <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 8, xl: 8 }}>
-                        <PostByIdCard data={postRes} loggedInUser={loggedInUser}/>
+                        <PostByIdCard data={postRes} />
                     </GridItem>
                     <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 4, xl: 4 }}>
-                        <PostProfileOverviewCard data={profileRes}/>
+                        <PostProfileOverviewCard data={profileRes} />
                     </GridItem>
                 </Grid>
             </Container>

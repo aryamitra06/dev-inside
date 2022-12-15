@@ -9,7 +9,7 @@ import { myProfileAction } from '../redux/actions/profileAction';
 import ExpCard from '../components/ExpCard';
 import EduCard from '../components/EduCard';
 import { stateReseter } from '../redux/actions/utilsAction';
-import { tokenGetter } from '../utils/tokenIdGetter';
+import { tokenGetter } from '../utils/tokenExtractor';
 
 export default function Dashboard() {
     const toggleState = useSelector((state) => state.togglevalue);

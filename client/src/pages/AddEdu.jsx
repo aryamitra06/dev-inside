@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { Container } from "@chakra-ui/react";
 import AddEduForm from '../components/AddEduForm';
 import { useNavigate } from 'react-router-dom';
-import { tokenGetter } from '../utils/tokenIdGetter';
+import { tokenGetter } from '../utils/tokenExtractor';
 export default function AddEdu() {
   const navigate = useNavigate();
 

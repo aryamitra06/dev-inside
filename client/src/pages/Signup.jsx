@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from "react-redux";
 import { signUpAction } from "../redux/actions/authAction";
-import { idGetter } from '../utils/tokenIdGetter';
+import { idGetter } from '../utils/tokenExtractor';
 import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {

@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { Alert, AlertIcon, Container, Text, Progress, Skeleton, SimpleGrid } from '@chakra-ui/react'
 import EditProfileForm from '../components/EditProfileForm'
 import { useNavigate } from "react-router-dom";
-import { idGetter } from '../utils/tokenIdGetter';
+import { idGetter } from '../utils/tokenExtractor';
 import { useSelector, useDispatch } from 'react-redux';
 import { myProfileAction } from '../redux/actions/profileAction';
 export default function EditProfile() {

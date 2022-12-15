@@ -7,7 +7,7 @@ import { BiLike, BiChat, BiShare } from "react-icons/bi";
 import CommentSection from './CommentSection';
 import { Link } from 'react-router-dom';
 
-const PostByIdCard = ({ data, loggedInUser }) => {
+const PostByIdCard = ({ data }) => {
     const { response, loading, error } = data;
     const stats = readingTime(response?.desc || "");
     return (
@@ -69,7 +69,7 @@ const PostByIdCard = ({ data, loggedInUser }) => {
                                             </Button>
                                         </Box>
                                     </Card>
-                                    <CommentSection loggedInUser={loggedInUser}/>
+                                    <CommentSection />
                                 </Fragment>
                             )
                         }

@@ -27,7 +27,7 @@ export const registerUser = async (req, res) => {
         user.save();
 
         // Return jsonwebtoken
-        const token = jwt.sign({ user: { id: user._id } }, "meawmeaw", { expiresIn: "7d" });
+        const token = jwt.sign({ user: { id: user._id, name: user.name, avatar: user.avatar} }, "meawmeaw", { expiresIn: "7d" });
         return res.status(200).json({ msg: "Success", token: token });
 
     } catch (error) {
@@ -53,7 +53,7 @@ export const loginUser = async (req, res) => {
         }
 
         // Return jsonwebtoken
-        const token = jwt.sign({ user: { id: user._id } }, "meawmeaw", { expiresIn: "7d" });
+        const token = jwt.sign({ user: { id: user._id, name: user.name, avatar: user.avatar} }, "meawmeaw", { expiresIn: "7d" });
         return res.status(200).json({ msg: "Success", token: token });
 
     } catch (error) {

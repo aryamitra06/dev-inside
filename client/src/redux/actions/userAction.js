@@ -1,5 +1,5 @@
 import axios from "axios";
-import { tokenGetter } from "../../utils/tokenIdGetter";
+import { tokenGetter } from "../../utils/tokenExtractor";
 import { USER_REQUEST, USER_SUCCESS, USER_FAIL } from "../constants/types";
 
 export const userAction = () => async (dispatch) => {

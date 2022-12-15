@@ -31,7 +31,6 @@ export default function PostCard({ data }) {
         navigate(`profile/${data?.user}`)
     }
 
-
     return (
         <Card mb={3} >
             <CardHeader>

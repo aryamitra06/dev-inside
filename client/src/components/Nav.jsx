@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import {
   Box,
   Flex,
@@ -14,7 +14,6 @@ import {
   MenuList,
   Container,
   Avatar,
-  Skeleton,
   Tag,
   TagLabel,
   Popover,
@@ -32,13 +31,10 @@ import logo_dark_mode from "../static/logo_dark_mode.svg";
 import logo_light_mode from "../static/logo_light_mode.svg";
 import SettingsModal from './SettingsModal';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-import { userAction } from "../redux/actions/userAction";
-import { idGetter, tokenGetter } from '../utils/tokenIdGetter';
+import { idGetter, tokenGetter, nameGetter, avatarGetter } from '../utils/tokenExtractor';
 import { AiOutlineLogout } from "react-icons/ai";
 
 export default function Nav() {
-  const dispatch = useDispatch();
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -47,12 +43,7 @@ export default function Nav() {
     window.location.href = "/login";
   }
 
-  useEffect(() => {
-    dispatch(userAction());
-  }, [dispatch])
-
-  const response = useSelector((state) => state.user);
-
+  console.log(avatarGetter());
   const Navbar = () => {
     return (
       <Flex h={14} alignItems={'center'} justifyContent={'space-between'}>
@@ -70,75 +61,64 @@ export default function Nav() {
               <MenuItem onClick={onOpen}>Settings</MenuItem>
             </MenuList>
           </Menu>
-          <Link to={"/"}><Image src={colorMode === "dark" ? logo_dark_mode : logo_light_mode} height={{base: "50px", sm: "50px", md: "65px", lg: "65px", xl: "65px"}} /></Link>
+          <Link to={"/"}><Image src={colorMode === "dark" ? logo_dark_mode : logo_light_mode} height={{ base: "50px", sm: "50px", md: "65px", lg: "65px", xl: "65px" }} /></Link>
         </HStack>
         <HStack>
-          {tokenGetter() && <Link to={"/new"}><Button variant={"solid"} colorScheme={"blue"} size={"sm"} isDisabled={response.loading}>Create Post</Button></Link>}
+          {tokenGetter() && <Link to={"/new"}><Button variant={"solid"} colorScheme={"blue"} size={"sm"}>Create Post</Button></Link>}
           {
             idGetter() ? (
               <HStack>
-                {
-                  response.loading ? (
-                    <>
-                      <Skeleton height='35px' width={"200px"} display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }} />
-                      <Skeleton height='35px' width={"35px"} display={{ base: "block", sm: "block", md: "none", lg: "none", xl: "none" }} borderRadius={"100%"} />
-                    </>
-                  ) : (
-                    <Fragment>
-                      <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>
-                        <Popover>
-                          <PopoverTrigger>
-                            <Tag size='lg' colorScheme='blue' borderRadius='full' cursor={"pointer"}>
-                              <Avatar
-                                src={response?.response?.avatar}
-                                size='xs'
-                                name={response?.response?.name}
-                                ml={-1}
-                                mr={2}
-                              />
-                              <TagLabel>{response?.response?.name}</TagLabel>
-                            </Tag>
-                          </PopoverTrigger>
-                          <PopoverContent>
-                            <PopoverArrow />
-                            <PopoverCloseButton />
-                            <PopoverBody>
-                              <Card variant={"filled"}>
-                                <CardBody>
-                                  <Button leftIcon={<AiOutlineLogout />} colorScheme='blue' onClick={logOutHandler} w={"100%"}>Logout</Button>
-                                </CardBody>
-                              </Card>
-                            </PopoverBody>
-                          </PopoverContent>
-                        </Popover>
-                      </Box>
-                      <Box display={{ base: "block", sm: "block", md: "none", lg: "none", xl: "none" }}>
-                        <Popover>
-                          <PopoverTrigger>
-                            <Avatar
-                              src={response?.response?.avatar}
-                              size='sm'
-                              name={response?.response?.name}
-                              ml={-1}
-                              mr={2}
-                            />
-                          </PopoverTrigger>
-                          <PopoverContent>
-                            <PopoverArrow />
-                            <PopoverCloseButton />
-                            <PopoverBody>
-                            <Card variant={"filled"}>
-                                <CardBody>
-                                  <Button leftIcon={<AiOutlineLogout />} colorScheme='blue' onClick={logOutHandler} w={"100%"}>Logout</Button>
-                                </CardBody>
-                              </Card>
-                            </PopoverBody>
-                          </PopoverContent>
-                        </Popover>
-                      </Box>
-                    </Fragment>
-                  )
-                }
+                <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>
+                  <Popover>
+                    <PopoverTrigger>
+                      <Tag size='lg' colorScheme='blue' borderRadius='full' cursor={"pointer"}>
+                        <Avatar
+                          src={avatarGetter()}
+                          size='xs'
+                          name={nameGetter()}
+                          ml={-1}
+                          mr={2}
+                        />
+                        <TagLabel>{nameGetter()}</TagLabel>
+                      </Tag>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverBody>
+                        <Card variant={"filled"}>
+                          <CardBody>
+                            <Button leftIcon={<AiOutlineLogout />} colorScheme='blue' onClick={logOutHandler} w={"100%"}>Logout</Button>
+                          </CardBody>
+                        </Card>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                </Box>
+                <Box display={{ base: "block", sm: "block", md: "none", lg: "none", xl: "none" }}>
+                  <Popover>
+                    <PopoverTrigger>
+                      <Avatar
+                        src={avatarGetter()}
+                        size='sm'
+                        name={nameGetter()}
+                        ml={-1}
+                        mr={2}
+                      />
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverBody>
+                        <Card variant={"filled"}>
+                          <CardBody>
+                            <Button leftIcon={<AiOutlineLogout />} colorScheme='blue' onClick={logOutHandler} w={"100%"}>Logout</Button>
+                          </CardBody>
+                        </Card>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                </Box>
               </HStack>
             ) : (
               <>

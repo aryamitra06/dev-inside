@@ -1,6 +1,6 @@
 import { ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_BY_ID_FAIL, POST_BY_ID_REQUEST, POST_BY_ID_SUCCESS } from "../constants/types";
 import axios from "axios";
-import { tokenGetter } from "../../utils/tokenIdGetter";
+import { tokenGetter } from "../../utils/tokenExtractor";
 
 export const allPostsAction = () => async (dispatch) => {
     try {

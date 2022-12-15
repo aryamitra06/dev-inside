@@ -1,15 +1,13 @@
-import { Avatar, Box, Button, Card, IconButton, HStack, Text, Textarea, Menu, MenuButton, MenuList, MenuItem, Alert, AlertIcon, Stack, CircularProgress, Center } from '@chakra-ui/react'
+import { Avatar, Box, Button, Card, IconButton, HStack, Text, Textarea, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
 import React, { Fragment, memo, useState } from 'react'
 import { BsThreeDotsVertical } from "react-icons/bs";
-
-function CommentSection({ loggedInUser }) {
+import { avatarGetter } from "../utils/tokenExtractor";
+function CommentSection() {
     const [showBtn, setShowBtn] = useState(false);
 
     const displaySubmitBtn = () => {
         setShowBtn(true);
     }
-
-    const { response, loading, error } = loggedInUser;
 
     const AllComments = () => (
         <Box pl={5} pr={5}>
@@ -40,37 +38,15 @@ function CommentSection({ loggedInUser }) {
     return (
         <Fragment>
             <Text fontSize={"2xl"} fontWeight={"bold"} p={5}>Comments (10)</Text>
-            {
-                loading ? (
-                    <Stack>
-                        <Center>
-                            <CircularProgress isIndeterminate size={10} mb={10}/>
-                        </Center>
-                    </Stack>
-                ) : (
-                    <>
-                        {
-                            error ? (
-                                <Alert status='error'>
-                                    <AlertIcon />
-                                    {error?.msg}
-                                </Alert>
-                            ) : (
-                                <Box pl={5} pr={5} mb={3}>
-                                    <Box display={"flex"} gap={3}>
-                                        <Avatar size={"sm"} src={response?.avatar}/>
-                                        <Box width={"100%"}>
-                                            <Textarea placeholder='Add to the discussion' width={"100%"} mb={2} onClick={displaySubmitBtn}></Textarea>
-                                            {showBtn && <Button colorScheme={"blue"}>Submit</Button>}
-                                        </Box>
-                                    </Box>
-                                </Box>
-                            )
-                        }
-                    </>
-                )
-            }
-
+            <Box pl={5} pr={5} mb={3}>
+                <Box display={"flex"} gap={3}>
+                    <Avatar size={"sm"} src={avatarGetter()} />
+                    <Box width={"100%"}>
+                        <Textarea placeholder='Add to the discussion' width={"100%"} mb={2} onClick={displaySubmitBtn}></Textarea>
+                        {showBtn && <Button colorScheme={"blue"}>Submit</Button>}
+                    </Box>
+                </Box>
+            </Box>
             {AllComments()}
             <Box mb={5} />
         </Fragment>
