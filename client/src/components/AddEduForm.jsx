@@ -80,18 +80,18 @@ export default function AddEduForm() {
                     <FormControl>
                         <FormLabel>From Date</FormLabel>
                         <Input type='date' name='from' value={from} onChange={(e) => onChange(e)} isDisabled={response.loading} />
-                        <FormHelperText>Could be your start date of the company</FormHelperText>
+                        <FormHelperText>Could be your start date of the institute</FormHelperText>
                     </FormControl>
                     <FormControl>
                         <FormLabel>To Date</FormLabel>
                         <Input type='date' name='to' isDisabled={disableToDate || response.loading} value={to} onChange={(e) => onChange(e)} />
-                        <FormHelperText>Could be your end date of the company</FormHelperText>
-                        <Checkbox mt={2} onChange={(e) => handleCurrentJobChange(e)} isDisabled={response.loading}>Current Job</Checkbox>
+                        <FormHelperText>Could be your end date of the institute</FormHelperText>
+                        <Checkbox mt={2} onChange={(e) => handleCurrentJobChange(e)} isDisabled={response.loading}>Current Institute</Checkbox>
                     </FormControl>
                     <FormControl>
                         <FormLabel>Description</FormLabel>
                         <Textarea type='text' name='description' value={description} onChange={(e) => onChange(e)} isDisabled={response.loading} />
-                        <FormHelperText>Tell us a little about your job and experience</FormHelperText>
+                        <FormHelperText>Tell us a little about your study and experience</FormHelperText>
                     </FormControl>
                 </SimpleGrid>
                 <Box display={"flex"} justifyContent={"flex-end"} gap={2} mb={3} mt={3}>

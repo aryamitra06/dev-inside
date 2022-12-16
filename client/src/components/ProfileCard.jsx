@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardBody, Center, HStack, IconButton, SimpleGrid, Tag, Text, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Card, CardBody, Center, HStack, IconButton, SimpleGrid, Tag, Text, VStack, ScaleFade} from '@chakra-ui/react';
 import React, { Fragment } from 'react'
 import moment from "moment";
 import { MdCelebration } from "react-icons/md";
@@ -124,6 +124,7 @@ export default function ProfileCard({ data }) {
 
     return (
         <Fragment>
+            <ScaleFade initialScale={0.9} in>
             <Card>
                 <CardBody bgGradient='linear(to-l, #5433FF, #20BDFF)' borderRadius={"lg"}>
                     <Center>
@@ -145,6 +146,7 @@ export default function ProfileCard({ data }) {
                 {ExpSection()}
                 {EduCard()}
             </SimpleGrid>
+            </ScaleFade>
         </Fragment>
     )
 }

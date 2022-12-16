@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, CardBody, Center, Tag, Text, Alert, AlertIcon, Skeleton, Stack } from '@chakra-ui/react'
+import { Avatar, Box, Button, Card, CardBody, Center, Tag, Text, Alert, AlertIcon, Skeleton, Stack,ScaleFade } from '@chakra-ui/react'
 import React, { Fragment, memo } from 'react'
 import { Link } from "react-router-dom";
 import moment from 'moment';
@@ -22,6 +22,7 @@ const PostProfileOverviewCard = ({ data }) => {
                   {error?.msg}
                 </Alert>
               ) : (
+                <ScaleFade initialScale={0.9} in>
                 <Card variant={"outline"} borderRadius={"xl"} overflow={"hidden"} mb={5} boxShadow={"lg"}>
                   <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"13px"} />
                   <Box display={"flex"} alignItems={"center"} flexDirection={"column"} justifyContent={"center"} mt={6}>
@@ -41,6 +42,7 @@ const PostProfileOverviewCard = ({ data }) => {
                     <Text color={"gray.400"} fontSize={"sm"}>{moment(response?.date).format("MMM Do YY")}</Text>
                   </CardBody>
                 </Card>
+                </ScaleFade>
               )
             }
           </>

@@ -12,11 +12,11 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Alert,
-  AlertIcon,
-  Select
+  Select,
+  Progress
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { useToast } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from "react-redux";
@@ -25,9 +25,10 @@ import { idGetter } from '../utils/tokenExtractor';
 import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
+  const toast = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error, loading, response } = useSelector((state) => state.signup);
+  const { error, loading } = useSelector((state) => state.signup);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -50,10 +51,18 @@ export default function Signup() {
     if (idGetter()) {
       navigate("/");
     }
-  }, [navigate])
+    if (error) {
+      toast({ title: 'Signup Failed', description: error?.msg, status: 'error', duration: 3000, variant: 'left-accent', isClosable: true });
+    }
+  }, [navigate, error, toast])
 
   return (
     <Fragment>
+      {
+        loading && (
+          <Progress size='xs' isIndeterminate />
+        )
+      }
       <form onSubmit={(e) => onSubmit(e)}>
         <Flex
           minH={'90vh'}
@@ -65,7 +74,7 @@ export default function Signup() {
               <Heading fontSize={'4xl'} textAlign={'center'}>
                 Sign up to your account
               </Heading>
-              <Text fontSize={'lg'} color={'gray.600'}>
+              <Text fontSize={'lg'} color={'gray.300'}>
                 Join the biggest developer community 👩‍💻
               </Text>
             </Stack>
@@ -124,22 +133,6 @@ export default function Signup() {
                 </Stack>
               </Stack>
             </Box>
-            {
-              error && (
-                <Alert status='error' borderRadius={"md"}>
-                  <AlertIcon />
-                  {error.msg}
-                </Alert>
-              )
-            }
-            {
-              response && (
-                <Alert status='success' borderRadius={"md"}>
-                  <AlertIcon />
-                  {response.msg}
-                </Alert>
-              )
-            }
           </Stack>
         </Flex>
       </form>

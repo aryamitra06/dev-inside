@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import {
     Flex,
     Box,
@@ -9,19 +9,20 @@ import {
     Button,
     Heading,
     Text,
-    Alert,
-    AlertIcon,
-    useColorModeValue
+    useColorModeValue,
+    Progress
 } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { useDispatch, useSelector } from "react-redux";
 import { logInAction } from '../redux/actions/authAction';
-import { idGetter } from '../utils/tokenExtractor';
+import { tokenGetter } from '../utils/tokenExtractor';
 import { useNavigate, Link } from 'react-router-dom';
 
 export default function Login() {
+    const toast = useToast();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { error, loading, response } = useSelector((state) => state.login);
+    const { error, loading } = useSelector((state) => state.login);
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -38,12 +39,21 @@ export default function Login() {
     }
 
     useEffect(() => {
-        if (idGetter()) {
+        if (tokenGetter()) {
             navigate("/");
         }
-    }, [navigate])
+        if (error) {
+            toast({ title: 'Login Failed', description: error?.msg, status: 'error', duration: 3000, variant: 'left-accent', isClosable: true });
+        }
+    }, [navigate, error, toast])
 
     return (
+        <Fragment>
+        {
+            loading && (
+              <Progress size='xs' isIndeterminate />
+            )
+          }
         <form onSubmit={(e) => onSubmit(e)}>
             <Flex
                 minH={'90vh'}
@@ -95,7 +105,7 @@ export default function Login() {
                             </Stack>
                         </Stack>
                     </Box>
-                    {
+                    {/* {
                         error && (
                             <Alert status='error' borderRadius={"md"}>
                                 <AlertIcon />
@@ -110,9 +120,10 @@ export default function Login() {
                                 {response.msg}
                             </Alert>
                         )
-                    }
+                    } */}
                 </Stack>
             </Flex>
         </form>
+        </Fragment>
     );
 }

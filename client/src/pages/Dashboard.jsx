@@ -128,7 +128,7 @@ export default function Dashboard() {
 
     const ProfileTabs = () => {
         return (
-            <Tabs mt={6} width={{ base: "100%", sm: "100%", md: "70%", lg: "70%", xl: "70%" }} colorScheme='blue'>
+            <Tabs mt={6} width={{ base: "100%", sm: "100%", md: "70%", lg: "70%", xl: "70%" }} colorScheme='blue' variant='soft-rounded' isFitted>
                 <TabList>
                     <Tab>Experience</Tab>
                     <Tab>Education</Tab>
@@ -167,8 +167,8 @@ export default function Dashboard() {
                     {
                         isProfileCreated === true && (
                             <>
-                                <Text fontSize={"xl"} mt={1} color={'gray.400'}>{greetingTime(new Date())},</Text>
-                                {profile.loading ? <Skeleton width={20} height={5} mt={3} /> : <Text fontSize={"xl"} mt={1} color={'gray.400'}>{profile?.response?.user?.name}</Text>}
+                                <Text fontSize={{base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl"}} mt={1} color={'gray.200'}>{greetingTime(new Date())},</Text>
+                                {profile.loading ? <Skeleton width={20} height={5} mt={3} /> : <Text fontSize={{base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl"}} mt={1} color={'gray.200'}>{profile?.response?.user?.name}</Text>}
                             </>
                         )
                     }
