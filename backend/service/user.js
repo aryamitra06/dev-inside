@@ -1,5 +1,5 @@
 import express from "express";
-import { registerUser, loginUser, getProfileInfo } from "../controller/user.js";
+import { registerUser, loginUser } from "../controller/user.js";
 import { auth } from "../middleware/auth.js";
 const router = express.Router();
 
@@ -18,14 +18,5 @@ router.post("/register", registerUser);
 @desc: Login existing user
 */
 router.post("/login", loginUser);
-
-/*
-@route: /user
-@method: GET
-@access: Private
-@header: x-auth-token
-@desc: Fetching details of loggedin user
-*/
-router.get("/user", auth, getProfileInfo)
 
 export default router;

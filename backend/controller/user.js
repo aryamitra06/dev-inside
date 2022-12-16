@@ -1,5 +1,4 @@
 import User from "../model/User.js";
-import gravatar from "gravatar";
 import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken";
 
@@ -58,14 +57,5 @@ export const loginUser = async (req, res) => {
 
     } catch (error) {
         return res.status(204).json({ msg: "Error" });
-    }
-}
-
-export const getProfileInfo = async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id).select('-password');
-        return res.json(user);
-    } catch (error) {
-        res.status(404).json({ msg: "Server issue" });
     }
 }
