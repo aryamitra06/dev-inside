@@ -2,7 +2,7 @@ import { SimpleGrid, FormControl, FormLabel, Input, FormHelperText, Textarea, Bu
 import React, { Fragment, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from 'react-router-dom';
-import { newPostAction } from "../redux/actions/postAction";
+import { newPostAction } from "../../redux/actions/postAction";
 export default function NewPostForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();

@@ -5,11 +5,11 @@ import { MdAdd } from 'react-icons/md';
 import { AiFillEye } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import greetingTime from "greeting-time";
-import { myProfileAction } from '../redux/actions/profileAction';
-import ExpCard from '../components/ExpCard';
-import EduCard from '../components/EduCard';
-import { stateReseter } from '../redux/actions/utilsAction';
-import { tokenGetter } from '../utils/tokenExtractor';
+import { myProfileAction } from '../../redux/actions/profileAction';
+import ExpCard from '../../components/Dashboard/ExpCard';
+import EduCard from '../../components/Dashboard/EduCard';
+import { stateReseter } from '../../redux/actions/utilsAction';
+import { tokenGetter } from '../../utils/tokenExtractor';
 
 export default function Dashboard() {
     const toggleState = useSelector((state) => state.togglevalue);
@@ -71,8 +71,6 @@ export default function Dashboard() {
                             <>
                                 <HStack>
                                     <Link to={"/dashboard/edit-profile"}><Button colorScheme={"blue"} variant={"solid"} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }}>Edit Profile</Button></Link>
-                                    <Link to={"/dashboard/add-experience"}><Button colorScheme={"blue"} variant={"ghost"} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Experience</Button></Link>
-                                    <Link to={"/dashboard/add-education"}><Button colorScheme={"blue"} variant={"ghost"} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Education</Button></Link>
                                 </HStack>
                             </>
                         )
@@ -85,6 +83,11 @@ export default function Dashboard() {
     const ExperienceSection = () => {
         return (
             <>
+                <Link to={"/dashboard/add-experience"}>
+                    <Box display={"flex"} justifyContent={"flex-end"}>
+                        <Button colorScheme={"blue"} variant={"outline"} mb={4} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Experience</Button>
+                    </Box>
+                </Link>
                 <SimpleGrid columns={1} spacing={3}>
                     {
                         profileRes?.experience?.length === 0 && (
@@ -107,6 +110,11 @@ export default function Dashboard() {
     const EducationSection = () => {
         return (
             <>
+                <Link to={"/dashboard/add-education"}>
+                    <Box display={"flex"} justifyContent={"flex-end"}>
+                    <Button colorScheme={"blue"} variant={"outline"} mb={4} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Education</Button>
+                    </Box>
+                </Link>
                 <SimpleGrid columns={1} spacing={3}>
                     {
                         profileRes?.education?.length === 0 && (
@@ -167,8 +175,8 @@ export default function Dashboard() {
                     {
                         isProfileCreated === true && (
                             <>
-                                <Text fontSize={{base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl"}} mt={1} color={'gray.200'}>{greetingTime(new Date())},</Text>
-                                {profile.loading ? <Skeleton width={20} height={5} mt={3} /> : <Text fontSize={{base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl"}} mt={1} color={'gray.200'}>{profile?.response?.user?.name}</Text>}
+                                <Text fontSize={{ base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl" }} mt={1} color={'gray.200'}>{greetingTime(new Date())},</Text>
+                                {profile.loading ? <Skeleton width={20} height={5} mt={3} /> : <Text fontSize={{ base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl" }} mt={1} color={'gray.200'}>{profile?.response?.user?.name}</Text>}
                             </>
                         )
                     }

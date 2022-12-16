@@ -8,7 +8,7 @@ import CommentSection from './CommentSection';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandsClapping, faComments, faShare } from '@fortawesome/free-solid-svg-icons'
-import { idGetter } from '../utils/tokenExtractor';
+import { idGetter } from '../../utils/tokenExtractor';
 
 const PostByIdCard = ({ data }) => {
     const { response, loading, error } = data;

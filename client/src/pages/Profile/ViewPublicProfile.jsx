@@ -2,8 +2,8 @@ import { Container, Progress, SimpleGrid, Skeleton, Stack, Alert, AlertIcon } fr
 import React, { Fragment, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from 'react-router-dom';
-import ProfileCard from '../components/ProfileCard';
-import { profileByIdAction } from '../redux/actions/profileAction';
+import ProfileCard from '../../components/Profile/ProfileCard';
+import { profileByIdAction } from '../../redux/actions/profileAction';
 
 export default function ViewPublicProfile() {
     let { id } = useParams();

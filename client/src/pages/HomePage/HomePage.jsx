@@ -2,8 +2,8 @@ import React, { Fragment, useEffect } from 'react';
 import { Container, Grid, GridItem, Progress} from '@chakra-ui/react';
 import AllPosts from './AllPosts';
 import { useDispatch, useSelector } from "react-redux";
-import { allPostsAction } from '../redux/actions/postAction';
-import {stateReseter} from "../redux/actions/utilsAction";
+import { allPostsAction } from '../../redux/actions/postAction';
+import {stateReseter} from "../../redux/actions/utilsAction";
 
 export default function HomePage() {
     const dispatch = useDispatch();

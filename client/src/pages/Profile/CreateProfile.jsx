@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from 'react'
 import { Container, Text } from '@chakra-ui/react'
-import CreateProfileForm from '../components/CreateProfileForm'
+import CreateProfileForm from '../../components/Profile/CreateProfileForm'
 import { useNavigate } from "react-router-dom";
-import { tokenGetter } from '../utils/tokenExtractor';
+import { tokenGetter } from '../../utils/tokenExtractor';
 import { useSelector, useDispatch } from 'react-redux';
-import { myProfileAction } from '../redux/actions/profileAction';
+import { myProfileAction } from '../../redux/actions/profileAction';
 export default function CreateProfile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();

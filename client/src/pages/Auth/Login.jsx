@@ -14,8 +14,8 @@ import {
 } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react';
 import { useDispatch, useSelector } from "react-redux";
-import { logInAction } from '../redux/actions/authAction';
-import { tokenGetter } from '../utils/tokenExtractor';
+import { logInAction } from '../../redux/actions/authAction';
+import { tokenGetter } from '../../utils/tokenExtractor';
 import { useNavigate, Link } from 'react-router-dom';
 
 export default function Login() {

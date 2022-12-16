@@ -1,6 +1,6 @@
 import { Tag, Alert, AlertIcon, Skeleton, Stack, Input, Box } from '@chakra-ui/react'
 import React, { Fragment } from 'react'
-import PostCard from '../components/PostCard'
+import PostCard from '../../components/Post/PostCard'
 
 export default function AllPosts({ postRes }) {
   const { response, loading, error } = postRes;

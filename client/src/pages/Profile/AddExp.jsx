@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect } from 'react'
 import { Container } from "@chakra-ui/react";
-import AddEduForm from '../components/AddEduForm';
+import AddExpForm from '../../components/Profile/AddExpForm';
+import { tokenGetter } from '../../utils/tokenExtractor';
 import { useNavigate } from 'react-router-dom';
-import { tokenGetter } from '../utils/tokenExtractor';
-export default function AddEdu() {
+export default function AddExp() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function AddEdu() {
   return (
     <Fragment>
       <Container maxW={"7xl"} mt={4}>
-        <AddEduForm />
+        <AddExpForm />
       </Container>
     </Fragment>
   )

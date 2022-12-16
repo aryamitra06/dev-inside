@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Card, IconButton, HStack, Text, Textarea, Menu, MenuButton, MenuList, MenuItem, Alert, AlertIcon } from '@chakra-ui/react'
 import React, { Fragment, memo, useState } from 'react'
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { avatarGetter, tokenGetter } from "../utils/tokenExtractor";
+import { avatarGetter, tokenGetter } from "../../utils/tokenExtractor";
 function CommentSection() {
     const [showBtn, setShowBtn] = useState(false);
 

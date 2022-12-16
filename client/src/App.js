@@ -1,25 +1,25 @@
 import React from 'react';
 import './App.css';
-import Nav from './components/Nav';
+import Nav from './components/Navbar/Nav';
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
-import Signup from './pages/Signup';
-import Login from './pages/Login';
+import Signup from './pages/Auth/Signup';
+import Login from './pages/Auth/Login';
 
 import { Provider } from "react-redux";
 import store from './store';
-import Dashboard from './pages/Dashboard';
-import CreateProfile from './pages/CreateProfile';
-import EditProfile from './pages/EditProfile';
-import AddExp from './pages/AddExp';
-import AddEdu from './pages/AddEdu';
-import ViewPublicProfile from './pages/ViewPublicProfile';
-import HomePage from './pages/HomePage';
-import NewPost from './pages/NewPost';
-import PostById from './pages/PostById';
+import Dashboard from './pages/Dashboard/Dashboard';
+import CreateProfile from './pages/Profile/CreateProfile';
+import EditProfile from './pages/Profile/EditProfile';
+import AddExp from './pages/Profile/AddExp';
+import AddEdu from './pages/Profile/AddEdu';
+import ViewPublicProfile from './pages/Profile/ViewPublicProfile';
+import HomePage from './pages/HomePage/HomePage';
+import NewPost from './pages/Post/NewPost';
+import PostById from './pages/Post/PostById';
 
 function App() {
   return (

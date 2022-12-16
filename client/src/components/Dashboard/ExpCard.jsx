@@ -5,8 +5,8 @@ import moment from "moment";
 import { MdWork } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
 import { useDispatch, useSelector } from "react-redux";
-import { deleteExpAction } from '../redux/actions/profileAction';
-import { toggleAction } from "../redux/actions/utilsAction";
+import { deleteExpAction } from '../../redux/actions/profileAction';
+import { toggleAction } from "../../redux/actions/utilsAction";
 
 export default function ExpCard({ data }) {
     const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { tokenGetter } from '../utils/tokenExtractor';
+import { tokenGetter } from '../../utils/tokenExtractor';
 import { Container, Text } from "@chakra-ui/react";
-import NewPostForm from '../components/NewPostForm';
+import NewPostForm from '../../components/Post/NewPostForm';
 
 export default function NewPost() {
     const navigate = useNavigate();

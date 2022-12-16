@@ -7,7 +7,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandsClapping, faComments, faShare } from '@fortawesome/free-solid-svg-icons'
-import {idGetter} from "../utils/tokenExtractor";
+import { AiFillDelete } from 'react-icons/ai';
+import {idGetter} from "../../utils/tokenExtractor";
 
 export default function PostCard({ data }) {
     const navigate = useNavigate();
@@ -52,7 +53,7 @@ export default function PostCard({ data }) {
                                 <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} size={"sm"}>
                                 </MenuButton>
                                 <MenuList>
-                                    <MenuItem>Delete</MenuItem>
+                                    <MenuItem icon={<AiFillDelete/>}>Delete</MenuItem>
                                 </MenuList>
                             </Menu>
                         )

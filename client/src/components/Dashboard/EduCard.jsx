@@ -5,8 +5,8 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { MdSchool } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
-import { toggleAction } from "../redux/actions/utilsAction";
-import { deleteEduAction } from '../redux/actions/profileAction';
+import { toggleAction } from "../../redux/actions/utilsAction";
+import { deleteEduAction } from '../../redux/actions/profileAction';
 
 export default function EduCard({ data }) {
     const dispatch = useDispatch();
