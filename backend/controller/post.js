@@ -69,7 +69,7 @@ export const addNewComment = async (req, res) => {
             text: req.body.text
         };
 
-        post.comments.unshift(newComment);
+        post.comments.unshift(newComment); 
         await post.save();
 
         res.json(post);

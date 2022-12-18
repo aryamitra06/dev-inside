@@ -32,8 +32,9 @@ import logo_light_mode from "../../static/logo_light_mode.svg";
 import SettingsModal from './SettingsModal';
 import { Link } from 'react-router-dom';
 import { idGetter, tokenGetter, nameGetter, avatarGetter } from '../../utils/tokenExtractor';
+import {BiNews} from "react-icons/bi";
 import { AiOutlineLogout, AiFillEye, AiFillSetting } from "react-icons/ai";
-import {MdOutlineAutoGraph} from "react-icons/md";
+import { MdOutlineAutoGraph } from "react-icons/md";
 
 export default function Nav() {
   const { colorMode } = useColorMode();
@@ -57,15 +58,15 @@ export default function Nav() {
               variant='outline'
             />
             <MenuList>
-              {tokenGetter() && <Link to={`/profile/${idGetter()}`}><MenuItem icon={<AiFillEye/>}>My Public Profile</MenuItem></Link>}
-              {tokenGetter() && <Link to={"/dashboard"}><MenuItem icon={<MdOutlineAutoGraph/>}>Dashboard</MenuItem></Link>}
-              <MenuItem onClick={onOpen} icon={<AiFillSetting/>}>Settings</MenuItem>
+              <Link to={"/"}><MenuItem icon={<BiNews />}>Feed</MenuItem></Link>
+              {tokenGetter() && <Link to={`/profile/${idGetter()}`}><MenuItem icon={<AiFillEye />}>My Public Profile</MenuItem></Link>}
+              {tokenGetter() && <Link to={"/dashboard"}><MenuItem icon={<MdOutlineAutoGraph />}>Dashboard</MenuItem></Link>}
+              <MenuItem onClick={onOpen} icon={<AiFillSetting />}>Settings</MenuItem>
             </MenuList>
           </Menu>
           <Link to={"/"}><Image src={colorMode === "dark" ? logo_dark_mode : logo_light_mode} height={{ base: "50px", sm: "50px", md: "65px", lg: "65px", xl: "65px" }} /></Link>
         </HStack>
         <HStack>
-          {tokenGetter() && <Link to={"/new"}><Button variant={"solid"} colorScheme={"blue"} size={"sm"}>Create Post</Button></Link>}
           {
             idGetter() ? (
               <HStack>

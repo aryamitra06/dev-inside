@@ -12,8 +12,7 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Select,
-  Progress
+  Select
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useToast } from '@chakra-ui/react';
@@ -58,11 +57,6 @@ export default function Signup() {
 
   return (
     <Fragment>
-      {
-        loading && (
-          <Progress size='xs' isIndeterminate />
-        )
-      }
       <form onSubmit={(e) => onSubmit(e)}>
         <Flex
           minH={'90vh'}

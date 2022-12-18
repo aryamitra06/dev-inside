@@ -10,7 +10,6 @@ import {
     Heading,
     Text,
     useColorModeValue,
-    Progress
 } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react';
 import { useDispatch, useSelector } from "react-redux";
@@ -49,11 +48,6 @@ export default function Login() {
 
     return (
         <Fragment>
-        {
-            loading && (
-              <Progress size='xs' isIndeterminate />
-            )
-          }
         <form onSubmit={(e) => onSubmit(e)}>
             <Flex
                 minH={'90vh'}

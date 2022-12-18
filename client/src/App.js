@@ -18,7 +18,6 @@ import AddExp from './pages/Profile/AddExp';
 import AddEdu from './pages/Profile/AddEdu';
 import ViewPublicProfile from './pages/Profile/ViewPublicProfile';
 import HomePage from './pages/HomePage/HomePage';
-import NewPost from './pages/Post/NewPost';
 import PostById from './pages/Post/PostById';
 
 function App() {
@@ -28,7 +27,6 @@ function App() {
         <Nav />
         <Routes>
           <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/new" element={<NewPost />} />
           <Route exact path="/post/:userid/:postid" element={<PostById />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/signup" element={<Signup />} />

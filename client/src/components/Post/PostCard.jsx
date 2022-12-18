@@ -36,7 +36,6 @@ export default function PostCard({ data }) {
     }
 
     return (
-        <ScaleFade initialScale={0.9} in>
         <Card mb={3} >
             <CardHeader>
                 <Flex spacing='4'>
@@ -93,7 +92,5 @@ export default function PostCard({ data }) {
                 </Button>
             </Box>
         </Card>
-        </ScaleFade>
-
     )
 }

@@ -124,7 +124,6 @@ export default function ProfileCard({ data }) {
 
     return (
         <Fragment>
-            <ScaleFade initialScale={0.9} in>
             <Card>
                 <CardBody bgGradient='linear(to-l, #5433FF, #20BDFF)' borderRadius={"lg"}>
                     <Center>
@@ -146,7 +145,6 @@ export default function ProfileCard({ data }) {
                 {ExpSection()}
                 {EduCard()}
             </SimpleGrid>
-            </ScaleFade>
         </Fragment>
     )
 }

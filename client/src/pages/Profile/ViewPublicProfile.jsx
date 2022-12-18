@@ -1,4 +1,4 @@
-import { Container, Progress, SimpleGrid, Skeleton, Stack, Alert, AlertIcon } from '@chakra-ui/react'
+import { Container, SimpleGrid, Skeleton, Stack, Alert, AlertIcon } from '@chakra-ui/react'
 import React, { Fragment, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from 'react-router-dom';
@@ -31,11 +31,6 @@ export default function ViewPublicProfile() {
 
     return (
         <Fragment>
-            {
-                loading && (
-                    <Progress size='xs' isIndeterminate />
-                )
-            }
             <Container maxW={"7xl"} mt={4}>
                 {
                     error && (

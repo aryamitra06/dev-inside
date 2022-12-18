@@ -3,14 +3,12 @@ import React, { Fragment } from 'react'
 import PostCard from '../../components/Post/PostCard'
 
 export default function AllPosts({ postRes }) {
-  const { response, loading, error } = postRes;
-  console.log(response);
-
+  const { posts, loading, error } = postRes;
 
   return (
     <Fragment>
       {
-        error || response?.length === 0 ? (
+        error || posts?.length === 0 ? (
           <>
           </>
         ) : (
@@ -32,7 +30,7 @@ export default function AllPosts({ postRes }) {
         ) : (
           <>
             {
-              loading ? (
+              (loading || posts.length === 0) ? (
                 <>
                   <Stack>
                     <Skeleton height={"250px"} />
@@ -43,22 +41,10 @@ export default function AllPosts({ postRes }) {
               ) : (
                 <>
                   {
-                    response?.length === 0 ? (
-                      <>
-                        <Alert status='warning'>
-                          <AlertIcon />
-                          No post found
-                        </Alert>
-                      </>
-                    ) : (
-                      <>
-                        {
-                          response?.map((e) => (
-                            <PostCard key={e?._id} data={e} />
-                          ))
-                        }
-                      </>
-                    )
+
+                    posts?.map((e) => (
+                      <PostCard key={e?._id} data={e} />
+                    ))
                   }
                 </>
               )

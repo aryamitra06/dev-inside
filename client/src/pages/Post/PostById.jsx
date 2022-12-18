@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-import { Container, Grid, GridItem, Progress } from "@chakra-ui/react";
+import { Container, Grid, GridItem } from "@chakra-ui/react";
 import PostByIdCard from '../../components/Post/PostByIdCard';
 import PostProfileOverviewCard from '../../components/Post/PostProfileOverviewCard';
 import { useDispatch, useSelector } from "react-redux";
@@ -13,19 +13,14 @@ export default function PostById() {
     useEffect(() => {
         dispatch(postByIdAction(postid))
         dispatch(profileByIdAction(userid))
-    }, [dispatch, postid, userid])
+    }, [dispatch, postid])
 
 
-    const postRes = useSelector((state) => state.postbyid);
+    const postRes = useSelector((state) => state.postReducer);
     const profileRes = useSelector((state) => state.profilebyid);
 
     return (
         <Fragment>
-            {
-                (postRes?.loading || profileRes?.loading) && (
-                    <Progress size='xs' isIndeterminate />
-                )
-            }
             <Container maxW={"6xl"} mt={3}>
                 <Grid
                     templateRows='repeat(1, 1fr)'

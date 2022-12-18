@@ -11,8 +11,8 @@ import { faHandsClapping, faComments, faShare } from '@fortawesome/free-solid-sv
 import { idGetter } from '../../utils/tokenExtractor';
 
 const PostByIdCard = ({ data }) => {
-    const { response, loading, error } = data;
-    const stats = readingTime(response?.desc || "");
+    const { post, loading, error } = data;
+    const stats = readingTime(post?.desc || "");
     return (
         <Fragment>
             {
@@ -31,12 +31,12 @@ const PostByIdCard = ({ data }) => {
                                 </Alert>
                             ) : (
                                 <Fragment>
-                                    <ScaleFade initialScale={0.9} in>
+        
                                         <Card overflow={"hidden"}>
                                             {
-                                                response?.cover && (
+                                                post?.cover && (
                                                     <Image
-                                                        src={response?.cover}
+                                                        src={post?.cover}
                                                         objectFit='cover'
                                                     />
                                                 )
@@ -44,14 +44,14 @@ const PostByIdCard = ({ data }) => {
                                             <CardBody>
                                                 <Flex spacing='4' mt={4}>
                                                     <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                                                        <Link to={`/profile/${response?.user}`}><Avatar src={response?.avatar} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} /></Link>
+                                                        <Link to={`/profile/${post?.user}`}><Avatar src={post?.avatar} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} /></Link>
                                                         <Box>
-                                                            <Link to={`/profile/${response?.user}`}><Heading size='sm' cursor={"pointer"}>{response?.name}</Heading></Link>
-                                                            <Text fontSize={"sm"} color={"gray.300"} display={"flex"} alignItems={"center"}><GoGlobe /> &nbsp;&bull; {moment(response?.date).format("MMM DD YYYY")} &bull; {stats.text}</Text>
+                                                            <Link to={`/profile/${post?.user}`}><Heading size='sm' cursor={"pointer"}>{post?.name}</Heading></Link>
+                                                            <Text fontSize={"sm"} color={"gray.300"} display={"flex"} alignItems={"center"}><GoGlobe /> &nbsp;&bull; {moment(post?.date).format("MMM DD YYYY")} &bull; {stats.text}</Text>
                                                         </Box>
                                                     </Flex>
                                                     {
-                                                        idGetter() === response?.user && (
+                                                        idGetter() === post?.user && (
                                                             <Menu>
                                                                 <MenuButton as={IconButton} icon={<BsThreeDotsVertical />}>
                                                                 </MenuButton>
@@ -62,8 +62,8 @@ const PostByIdCard = ({ data }) => {
                                                         )
                                                     }
                                                 </Flex>
-                                                <Text mt={4} mb={3} fontSize={{ base: "xl", sm: "xl", md: "2xl", lg: "3xl", xl: "3xl" }} fontWeight={"bold"}>{response?.title}</Text>
-                                                <Text>{response?.desc}</Text>
+                                                <Text mt={4} mb={3} fontSize={{ base: "xl", sm: "xl", md: "2xl", lg: "3xl", xl: "3xl" }} fontWeight={"bold"}>{post?.title}</Text>
+                                                <Text>{post?.desc}</Text>
                                             </CardBody>
                                             <Box display={"flex"} alignItems={"center"} justifyContent={"space-around"} gap={2} p={2}>
                                                 <Button variant="solid" leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
@@ -78,7 +78,6 @@ const PostByIdCard = ({ data }) => {
                                             </Box>
                                         </Card>
                                     <CommentSection />
-                                    </ScaleFade>
                                 </Fragment>
                             )
                         }

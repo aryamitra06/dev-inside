@@ -4,6 +4,8 @@ import User from "../model/User.js";
 
 export const getMyProfile = async (req, res) => {
     try {
+        //@desc
+        //@"user" is the column name which we are populating
         const profile = await Profile.findOne({ user: req.user.id }).populate("user", ['name', 'avatar']);
         if (!profile) {
             return res.status(200).json({ msg: 'No profile found' });

@@ -1,54 +1,39 @@
-import { ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_BY_ID_FAIL, POST_BY_ID_REQUEST, POST_BY_ID_SUCCESS, RESET_STATE } from "../constants/types";
+import { ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_BY_ID_FAIL, POST_BY_ID_REQUEST, POST_BY_ID_SUCCESS } from "../constants/types";
 
-const initialState1 = {
-    response: {},
+const initialState = {
+    posts: [],
+    post: {},
     loading: true,
-    error: false,
+    error: null,
+    isFormSubmitting: false
 }
 
-const initialState3 = {
-    response: {},
-    loading: false,
-    error: false,
-    success: false,
-}
-
-export const allPostsReducer = (state = initialState1, action) => {
+export const postReducer = (state = initialState, action) => { 
     switch (action.type) {
-        case ALL_POSTS_REQUEST:
-            return { response: {}, loading: true, error: false };
+        //@desc
+        //when it is request we dont need to call loading = true, posts data is already in state.
         case ALL_POSTS_SUCCESS:
-            return { response: action.payload, loading: false, error: false };
+            return { ...state, posts: action.payload, loading: false };
         case ALL_POSTS_FAIL:
-            return { response: {}, loading: false, error: action.payload }
-        default:
-            return state;
-    }
-}
-
-export const newPostReducer = (state = initialState3, action) => {
-    switch (action.type) {
-        case NEW_POST_REQUEST:
-            return { response: {}, loading: true, error: false, success: false };
-        case NEW_POST_SUCCESS:
-            return { response: action.payload, loading: false, error: false, success: true };
-        case NEW_POST_FAIL:
-            return { response: {}, loading: false, error: action.payload, success: false };
-        case RESET_STATE:
-            return initialState3;
-        default:
-            return state;
-    }
-}
-
-export const postByIdReducer = (state = initialState1, action) => {
-    switch (action.type) {
+            return { ...state, posts: null, loading: false, error: action.payload };
+        
+        //@desc
+        //each time we click on a post we will show user loading first until data arrives! 
         case POST_BY_ID_REQUEST:
-            return { response: {}, loading: true, error: false };
+            return {...state, post: {}, loading: true};
         case POST_BY_ID_SUCCESS:
-            return { response: action.payload, loading: false, error: false };
+            return { ...state, post: action.payload, loading: false };
         case POST_BY_ID_FAIL:
-            return { response: {}, loading: false, error: action.payload }
+            return { ...state, post: {}, loading: false, error: action.payload };
+        
+        //@desc
+        //isFormSubmitting state will not be false until we get response back from post form api!
+        case NEW_POST_REQUEST:
+            return {...state, isFormSubmitting: true};
+        case NEW_POST_SUCCESS:
+            return {...state, posts: [action.payload, ...state.posts], isFormSubmitting: false};
+        case NEW_POST_FAIL:
+            return {...state, error: action.payload, isFormSubmitting: false};
         default:
             return state;
     }

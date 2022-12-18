@@ -4,21 +4,10 @@ import { tokenGetter } from "../../utils/tokenExtractor";
 
 export const allPostsAction = () => async (dispatch) => {
     try {
-        dispatch({ type: ALL_POSTS_REQUEST });
         const response = await axios.get("http://localhost:5000/posts");
         dispatch({ type: ALL_POSTS_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: ALL_POSTS_FAIL, payload: error.response.data });
-    }
-}
-
-export const newPostAction = (formData) => async (dispatch) => {
-    try {
-        dispatch({ type: NEW_POST_REQUEST });
-        const response = await axios.post("http://localhost:5000/newpost", formData, { headers: { authorization: tokenGetter() } });
-        dispatch({ type: NEW_POST_SUCCESS, payload: response.data });
-    } catch (error) {
-        dispatch({ type: NEW_POST_FAIL, payload: error.response.data });
     }
 }
 
@@ -29,5 +18,14 @@ export const postByIdAction = (id) => async (dispatch) => {
         dispatch({ type: POST_BY_ID_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: POST_BY_ID_FAIL, payload: error.response.data });
+    }
+}
+export const newPostAction = (formData) => async (dispatch) => {
+    try {
+        dispatch({type: NEW_POST_REQUEST});
+        const response = await axios.post("http://localhost:5000/newpost", formData, { headers: { authorization: tokenGetter() } });
+        dispatch({ type: NEW_POST_SUCCESS, payload: response.data });
+    } catch (error) {
+        dispatch({ type: NEW_POST_FAIL, payload: error.response.data });
     }
 }

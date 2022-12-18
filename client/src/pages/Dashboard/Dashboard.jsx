@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-import { Container, Text, Alert, AlertIcon, Box, Progress, Skeleton, Button, HStack, Stack, Tabs, TabList, Tab, TabPanels, TabPanel, SimpleGrid } from '@chakra-ui/react';
+import { Container, Text, Alert, AlertIcon, Box, Skeleton, Button, HStack, Stack, Tabs, TabList, Tab, TabPanels, TabPanel, SimpleGrid } from '@chakra-ui/react';
 import { Link, useNavigate } from "react-router-dom";
 import { MdAdd } from 'react-icons/md';
 import { AiFillEye } from 'react-icons/ai';
@@ -155,11 +155,6 @@ export default function Dashboard() {
 
     return (
         <Fragment>
-            {
-                profile.loading && (
-                    <Progress size='xs' isIndeterminate />
-                )
-            }
             <Container maxW={"7xl"} mt={4}>
                 <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
                     <Text fontSize={"3xl"} fontWeight={"bold"}>Dashboard</Text>
