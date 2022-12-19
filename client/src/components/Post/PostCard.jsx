@@ -10,7 +10,7 @@ import { faHandsClapping, faComments, faShare } from '@fortawesome/free-solid-sv
 import { AiFillDelete } from 'react-icons/ai';
 import { idGetter } from "../../utils/tokenExtractor";
 import { useDispatch } from 'react-redux';
-import { addLikeAction, unLikeAction } from '../../redux/actions/postAction';
+import { addLikeAction, deletePostAction, unLikeAction } from '../../redux/actions/postAction';
 
 export default function PostCard({ data, isLikeUpdating }) {
     const navigate = useNavigate();
@@ -48,6 +48,10 @@ export default function PostCard({ data, isLikeUpdating }) {
         dispatch(unLikeAction(data?._id));
     }
 
+    const deletePost = () => {
+        dispatch(deletePostAction(data?._id))
+    }
+
     const likesArr = data?.likes;
     let isLoggedInUser = likesArr.some(user => user['user'] === idGetter());
 
@@ -68,7 +72,7 @@ export default function PostCard({ data, isLikeUpdating }) {
                                 <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} size={"sm"}>
                                 </MenuButton>
                                 <MenuList>
-                                    <MenuItem icon={<AiFillDelete />}>Delete</MenuItem>
+                                    <MenuItem onClick={deletePost} icon={<AiFillDelete />}>Delete</MenuItem>
                                 </MenuList>
                             </Menu>
                         )
@@ -109,7 +113,7 @@ export default function PostCard({ data, isLikeUpdating }) {
                     )
                 }
                 <Button onClick={fullPostNavigator} variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faComments} />} width={"100%"}>
-                    Discuss
+                    Discuss ({data?.comments?.length})
                 </Button>
                 <Button variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
                     Share
