@@ -2,7 +2,7 @@ import { Tag, Alert, AlertIcon, Skeleton, Stack, Input, Box } from '@chakra-ui/r
 import React, { Fragment } from 'react'
 import PostCard from '../../components/Post/PostCard'
 
-export default function AllPosts({ postRes }) {
+export default function AllPosts({ postRes, isLikeUpdating}) {
   const { posts, loading, error } = postRes;
 
   return (
@@ -43,7 +43,7 @@ export default function AllPosts({ postRes }) {
                   {
 
                     posts?.map((e) => (
-                      <PostCard key={e?._id} data={e} />
+                      <PostCard key={e?._id} data={e} isLikeUpdating={isLikeUpdating}/>
                     ))
                   }
                 </>

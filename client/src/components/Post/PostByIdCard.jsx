@@ -11,12 +11,12 @@ import { faHandsClapping, faComments, faShare } from '@fortawesome/free-solid-sv
 import { idGetter } from '../../utils/tokenExtractor';
 
 const PostByIdCard = ({ data }) => {
-    const { post, loading, error } = data;
+    const { post, postLoading, error } = data;
     const stats = readingTime(post?.desc || "");
     return (
         <Fragment>
             {
-                loading ? (
+                postLoading ? (
                     <Stack>
                         <Skeleton height={"300px"} />
                         <Skeleton height={"70px"} />

@@ -8,14 +8,19 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandsClapping, faComments, faShare } from '@fortawesome/free-solid-svg-icons'
 import { AiFillDelete } from 'react-icons/ai';
-import {idGetter} from "../../utils/tokenExtractor";
+import { idGetter } from "../../utils/tokenExtractor";
+import { useDispatch } from 'react-redux';
+import { addLikeAction, unLikeAction } from '../../redux/actions/postAction';
 
-export default function PostCard({ data }) {
+export default function PostCard({ data, isLikeUpdating }) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [expandText, setExpandText] = useState(data?.desc?.slice(0, 300));
     const [showLessBtn, setShowLessBtn] = useState(false);
 
     const stats = readingTime(data?.desc || "");
+
+    console.log(data);
 
     const readMoreHandler = () => {
         setExpandText(data?.desc);
@@ -35,6 +40,17 @@ export default function PostCard({ data }) {
         navigate(`profile/${data?.user}`)
     }
 
+    const likePost = () => {
+        dispatch(addLikeAction(data?._id));
+    }
+
+    const unLikePost = () => {
+        dispatch(unLikeAction(data?._id));
+    }
+
+    const likesArr = data?.likes;
+    let isLoggedInUser = likesArr.some(user => user['user'] === idGetter());
+
     return (
         <Card mb={3} >
             <CardHeader>
@@ -52,7 +68,7 @@ export default function PostCard({ data }) {
                                 <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} size={"sm"}>
                                 </MenuButton>
                                 <MenuList>
-                                    <MenuItem icon={<AiFillDelete/>}>Delete</MenuItem>
+                                    <MenuItem icon={<AiFillDelete />}>Delete</MenuItem>
                                 </MenuList>
                             </Menu>
                         )
@@ -81,13 +97,21 @@ export default function PostCard({ data }) {
                 )
             }
             <Box display={"flex"} alignItems={"center"} justifyContent={"space-around"} gap={2} p={2}>
-                <Button variant="solid" leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
-                    Clap
-                </Button>
-                <Button variant='ghost' leftIcon={<FontAwesomeIcon icon={faComments} />} width={"100%"}>
+                {
+                    isLoggedInUser ? (
+                        <Button onClick={unLikePost} isDisabled={isLikeUpdating} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="solid" colorScheme={"blue"} fontWeight={"bold"} leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
+                            Clap ({data?.likes?.length})
+                        </Button>
+                    ) : (
+                        <Button onClick={likePost} isDisabled={isLikeUpdating} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="outline" leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
+                            Clap ({data?.likes?.length})
+                        </Button>
+                    )
+                }
+                <Button onClick={fullPostNavigator} variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faComments} />} width={"100%"}>
                     Discuss
                 </Button>
-                <Button variant='ghost' leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
+                <Button variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
                     Share
                 </Button>
             </Box>

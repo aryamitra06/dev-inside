@@ -13,7 +13,7 @@ export default function PostById() {
     useEffect(() => {
         dispatch(postByIdAction(postid))
         dispatch(profileByIdAction(userid))
-    }, [dispatch, postid])
+    }, [dispatch, postid, userid])
 
 
     const postRes = useSelector((state) => state.postReducer);

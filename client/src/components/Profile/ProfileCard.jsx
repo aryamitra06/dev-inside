@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardBody, Center, HStack, IconButton, SimpleGrid, Tag, Text, VStack, ScaleFade} from '@chakra-ui/react';
+import { Avatar, Box, Card, CardBody, Center, HStack, IconButton, SimpleGrid, Tag, Text, VStack, useColorModeValue } from '@chakra-ui/react';
 import React, { Fragment } from 'react'
 import moment from "moment";
 import { MdCelebration } from "react-icons/md";
@@ -76,7 +76,7 @@ export default function ProfileCard({ data }) {
                             <Card mt={3} variant='outline' overflow='hidden'>
                                 <CardBody>
                                     <Text fontWeight={"bold"} fontSize={"md"}>{e?.company}</Text>
-                                    <Text fontSize={"sm"} color={"gray.200"}>{e?.title} &bull; {moment(e?.from).format('MMMM Do YYYY')} - {e?.current === false ? moment(e?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
+                                    <Text fontSize={"sm"} color={"gray.400"} fontWeight={"semibold"}>{e?.title} &bull; {moment(e?.from).format('MMMM Do YYYY')} - {e?.current === false ? moment(e?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
                                     <Text fontSize={"sm"} color={"gray.400"}>{e?.location}</Text>
                                     <Text fontSize={"sm"} mt={2}>{e?.description}</Text>
                                 </CardBody>
@@ -110,8 +110,8 @@ export default function ProfileCard({ data }) {
                             <Card mt={3} variant='outline' overflow='hidden'>
                                 <CardBody>
                                     <Text fontWeight={"bold"} fontSize={"md"}>{e?.school}</Text>
-                                    <Text fontSize={"sm"} color={"gray.200"}>{e?.fieldofstudy}</Text>
-                                    <Text fontSize={"sm"} color={"gray.400"}>{e?.degree} &bull; {moment(e?.from).format('MMMM Do YYYY')} - {e?.current === false ? moment(e?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
+                                    <Text fontSize={"sm"} color={"gray.400"} fontWeight={"semibold"}>{e?.degree} &bull; {moment(e?.from).format('MMMM Do YYYY')} - {e?.current === false ? moment(e?.to).format('MMMM Do YYYY') : <>Current</>}</Text>
+                                    <Text fontSize={"sm"} color={"gray.400"}>{e?.fieldofstudy}</Text>
                                     <Text fontSize={"sm"} mt={2}>{e?.description}</Text>
                                 </CardBody>
                             </Card>
@@ -128,10 +128,10 @@ export default function ProfileCard({ data }) {
                 <CardBody bgGradient='linear(to-l, #5433FF, #20BDFF)' borderRadius={"lg"}>
                     <Center>
                         <VStack>
-                            <Avatar src={data?.user?.avatar} size={{base: "xl", sm: "xl", md: "2xl", lg: "2xl", xl: "2xl"}} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"4px"} shadow={"xl"}>
+                            <Avatar src={data?.user?.avatar} size={{ base: "xl", sm: "xl", md: "2xl", lg: "2xl", xl: "2xl" }} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"4px"} shadow={"xl"}>
                             </Avatar>
                             <Text fontSize={"3xl"} fontWeight={"bold"} color={"white"}>{data?.user?.name}</Text>
-                            <Tag size={{base: "md", sm: "md", md: "lg", lg: "lg", xl: "lg"}} variant='subtle' colorScheme='cyan'>{data?.status} {data?.company && <>at</>} {data?.company}</Tag>
+                            <Tag size={{ base: "md", sm: "md", md: "lg", lg: "lg", xl: "lg" }} variant='subtle' colorScheme='cyan'>{data?.status} {data?.company && <>at</>} {data?.company}</Tag>
                             <Text fontSize={"lg"} color={"gray.300"} display={"flex"} alignItems={"center"} gap={1}><MdCelebration /> Joined {moment(data?.date).format("MMM Do YY")}</Text>
                             <Text fontSize={"md"} color={"gray.300"}>{data?.location || <>Earth</>}</Text>
                             {SocialHandles()}
@@ -141,7 +141,7 @@ export default function ProfileCard({ data }) {
             </Card>
             {BioSection()}
             {SkillsSection()}
-            <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={{base: 0, sm: 0, md: 3, lg: 3, xl: 3}} mb={4}>
+            <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={{ base: 0, sm: 0, md: 3, lg: 3, xl: 3 }} mb={4}>
                 {ExpSection()}
                 {EduCard()}
             </SimpleGrid>

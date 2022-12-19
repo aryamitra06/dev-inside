@@ -54,6 +54,10 @@ export const POST_BY_ID_REQUEST = "POST_BY_ID_REQUEST";
 export const POST_BY_ID_SUCCESS = "POST_BY_ID_SUCCESS";
 export const POST_BY_ID_FAIL = "POST_BY_ID_FAIL";
 
+export const UPDATE_LIKES_REQUEST = "UPDATE_LIKES_REQUEST";
+export const UPDATE_LIKES_SUCCESS = "UPDATE_LIKES_SUCCESS";
+export const UPDATE_LIKES_FAIL = "UPDATE_LIKES_FAIL";
+
 //utility
 export const RESET_STATE = "RESET_STATE";
 export const TOGGLE = "TOGGLE";

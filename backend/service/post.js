@@ -58,7 +58,7 @@ router.delete("/comment/delete/:post_id/:comment_id", auth, deleteComment);
 @access: Private
 @desc: Liking a post
 */
-router.post("/like/new/:id", auth, likePost);
+router.put("/like/new/:id", auth, likePost);
 
 /*
 @route: /unlike/:id
@@ -66,6 +66,6 @@ router.post("/like/new/:id", auth, likePost);
 @access: Private
 @desc: Unliking a post
 */
-router.post("/unlike/:id", auth, unlikePost);
+router.put("/unlike/:id", auth, unlikePost);
 
 export default router;

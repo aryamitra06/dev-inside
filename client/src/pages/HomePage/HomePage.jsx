@@ -13,6 +13,7 @@ export default function HomePage() {
     }, [dispatch])
 
     const postRes = useSelector((state) => state.postReducer);
+    console.log(postRes);
     return (
         <Fragment>
             <Container maxW={"7xl"} mt={3}>
@@ -24,7 +25,7 @@ export default function HomePage() {
                     <GridItem rowSpan={1} colSpan={3} display={{ base: "none", sm: "none", md: "none", lg: "block", xl: "block" }} />
                     <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 6, xl: 6 }}>
                         <NewPostCard/>
-                        <AllPosts postRes={postRes} />
+                        <AllPosts postRes={postRes} isLikeUpdating = {postRes?.isLikeUpdating}/>
                     </GridItem>
                     <GridItem rowSpan={1} colSpan={3} display={{ base: "none", sm: "none", md: "none", lg: "block", xl: "block" }} />
                 </Grid>
