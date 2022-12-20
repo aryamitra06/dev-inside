@@ -1,10 +1,9 @@
 import { SimpleGrid, FormControl, FormLabel, Input, FormHelperText, Textarea, Button, HStack } from '@chakra-ui/react'
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { newPostAction } from "../../redux/actions/postAction";
 export default function NewPostForm({ onClose }) {
     const dispatch = useDispatch();
-    const [state, setState] = useState(false);
     const [formData, setFormData] = useState({
         title: "",
         desc: "",
@@ -27,7 +26,7 @@ export default function NewPostForm({ onClose }) {
     }
 
     const newPostRes = useSelector((state) => state.postReducer);
-    const { error, isFormSubmitting } = newPostRes;
+    const { isFormSubmitting } = newPostRes;
 
     return (
         <Fragment>

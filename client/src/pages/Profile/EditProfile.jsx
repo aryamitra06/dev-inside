@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-import { Alert, AlertIcon, Container, Text, Progress, Skeleton, SimpleGrid } from '@chakra-ui/react'
+import { Alert, AlertIcon, Container, Text, Skeleton, SimpleGrid } from '@chakra-ui/react'
 import EditProfileForm from '../../components/Profile/EditProfileForm'
 import { useNavigate } from "react-router-dom";
 import { idGetter } from '../../utils/tokenExtractor';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, CardBody, CardHeader, Flex, Avatar, Box, Heading, Text, IconButton, Button, Image, Menu, MenuItem, MenuButton, MenuList, ScaleFade } from '@chakra-ui/react'
+import { Card, CardBody, CardHeader, Flex, Avatar, Box, Heading, Text, IconButton, Button, Image, Menu, MenuItem, MenuButton, MenuList } from '@chakra-ui/react'
 import moment from "moment";
 import readingTime from "reading-time/lib/reading-time";
 import { GoGlobe } from "react-icons/go";

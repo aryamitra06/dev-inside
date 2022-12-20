@@ -1,4 +1,4 @@
-import { ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, DELETE_EDU_SUCCESS, DELETE_POST_FAIL, DELETE_POST_REQUEST, DELETE_POST_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_BY_ID_FAIL, POST_BY_ID_REQUEST, POST_BY_ID_SUCCESS, UPDATE_LIKES_FAIL, UPDATE_LIKES_REQUEST, UPDATE_LIKES_SUCCESS } from "../constants/types";
+import { ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, DELETE_POST_FAIL, DELETE_POST_REQUEST, DELETE_POST_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_BY_ID_FAIL, POST_BY_ID_REQUEST, POST_BY_ID_SUCCESS, UPDATE_LIKES_FAIL, UPDATE_LIKES_REQUEST, UPDATE_LIKES_SUCCESS } from "../constants/types";
 
 const initialState = {
     posts: [],
@@ -43,20 +43,20 @@ export const postReducer = (state = initialState, action) => {
         //@desc
         //update likes for the post state with UPDATED_LIKES payload
         case UPDATE_LIKES_REQUEST:
-            return {...state, isLikeUpdating: true};
+            return { ...state, isLikeUpdating: true };
         case UPDATE_LIKES_SUCCESS:
             return { ...state, posts: state.posts.map(post => post._id === action.payload._id ? { ...post, likes: action.payload.likes } : post), isLikeUpdating: false };
         case UPDATE_LIKES_FAIL:
-            return {...state, error: action.payload, isLikeUpdating: false};
+            return { ...state, error: action.payload, isLikeUpdating: false };
 
         //@desc
         //delete post by id
         case DELETE_POST_REQUEST:
-            return {...state, isPostDeleting: true};
+            return { ...state, isPostDeleting: true };
         case DELETE_POST_SUCCESS:
-            return {...state, posts: state.posts.filter(post => post._id !== action.payload), isPostDeleting: false};
+            return { ...state, posts: state.posts.filter(post => post._id !== action.payload), isPostDeleting: false };
         case DELETE_POST_FAIL:
-            return {...state, error: action.payload, isPostDeleting: false};
+            return { ...state, error: action.payload, isPostDeleting: false };
         default:
             return state;
     }

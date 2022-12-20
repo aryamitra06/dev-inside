@@ -2,7 +2,7 @@ import React, { Fragment, memo } from 'react'
 import moment from 'moment'
 import readingTime from "reading-time/lib/reading-time";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Card, CardBody, Image, Text, Button, Flex, Avatar, Box, Heading, IconButton, Menu, MenuButton, MenuList, MenuItem, Stack, Skeleton, Alert, AlertIcon, ScaleFade } from '@chakra-ui/react'
+import { Card, CardBody, Image, Text, Button, Flex, Avatar, Box, Heading, IconButton, Menu, MenuButton, MenuList, MenuItem, Stack, Skeleton, Alert, AlertIcon } from '@chakra-ui/react'
 import { GoGlobe } from "react-icons/go";
 import CommentSection from './CommentSection';
 import { Link } from 'react-router-dom';

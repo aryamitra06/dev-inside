@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardBody, Center, HStack, IconButton, SimpleGrid, Tag, Text, VStack, useColorModeValue } from '@chakra-ui/react';
+import { Avatar, Box, Card, CardBody, Center, HStack, IconButton, SimpleGrid, Tag, Text, VStack } from '@chakra-ui/react';
 import React, { Fragment } from 'react'
 import moment from "moment";
 import { MdCelebration } from "react-icons/md";

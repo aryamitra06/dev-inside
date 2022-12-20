@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, CardBody, Center, Tag, Text, Alert, AlertIcon, Skeleton, Stack,ScaleFade } from '@chakra-ui/react'
+import { Avatar, Box, Button, Card, CardBody, Center, Tag, Text, Alert, AlertIcon, Skeleton, Stack } from '@chakra-ui/react'
 import React, { Fragment, memo } from 'react'
 import { Link } from "react-router-dom";
 import moment from 'moment';
