@@ -45,7 +45,7 @@ export const postReducer = (state = initialState, action) => {
         case UPDATE_LIKES_REQUEST:
             return { ...state, isLikeUpdating: true };
         case UPDATE_LIKES_SUCCESS:
-            return { ...state, post: {...state.post, likes: action.payload.likes}, posts: state.posts.map(post => post._id === action.payload._id ? { ...post, likes: action.payload.likes } : post), isLikeUpdating: false };
+            return { ...state, post: { ...state.post, likes: action.payload.likes }, posts: state.posts.map(post => post._id === action.payload._id ? { ...post, likes: action.payload.likes } : post), isLikeUpdating: false };
         case UPDATE_LIKES_FAIL:
             return { ...state, error: action.payload, isLikeUpdating: false };
 
@@ -72,7 +72,8 @@ export const postReducer = (state = initialState, action) => {
         case REMOVE_COMMENT_REQUEST:
             return { ...state, isDeleting: true };
         case REMOVE_COMMENT_SUCCESS:
-            return { ...state, post: { ...state.post, comments: state.post.comments.filter(comment => comment._id === action.payload.comments) }, isDeleting: false };
+            console.log(action.payload);
+            return { ...state, post: { ...state.post, comments: state.post.comments.filter((comment) => comment._id !== action.payload) }, isDeleting: false };
         case REMOVE_COMMENT_FAIL:
             return { ...state, isDeleting: false };
         default:

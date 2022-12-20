@@ -39,7 +39,7 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const cancelRef = React.useRef()
+    const cancelRef = React.useRef();
     const { _id, user, cover, title, desc, name, avatar, likes, comments, date } = postData;
     const [expandText, setExpandText] = useState(desc?.slice(0, 300));
     const [showLessBtn, setShowLessBtn] = useState(false);

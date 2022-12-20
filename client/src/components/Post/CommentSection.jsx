@@ -1,18 +1,38 @@
-import { Avatar, Box, Button, Card, IconButton, HStack, Text, Textarea, Menu, MenuButton, MenuList, MenuItem, Alert, AlertIcon, SimpleGrid } from '@chakra-ui/react'
-import React, { Fragment, memo, useState } from 'react'
+import {
+    Avatar,
+    Box,
+    Button,
+    Card,
+    IconButton,
+    HStack,
+    Text,
+    Textarea,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    Alert,
+    AlertIcon,
+    SimpleGrid,
+} from '@chakra-ui/react'
+import React, { Fragment, useState, memo } from 'react'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { avatarGetter, idGetter, tokenGetter } from "../../utils/tokenExtractor";
 import { useDispatch } from 'react-redux';
+import { AiFillDelete } from "react-icons/ai";
 import moment from 'moment'
 import { addCommentAction, deleteCommentAction } from '../../redux/actions/postAction';
 function CommentSection({ postReducer }) {
     const dispatch = useDispatch();
+    const resetComment = React.useRef();
     const [showBtn, setShowBtn] = useState(false);
     const [formData, setFormData] = useState({ text: "" });
     const { text } = formData;
-    
-    const { post, isFormSubmitting } = postReducer;
+
+    const { post, isFormSubmitting, isDeleting } = postReducer;
     const { _id, comments } = post;
+
+    console.log(post);
 
     const displaySubmitBtn = () => {
         setShowBtn(true);
@@ -22,20 +42,24 @@ function CommentSection({ postReducer }) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
+    const resetCommentHandler = () => {
+        resetComment.current.value = "";
+    }
     const onSubmit = async (e) => {
         e.preventDefault();
-        dispatch(addCommentAction(_id, formData));
+        await dispatch(addCommentAction(_id, formData));
+        await resetCommentHandler();
     }
 
     const deleteComment = (postId, commentId) => {
-        dispatch(deleteCommentAction(postId, commentId))
+        dispatch(deleteCommentAction(postId, commentId));
     }
 
     const AllComments = () => (
         <SimpleGrid columns={1}>
             {
                 comments?.map((e) => (
-                    <Box pl={5} pr={5} mb={3}>
+                    <Box pl={5} pr={5} mb={3} key={e?._id}>
                         <Box display={"flex"} gap={3}>
                             <Avatar size={"sm"} src={e?.avatar} />
                             <Box width={"100%"}>
@@ -50,7 +74,7 @@ function CommentSection({ postReducer }) {
                                                 <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} size={"sm"}>
                                                 </MenuButton>
                                                 <MenuList>
-                                                    <MenuItem onClick={() => deleteComment(_id, e?._id)}>Delete</MenuItem>
+                                                    <MenuItem icon={<AiFillDelete />} isDisabled={isDeleting} onClick={() => deleteComment(_id, e?._id)}>Delete</MenuItem>
                                                 </MenuList>
                                             </Menu>
                                         )}
@@ -74,7 +98,7 @@ function CommentSection({ postReducer }) {
                             <Avatar size={"sm"} src={avatarGetter()} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} />
                             <Box width={"100%"}>
                                 <form onSubmit={onSubmit}>
-                                    <Textarea placeholder='Add to the discussion' name='text' onChange={(e) => onChange(e)} width={"100%"} mb={2} onClick={displaySubmitBtn}></Textarea>
+                                    <Textarea ref={resetComment} placeholder='Add to the discussion' name='text' onChange={(e) => onChange(e)} width={"100%"} mb={2} onClick={displaySubmitBtn}></Textarea>
                                     {showBtn && <Button colorScheme={"blue"} isDisabled={text?.length === 0 || isFormSubmitting} type="submit">Submit</Button>}
                                 </form>
                             </Box>
@@ -95,4 +119,4 @@ function CommentSection({ postReducer }) {
     )
 }
 
-export default memo(CommentSection)
+export default memo(CommentSection);

@@ -75,7 +75,7 @@ export const deleteCommentAction = (postId, commentId) => async (dispatch) => {
     try {
         dispatch({ type: REMOVE_COMMENT_REQUEST });
         const response = await axios.delete(`/comment/delete/${postId}/${commentId}`, { headers: { authorization: tokenGetter() } });
-        dispatch({ type: REMOVE_COMMENT_SUCCESS, payload: response.data });
+        dispatch({ type: REMOVE_COMMENT_SUCCESS, payload: commentId });
     } catch (error) {
         dispatch({ type: REMOVE_COMMENT_FAIL, payload: error.response.data });
     }
