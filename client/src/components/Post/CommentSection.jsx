@@ -4,7 +4,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { avatarGetter, idGetter, tokenGetter } from "../../utils/tokenExtractor";
 import { useDispatch } from 'react-redux';
 import moment from 'moment'
-import { addCommentAction } from '../../redux/actions/postAction';
+import { addCommentAction, deleteCommentAction } from '../../redux/actions/postAction';
 function CommentSection({ data }) {
     const dispatch = useDispatch();
     const [showBtn, setShowBtn] = useState(false);
@@ -29,6 +29,9 @@ function CommentSection({ data }) {
         console.log(formData);
     }
 
+    const deleteComment = (postId, commentId) => {
+        dispatch(deleteCommentAction(postId, commentId))
+    }
 
     const AllComments = () => (
         <SimpleGrid columns={1}>
@@ -36,7 +39,7 @@ function CommentSection({ data }) {
                 comments?.map((e) => (
                     <Box pl={5} pr={5} mb={3}>
                         <Box display={"flex"} gap={3}>
-                            <Avatar size={"sm"} src={e?.avatar}/>
+                            <Avatar size={"sm"} src={e?.avatar} />
                             <Box width={"100%"}>
                                 <Card variant={"outline"} p={3}>
                                     <HStack justifyContent={"space-between"}>
@@ -49,7 +52,7 @@ function CommentSection({ data }) {
                                                 <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} size={"sm"}>
                                                 </MenuButton>
                                                 <MenuList>
-                                                    <MenuItem>Delete</MenuItem>
+                                                    <MenuItem onClick={() => deleteComment(_id, e?._id)}>Delete</MenuItem>
                                                 </MenuList>
                                             </Menu>
                                         )}
