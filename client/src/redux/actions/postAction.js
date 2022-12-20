@@ -1,4 +1,4 @@
-import { ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_BY_ID_FAIL, POST_BY_ID_REQUEST, POST_BY_ID_SUCCESS, UPDATE_LIKES_SUCCESS, UPDATE_LIKES_REQUEST, UPDATE_LIKES_FAIL, DELETE_POST_REQUEST, DELETE_POST_FAIL, DELETE_POST_SUCCESS } from "../constants/types";
+import { ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_BY_ID_FAIL, POST_BY_ID_REQUEST, POST_BY_ID_SUCCESS, UPDATE_LIKES_SUCCESS, UPDATE_LIKES_REQUEST, UPDATE_LIKES_FAIL, DELETE_POST_REQUEST, DELETE_POST_FAIL, DELETE_POST_SUCCESS, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAIL } from "../constants/types";
 import axios from "axios";
 import { tokenGetter } from "../../utils/tokenExtractor";
 
@@ -58,5 +58,15 @@ export const deletePostAction = (postId) => async (dispatch) => {
         dispatch({ type: DELETE_POST_SUCCESS, payload: postId });
     } catch (error) {
         dispatch({ type: DELETE_POST_FAIL, payload: error.response.data });
+    }
+}
+
+export const addCommentAction = (postId, formData) => async (dispatch) => {
+    try {
+        dispatch({ type: ADD_COMMENT_REQUEST });
+        const response = await axios.post(`/comment/new/${postId}`, formData, { headers: { authorization: tokenGetter() } });
+        dispatch({ type: ADD_COMMENT_SUCCESS, payload: response.data });
+    } catch (error) {
+        dispatch({ type: ADD_COMMENT_FAIL, payload: error.response.data });
     }
 }

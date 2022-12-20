@@ -1,4 +1,4 @@
-import { ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, DELETE_POST_FAIL, DELETE_POST_REQUEST, DELETE_POST_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_BY_ID_FAIL, POST_BY_ID_REQUEST, POST_BY_ID_SUCCESS, UPDATE_LIKES_FAIL, UPDATE_LIKES_REQUEST, UPDATE_LIKES_SUCCESS } from "../constants/types";
+import { ADD_COMMENT_FAIL, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ALL_POSTS_FAIL, ALL_POSTS_REQUEST, ALL_POSTS_SUCCESS, DELETE_POST_FAIL, DELETE_POST_REQUEST, DELETE_POST_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_BY_ID_FAIL, POST_BY_ID_REQUEST, POST_BY_ID_SUCCESS, UPDATE_LIKES_FAIL, UPDATE_LIKES_REQUEST, UPDATE_LIKES_SUCCESS } from "../constants/types";
 
 const initialState = {
     posts: [],
@@ -57,6 +57,15 @@ export const postReducer = (state = initialState, action) => {
             return { ...state, posts: state.posts.filter(post => post._id !== action.payload), isPostDeleting: false };
         case DELETE_POST_FAIL:
             return { ...state, error: action.payload, isPostDeleting: false };
+
+        //@desc
+        //add comment by postid
+        case ADD_COMMENT_REQUEST:
+            return {...state, isFormSubmitting: true};
+        case ADD_COMMENT_SUCCESS:
+            return {...state, post: {...state.post, comments: action.payload.comments}, isFormSubmitting: false};
+        case ADD_COMMENT_FAIL:
+            return {...state, isFormSubmitting: false};
         default:
             return state;
     }

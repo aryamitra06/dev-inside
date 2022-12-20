@@ -77,7 +77,7 @@ const PostByIdCard = ({ data }) => {
                                                 </Button>
                                             </Box>
                                         </Card>
-                                    <CommentSection />
+                                    <CommentSection data={data}/>
                                 </Fragment>
                             )
                         }
