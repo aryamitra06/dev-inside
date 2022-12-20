@@ -1,6 +1,6 @@
  
 # Devinside 
-Stackoverflow like forum for developers contains advanced features and stunning UI. 
+Stackoverflow like forum for connecting developers that contains advanced features and stunning UI.
 
 # Developer
 Aryamitra Chaudhuri
