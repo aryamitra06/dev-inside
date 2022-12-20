@@ -19,7 +19,7 @@ const PostByIdCard = ({ postReducer }) => {
     const { _id, name, avatar, likes, title, desc, cover, user, date } = post;
 
     const stats = readingTime(desc || "");
-    let isLoggedInUser = likes?.some(user => user['user'] === idGetter());
+    const hasLoggedInUserLiked = likes?.some(user => user['user'] === idGetter());
 
     const likePost = () => {
         dispatch(addLikeAction(_id));
@@ -67,7 +67,7 @@ const PostByIdCard = ({ postReducer }) => {
                                                     <Link to={`/profile/${user}`}><Avatar src={avatar} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} /></Link>
                                                     <Box>
                                                         <Link to={`/profile/${user}`}><Heading size='sm' cursor={"pointer"}>{name}</Heading></Link>
-                                                        <Text fontSize={"sm"} color={"gray.300"} display={"flex"} alignItems={"center"}><GoGlobe /> &nbsp;&bull; {moment(date).format("MMM DD YYYY")} &bull; {stats.text}</Text>
+                                                        <Text fontSize={"sm"} color={"gray.400"} display={"flex"} alignItems={"center"}><GoGlobe /> &nbsp;&bull; {moment(date).format("MMM DD YYYY")} &bull; {stats.text}</Text>
                                                     </Box>
                                                 </Flex>
                                                 {
@@ -87,12 +87,12 @@ const PostByIdCard = ({ postReducer }) => {
                                         </CardBody>
                                         <Box display={"flex"} alignItems={"center"} justifyContent={"space-around"} gap={2} p={2}>
                                             {
-                                                isLoggedInUser ? (
-                                                    <Button onClick={unLikePost} isDisabled={isLikeUpdating} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="solid" colorScheme={"blue"} fontWeight={"bold"} leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
+                                                hasLoggedInUserLiked ? (
+                                                    <Button onClick={unLikePost} isDisabled={isLikeUpdating || !idGetter()} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="solid" colorScheme={"blue"} fontWeight={"bold"} leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
                                                         Clap ({likes?.length})
                                                     </Button>
                                                 ) : (
-                                                    <Button onClick={likePost} isDisabled={isLikeUpdating} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="outline" leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
+                                                    <Button onClick={likePost} isDisabled={isLikeUpdating || !idGetter()} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="outline" leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
                                                         Clap ({likes?.length})
                                                     </Button>
                                                 )

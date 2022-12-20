@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import PostCard from "../../components/Post/PostCard";
 
 export default function AllPosts({ postReducer }) {
-  const { posts, postsLoading, error, isLikeUpdating } = postReducer;
+  const { posts, postsLoading, error, isLikeUpdating, isDeleting } = postReducer;
   return (
     <Fragment>
       {
@@ -40,7 +40,7 @@ export default function AllPosts({ postReducer }) {
                 <>
                   {
                     posts?.map((e) => (
-                      <PostCard key={e?._id} postData={e} isLikeUpdating={isLikeUpdating} />
+                      <PostCard key={e?._id} postData={e} isLikeUpdating={isLikeUpdating} isDeleting={isDeleting}/>
                     ))
                   }
                 </>

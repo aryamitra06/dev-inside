@@ -84,7 +84,7 @@ function CommentSection({ postReducer }) {
                     <Box pl={5} pr={5} mb={6}>
                         <Alert status='info'>
                             <AlertIcon />
-                            Login/Signup to comment!
+                            Login or create an account to join discussion!
                         </Alert>
                     </Box>
                 )

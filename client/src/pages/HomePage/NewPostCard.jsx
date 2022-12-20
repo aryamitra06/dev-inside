@@ -1,7 +1,7 @@
 import { Avatar, Card, CardBody, Text, useColorModeValue, useDisclosure, Modal, ModalBody, ModalCloseButton, ModalHeader, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import React, { Fragment } from 'react';
 import NewPostForm from '../../components/Post/NewPostForm';
-import { avatarGetter } from '../../utils/tokenExtractor';
+import { avatarGetter, idGetter } from '../../utils/tokenExtractor';
 
 export default function NewPostCard() {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -19,12 +19,14 @@ export default function NewPostCard() {
     )
     return (
         <Fragment>
+            {(idGetter() && (
             <Card variant={"outline"} mb={3}>
                 <CardBody display={"flex"} alignItems={"center"} justifyContent={"center"} gap={3}>
-                    <Avatar src={avatarGetter()} />
-                    <Card width={"100%"} height={"40px"} variant={"filled"} borderRadius={"md"} display={"flex"} justifyContent={"center"} cursor={"pointer"} onClick={onOpen}><Text ml={3} fontSize={"sm"} color={useColorModeValue("gray.500", "gray.400")}>Write something about coding!</Text></Card>
+                    <Avatar bgGradient='linear(to-l, #85E7FC, #90CDF4)' src={avatarGetter()} />
+                    <Card width={"100%"} height={"40px"} variant={"filled"} borderRadius={"md"} display={"flex"} justifyContent={"center"} cursor={"pointer"} onClick={onOpen}><Text ml={3} fontSize={"sm"}>Write something about coding!</Text></Card>
                 </CardBody>
             </Card>
+            ))}
             {NewPostModal()}
         </Fragment>
     )
