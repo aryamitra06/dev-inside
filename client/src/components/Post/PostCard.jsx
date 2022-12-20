@@ -20,8 +20,6 @@ export default function PostCard({ data, isLikeUpdating }) {
 
     const stats = readingTime(data?.desc || "");
 
-    console.log(data);
-
     const readMoreHandler = () => {
         setExpandText(data?.desc);
         setShowLessBtn(true);
@@ -52,8 +50,7 @@ export default function PostCard({ data, isLikeUpdating }) {
         dispatch(deletePostAction(data?._id))
     }
 
-    const likesArr = data?.likes;
-    let isLoggedInUser = likesArr.some(user => user['user'] === idGetter());
+    let isLoggedInUser = data?.likes?.some(user => user['user'] === idGetter());
 
     return (
         <Card mb={3} >

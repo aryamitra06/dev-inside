@@ -45,7 +45,7 @@ export const postReducer = (state = initialState, action) => {
         case UPDATE_LIKES_REQUEST:
             return { ...state, isLikeUpdating: true };
         case UPDATE_LIKES_SUCCESS:
-            return { ...state, posts: state.posts.map(post => post._id === action.payload._id ? { ...post, likes: action.payload.likes } : post), isLikeUpdating: false };
+            return { ...state, post: {...state.post, likes: action.payload.likes}, posts: state.posts.map(post => post._id === action.payload._id ? { ...post, likes: action.payload.likes } : post), isLikeUpdating: false };
         case UPDATE_LIKES_FAIL:
             return { ...state, error: action.payload, isLikeUpdating: false };
 
