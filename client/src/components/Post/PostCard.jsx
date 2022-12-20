@@ -61,7 +61,7 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
     }
 
     const profileNavigator = () => {
-        navigate(`profile/${user}`)
+        navigate(`profile/${user}`);
     }
 
     const likePost = () => {
@@ -73,7 +73,7 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
     }
 
     const deletePost = () => {
-        dispatch(deletePostAction(_id))
+        dispatch(deletePostAction(_id));
     }
 
     const hasLoggedInUserLiked = likes?.some(user => user['user'] === idGetter());

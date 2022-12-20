@@ -2,20 +2,50 @@ import React, { Fragment, memo } from 'react'
 import moment from 'moment'
 import readingTime from "reading-time/lib/reading-time";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Card, CardBody, Image, Text, Button, Flex, Avatar, Box, Heading, IconButton, Menu, MenuButton, MenuList, MenuItem, Stack, Skeleton, Alert, AlertIcon } from '@chakra-ui/react'
+import {
+    Card,
+    CardBody,
+    Flex,
+    Avatar,
+    Box,
+    Heading,
+    Text,
+    IconButton,
+    Button,
+    Image,
+    Menu,
+    MenuItem,
+    MenuButton,
+    MenuList,
+    useDisclosure,
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogOverlay,
+    AlertDialogContent,
+    AlertDialogHeader,
+    AlertDialogFooter,
+    Stack,
+    Skeleton,
+    Alert,
+    AlertIcon
+} from "@chakra-ui/react";
 import { GoGlobe } from "react-icons/go";
 import CommentSection from './CommentSection';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandsClapping, faComments, faShare } from '@fortawesome/free-solid-svg-icons'
 import { idGetter } from '../../utils/tokenExtractor';
+import { AiFillDelete } from "react-icons/ai";
 import { addLikeAction, deletePostAction, unLikeAction } from '../../redux/actions/postAction';
 import { useDispatch } from 'react-redux';
 
 const PostByIdCard = ({ postReducer }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const cancelRef = React.useRef()
 
-    const { post, postLoading, error, isLikeUpdating } = postReducer;
+    const { post, postLoading, error, isLikeUpdating, isDeleting } = postReducer;
     const { _id, name, avatar, likes, title, desc, cover, user, date } = post;
 
     const stats = readingTime(desc || "");
@@ -29,9 +59,38 @@ const PostByIdCard = ({ postReducer }) => {
         dispatch(unLikeAction(_id));
     }
 
-    // const deletePost = () => {
-    //     dispatch(deletePostAction(_id));
-    // }
+    const deletePost = async() => {
+        await dispatch(deletePostAction(_id));
+        await navigate("/");
+    }
+
+    const DeleteDialog = () => (
+        <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+            isCentered
+        >
+            <AlertDialogOverlay backdropFilter='blur(10px)'>
+                <AlertDialogContent>
+                    <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                        Delete
+                    </AlertDialogHeader>
+                    <AlertDialogBody>
+                        Are you sure? You can't undo this action afterwards.
+                    </AlertDialogBody>
+                    <AlertDialogFooter>
+                        <Button ref={cancelRef} onClick={onClose} isDisabled={isDeleting}>
+                            Cancel
+                        </Button>
+                        <Button colorScheme='red' onClick={deletePost} ml={3} isDisabled={isDeleting}>
+                            Delete
+                        </Button>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialogOverlay>
+        </AlertDialog>
+    )
 
     return (
         <Fragment>
@@ -76,7 +135,7 @@ const PostByIdCard = ({ postReducer }) => {
                                                             <MenuButton as={IconButton} icon={<BsThreeDotsVertical />}>
                                                             </MenuButton>
                                                             <MenuList>
-                                                                <MenuItem>Delete</MenuItem>
+                                                                <MenuItem icon={<AiFillDelete />} onClick={onOpen}>Delete</MenuItem>
                                                             </MenuList>
                                                         </Menu>
                                                     )
@@ -105,7 +164,8 @@ const PostByIdCard = ({ postReducer }) => {
                                             </Button>
                                         </Box>
                                     </Card>
-                                    <CommentSection postReducer = {postReducer} />
+                                    <CommentSection postReducer={postReducer} />
+                                    {DeleteDialog()}
                                 </Fragment>
                             )
                         }
