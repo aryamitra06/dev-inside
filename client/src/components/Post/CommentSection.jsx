@@ -5,14 +5,13 @@ import { avatarGetter, idGetter, tokenGetter } from "../../utils/tokenExtractor"
 import { useDispatch } from 'react-redux';
 import moment from 'moment'
 import { addCommentAction, deleteCommentAction } from '../../redux/actions/postAction';
-function CommentSection({ data }) {
+function CommentSection({ postReducer }) {
     const dispatch = useDispatch();
     const [showBtn, setShowBtn] = useState(false);
     const [formData, setFormData] = useState({ text: "" });
     const { text } = formData;
-
-    console.log(data);
-    const { post, isFormSubmitting } = data;
+    
+    const { post, isFormSubmitting } = postReducer;
     const { _id, comments } = post;
 
     const displaySubmitBtn = () => {
@@ -26,7 +25,6 @@ function CommentSection({ data }) {
     const onSubmit = async (e) => {
         e.preventDefault();
         dispatch(addCommentAction(_id, formData));
-        console.log(formData);
     }
 
     const deleteComment = (postId, commentId) => {

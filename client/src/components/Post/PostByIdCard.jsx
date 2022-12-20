@@ -12,21 +12,25 @@ import { idGetter } from '../../utils/tokenExtractor';
 import { addLikeAction, deletePostAction, unLikeAction } from '../../redux/actions/postAction';
 import { useDispatch } from 'react-redux';
 
-const PostByIdCard = ({ data }) => {
+const PostByIdCard = ({ postReducer }) => {
     const dispatch = useDispatch();
-    const { post, postLoading, error, isLikeUpdating } = data;
-    const stats = readingTime(post?.desc || "");
-    let isLoggedInUser = post?.likes?.some(user => user['user'] === idGetter());
+
+    const { post, postLoading, error, isLikeUpdating } = postReducer;
+    const { _id, name, avatar, likes, title, desc, cover, user, date } = post;
+
+    const stats = readingTime(desc || "");
+    let isLoggedInUser = likes?.some(user => user['user'] === idGetter());
+
     const likePost = () => {
-        dispatch(addLikeAction(post?._id));
+        dispatch(addLikeAction(_id));
     }
 
     const unLikePost = () => {
-        dispatch(unLikeAction(post?._id));
+        dispatch(unLikeAction(_id));
     }
 
     // const deletePost = () => {
-    //     dispatch(deletePostAction(post?._id))
+    //     dispatch(deletePostAction(_id));
     // }
 
     return (
@@ -50,9 +54,9 @@ const PostByIdCard = ({ data }) => {
 
                                     <Card overflow={"hidden"}>
                                         {
-                                            post?.cover && (
+                                            cover && (
                                                 <Image
-                                                    src={post?.cover}
+                                                    src={cover}
                                                     objectFit='cover'
                                                 />
                                             )
@@ -60,14 +64,14 @@ const PostByIdCard = ({ data }) => {
                                         <CardBody>
                                             <Flex spacing='4' mt={4}>
                                                 <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                                                    <Link to={`/profile/${post?.user}`}><Avatar src={post?.avatar} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} /></Link>
+                                                    <Link to={`/profile/${user}`}><Avatar src={avatar} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} /></Link>
                                                     <Box>
-                                                        <Link to={`/profile/${post?.user}`}><Heading size='sm' cursor={"pointer"}>{post?.name}</Heading></Link>
-                                                        <Text fontSize={"sm"} color={"gray.300"} display={"flex"} alignItems={"center"}><GoGlobe /> &nbsp;&bull; {moment(post?.date).format("MMM DD YYYY")} &bull; {stats.text}</Text>
+                                                        <Link to={`/profile/${user}`}><Heading size='sm' cursor={"pointer"}>{name}</Heading></Link>
+                                                        <Text fontSize={"sm"} color={"gray.300"} display={"flex"} alignItems={"center"}><GoGlobe /> &nbsp;&bull; {moment(date).format("MMM DD YYYY")} &bull; {stats.text}</Text>
                                                     </Box>
                                                 </Flex>
                                                 {
-                                                    idGetter() === post?.user && (
+                                                    idGetter() === user && (
                                                         <Menu>
                                                             <MenuButton as={IconButton} icon={<BsThreeDotsVertical />}>
                                                             </MenuButton>
@@ -78,18 +82,18 @@ const PostByIdCard = ({ data }) => {
                                                     )
                                                 }
                                             </Flex>
-                                            <Text mt={4} mb={3} fontSize={{ base: "xl", sm: "xl", md: "2xl", lg: "3xl", xl: "3xl" }} fontWeight={"bold"}>{post?.title}</Text>
-                                            <Text>{post?.desc}</Text>
+                                            <Text mt={4} mb={3} fontSize={{ base: "xl", sm: "xl", md: "2xl", lg: "3xl", xl: "3xl" }} fontWeight={"bold"}>{title}</Text>
+                                            <Text>{desc}</Text>
                                         </CardBody>
                                         <Box display={"flex"} alignItems={"center"} justifyContent={"space-around"} gap={2} p={2}>
                                             {
                                                 isLoggedInUser ? (
                                                     <Button onClick={unLikePost} isDisabled={isLikeUpdating} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="solid" colorScheme={"blue"} fontWeight={"bold"} leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
-                                                        Clap ({post?.likes?.length})
+                                                        Clap ({likes?.length})
                                                     </Button>
                                                 ) : (
                                                     <Button onClick={likePost} isDisabled={isLikeUpdating} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="outline" leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
-                                                        Clap ({post?.likes?.length})
+                                                        Clap ({likes?.length})
                                                     </Button>
                                                 )
                                             }
@@ -101,7 +105,7 @@ const PostByIdCard = ({ data }) => {
                                             </Button>
                                         </Box>
                                     </Card>
-                                    <CommentSection data={data} />
+                                    <CommentSection postReducer = {postReducer} />
                                 </Fragment>
                             )
                         }

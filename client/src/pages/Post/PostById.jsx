@@ -16,7 +16,7 @@ export default function PostById() {
     }, [dispatch, postid, userid])
 
 
-    const postRes = useSelector((state) => state.postReducer);
+    const postReducer = useSelector((state) => state.postReducer);
     const profileRes = useSelector((state) => state.profilebyid);
 
     return (
@@ -28,7 +28,7 @@ export default function PostById() {
                     gap={5}
                 >
                     <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 8, xl: 8 }}>
-                        <PostByIdCard data={postRes} />
+                        <PostByIdCard postReducer = {postReducer} />
                     </GridItem>
                     <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 4, xl: 4 }}>
                         <PostProfileOverviewCard data={profileRes} />

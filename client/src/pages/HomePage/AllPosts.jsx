@@ -1,23 +1,21 @@
-import { Tag, Alert, AlertIcon, Skeleton, Stack, Input, Box } from '@chakra-ui/react'
-import React, { Fragment } from 'react'
-import PostCard from '../../components/Post/PostCard'
+import { Tag, Alert, AlertIcon, Skeleton, Stack, Input, Box } from "@chakra-ui/react";
+import React, { Fragment } from "react";
+import PostCard from "../../components/Post/PostCard";
 
-export default function AllPosts({ postRes, isLikeUpdating}) {
-  const { posts, loading, error } = postRes;
-
+export default function AllPosts({ postReducer }) {
+  const { posts, postsLoading, error, isLikeUpdating } = postReducer;
   return (
     <Fragment>
       {
-        error || posts?.length === 0 ? (
-          <>
-          </>
+        error ? (
+          <></>
         ) : (
           <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"} mb={3}>
             <Box display={"flex"} gap={2}>
-              {loading ? <Skeleton width={"80px"} height={"30px"} /> : <Tag size={"lg"} variant={"solid"} colorScheme={"blue"}>Latest</Tag>}
-              {loading ? <Skeleton width={"80px"} height={"30px"} /> : <Tag size={"lg"} variant={"outline"} colorScheme={"red"}>Popular</Tag>}
+              {postsLoading ? <Skeleton width={"80px"} height={"30px"} /> : <Tag size={"lg"} variant={"solid"} colorScheme={"blue"}>Latest</Tag>}
+              {postsLoading ? <Skeleton width={"80px"} height={"30px"} /> : <Tag size={"lg"} variant={"outline"} colorScheme={"red"}>Popular</Tag>}
             </Box>
-            <Input type='text' placeholder='Search...' width={{ base: "180px", sm: "200px", md: "250px", lg: "250px", xl: "250px" }} variant={"outline"} isDisabled={loading} size={"sm"} />
+            <Input type='text' placeholder='Search...' width={{ base: "180px", sm: "200px", md: "250px", lg: "250px", xl: "250px" }} variant={"outline"} isDisabled={postsLoading} size={"sm"} />
           </Box>
         )
       }
@@ -30,7 +28,7 @@ export default function AllPosts({ postRes, isLikeUpdating}) {
         ) : (
           <>
             {
-              (loading || posts.length === 0) ? (
+              (postsLoading) ? (
                 <>
                   <Stack>
                     <Skeleton height={"250px"} />
@@ -41,9 +39,8 @@ export default function AllPosts({ postRes, isLikeUpdating}) {
               ) : (
                 <>
                   {
-
                     posts?.map((e) => (
-                      <PostCard key={e?._id} data={e} isLikeUpdating={isLikeUpdating}/>
+                      <PostCard key={e?._id} postData={e} isLikeUpdating={isLikeUpdating} />
                     ))
                   }
                 </>

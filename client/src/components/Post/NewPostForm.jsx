@@ -25,8 +25,8 @@ export default function NewPostForm({ onClose }) {
         await onClose();
     }
 
-    const newPostRes = useSelector((state) => state.postReducer);
-    const { isFormSubmitting } = newPostRes;
+    const postReducer = useSelector((state) => state.postReducer);
+    const { isFormSubmitting } = postReducer;
 
     return (
         <Fragment>

@@ -1,70 +1,71 @@
-import React, { useState } from 'react'
-import { Card, CardBody, CardHeader, Flex, Avatar, Box, Heading, Text, IconButton, Button, Image, Menu, MenuItem, MenuButton, MenuList } from '@chakra-ui/react'
-import moment from "moment";
-import readingTime from "reading-time/lib/reading-time";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { idGetter } from "../../utils/tokenExtractor";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Card, CardBody, CardHeader, Flex, Avatar, Box, Heading, Text, IconButton, Button, Image, Menu, MenuItem, MenuButton, MenuList } from "@chakra-ui/react";
 import { GoGlobe } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHandsClapping, faComments, faShare } from '@fortawesome/free-solid-svg-icons'
-import { AiFillDelete } from 'react-icons/ai';
-import { idGetter } from "../../utils/tokenExtractor";
-import { useDispatch } from 'react-redux';
-import { addLikeAction, deletePostAction, unLikeAction } from '../../redux/actions/postAction';
+import { faHandsClapping, faComments, faShare } from "@fortawesome/free-solid-svg-icons";
+import { AiFillDelete } from "react-icons/ai";
+import { addLikeAction, deletePostAction, unLikeAction } from "../../redux/actions/postAction";
+import moment from "moment";
+import readingTime from "reading-time/lib/reading-time";
 
-export default function PostCard({ data, isLikeUpdating }) {
+export default function PostCard({ postData, isLikeUpdating }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [expandText, setExpandText] = useState(data?.desc?.slice(0, 300));
+    const { _id, user, cover, title, desc, name, avatar, likes, comments, date } = postData;
+    const [expandText, setExpandText] = useState(desc?.slice(0, 300));
     const [showLessBtn, setShowLessBtn] = useState(false);
 
-    const stats = readingTime(data?.desc || "");
+    const stats = readingTime(desc || "");
 
     const readMoreHandler = () => {
-        setExpandText(data?.desc);
+        setExpandText(desc);
         setShowLessBtn(true);
     }
 
     const showLessHandler = () => {
-        setExpandText(data?.desc?.slice(0, 300));
+        setExpandText(desc?.slice(0, 300));
         setShowLessBtn(false);
     }
 
     const fullPostNavigator = () => {
-        navigate(`post/${data?.user}/${data?._id}`);
+        navigate(`post/${user}/${_id}`);
     }
 
     const profileNavigator = () => {
-        navigate(`profile/${data?.user}`)
+        navigate(`profile/${user}`)
     }
 
     const likePost = () => {
-        dispatch(addLikeAction(data?._id));
+        dispatch(addLikeAction(_id));
     }
 
     const unLikePost = () => {
-        dispatch(unLikeAction(data?._id));
+        dispatch(unLikeAction(_id));
     }
 
     const deletePost = () => {
-        dispatch(deletePostAction(data?._id))
+        dispatch(deletePostAction(_id))
     }
 
-    let isLoggedInUser = data?.likes?.some(user => user['user'] === idGetter());
+    let isLoggedInUser = likes?.some(user => user['user'] === idGetter());
 
     return (
         <Card mb={3} >
             <CardHeader>
                 <Flex spacing='4'>
                     <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                        <Avatar name={data?.name} src={data?.avatar} onClick={profileNavigator} cursor={"pointer"} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} />
+                        <Avatar src={avatar} onClick={profileNavigator} cursor={"pointer"} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} />
                         <Box>
-                            <Heading size='sm' onClick={profileNavigator} cursor={"pointer"}>{data?.name}</Heading>
-                            <Text fontSize={"sm"} color={"gray.300"} display={"flex"} alignItems={"center"}><GoGlobe /> &nbsp;&bull; {moment(data?.date).format("MMM DD YYYY")} &bull; {stats?.text}</Text>
+                            <Heading size='sm' onClick={profileNavigator} cursor={"pointer"}>{name}</Heading>
+                            <Text fontSize={"sm"} color={"gray.300"} display={"flex"} alignItems={"center"}><GoGlobe /> &nbsp;&bull; {moment(date).format("MMM DD YYYY")} &bull; {stats?.text}</Text>
                         </Box>
                     </Flex>
                     {
-                        data?.user === idGetter() && (
+                        (user === idGetter()) && (
                             <Menu>
                                 <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} size={"sm"}>
                                 </MenuButton>
@@ -77,7 +78,7 @@ export default function PostCard({ data, isLikeUpdating }) {
                 </Flex>
             </CardHeader>
             <CardBody onClick={fullPostNavigator} cursor={"pointer"}>
-                <Text fontSize={"2xl"} fontWeight={"bold"} mb={3}>{data?.title}</Text>
+                <Text fontSize={"2xl"} fontWeight={"bold"} mb={3}>{title}</Text>
                 <Text>
                     {expandText}{expandText?.length === 300 && <>...</>}
                 </Text>
@@ -87,13 +88,13 @@ export default function PostCard({ data, isLikeUpdating }) {
                 {showLessBtn && <Button size={"sm"} onClick={showLessHandler}>Show Less</Button>}
             </Text>
             {
-                data?.cover && (
+                cover && (
                     <Image
                         onClick={fullPostNavigator}
                         cursor={"pointer"}
                         objectFit='cover'
-                        src={data?.cover}
-                        alt='Chakra UI'
+                        src={cover}
+                        alt={cover}
                     />
                 )
             }
@@ -101,16 +102,16 @@ export default function PostCard({ data, isLikeUpdating }) {
                 {
                     isLoggedInUser ? (
                         <Button onClick={unLikePost} isDisabled={isLikeUpdating} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="solid" colorScheme={"blue"} fontWeight={"bold"} leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
-                            Clap ({data?.likes?.length})
+                            Clap ({likes?.length})
                         </Button>
                     ) : (
                         <Button onClick={likePost} isDisabled={isLikeUpdating} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="outline" leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
-                            Clap ({data?.likes?.length})
+                            Clap ({likes?.length})
                         </Button>
                     )
                 }
                 <Button onClick={fullPostNavigator} variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faComments} />} width={"100%"}>
-                    Discuss ({data?.comments?.length})
+                    Discuss ({comments?.length})
                 </Button>
                 <Button variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
                     Share
