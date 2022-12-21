@@ -32,7 +32,7 @@ import logo_light_mode from "../../static/logo_light_mode.svg";
 import SettingsModal from './SettingsModal';
 import { Link } from 'react-router-dom';
 import { idGetter, tokenGetter, nameGetter, avatarGetter } from '../../utils/tokenExtractor';
-import {BiNews} from "react-icons/bi";
+import { BiNews } from "react-icons/bi";
 import { AiOutlineLogout, AiFillEye, AiFillSetting } from "react-icons/ai";
 import { MdOutlineAutoGraph } from "react-icons/md";
 
@@ -75,6 +75,8 @@ export default function Nav() {
                     <PopoverTrigger>
                       <Tag size='lg' colorScheme='blue' borderRadius='full' cursor={"pointer"}>
                         <Avatar
+                          bgGradient='linear(to-l, #85E7FC, #90CDF4)'
+                          p={"3px"}
                           src={avatarGetter()}
                           size='xs'
                           name={nameGetter()}
@@ -101,6 +103,8 @@ export default function Nav() {
                   <Popover>
                     <PopoverTrigger>
                       <Avatar
+                        bgGradient='linear(to-l, #85E7FC, #90CDF4)'
+                        p={"3px"}
                         src={avatarGetter()}
                         size='sm'
                         name={nameGetter()}

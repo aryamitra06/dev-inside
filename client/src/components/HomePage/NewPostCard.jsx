@@ -1,7 +1,7 @@
 import { Avatar, Card, CardBody, Text, useDisclosure, Modal, ModalBody, ModalCloseButton, ModalHeader, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import React, { Fragment } from 'react';
-import NewPostForm from '../PostById/NewPostForm';
 import { avatarGetter, idGetter } from '../../utils/tokenExtractor';
+import NewPostForm from './NewPostForm';
 
 export default function NewPostCard() {
     const { isOpen, onOpen, onClose } = useDisclosure();

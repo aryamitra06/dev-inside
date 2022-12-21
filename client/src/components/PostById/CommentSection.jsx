@@ -61,13 +61,13 @@ function CommentSection({ postReducer }) {
                 comments?.map((e) => (
                     <Box pl={5} pr={5} mb={3} key={e?._id}>
                         <Box display={"flex"} gap={3}>
-                            <Avatar size={"sm"} src={e?.avatar} />
+                            <Avatar size={"sm"} src={e?.avatar} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"}/>
                             <Box width={"100%"}>
                                 <Card variant={"outline"} p={3}>
                                     <HStack justifyContent={"space-between"}>
-                                        <Box display={"flex"} gap={2} alignItems={"center"}>
+                                        <Box display={"flex"} gap={1} flexDirection={"column"}>
                                             <Text fontWeight={"bold"} fontSize={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }}>{e?.name}</Text>
-                                            <Text color={"gray.400"} fontSize={{ base: "xs" }}>&bull; {moment(e?.date).format("MMM DD YYYY")}</Text>
+                                            <Text color={"gray.400"} fontSize={{ base: "xs" }}>{moment(e?.date).format("MMM DD YYYY")}</Text>
                                         </Box>
                                         {e?.user === idGetter() && (
                                             <Menu>

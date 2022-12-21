@@ -19,7 +19,7 @@ export default function HomePage() {
     const allProfilesReducer = useSelector((state) => state.allprofiles);
     return (
         <Fragment>
-            <Container maxW={"6xl"} mt={3}>
+            <Container maxW={"6xl"} mt={3} minH={"80vh"}>
                 <Grid
                     templateRows='repeat(1, 1fr)'
                     templateColumns='repeat(12, 1fr)'

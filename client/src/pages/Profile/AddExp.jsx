@@ -14,7 +14,7 @@ export default function AddExp() {
 
   return (
     <Fragment>
-      <Container maxW={"7xl"} mt={4}>
+      <Container maxW={"6xl"} mt={3}>
         <AddExpForm />
       </Container>
     </Fragment>

@@ -1,5 +1,6 @@
-import { Card, CardBody, SimpleGrid, Text, Alert, AlertIcon, Skeleton, Stack, HStack, Avatar, VStack, Box, Badge, Tag } from '@chakra-ui/react'
+import { Card, CardBody, SimpleGrid, Text, Alert, AlertIcon, Skeleton, Stack, HStack, Avatar, Box, Tag } from '@chakra-ui/react'
 import React, { Fragment, memo } from 'react'
+import { Link } from 'react-router-dom';
 
 const AllProfilesCard = ({ allProfilesReducer }) => {
     const { error, loading, response } = allProfilesReducer;
@@ -9,6 +10,7 @@ const AllProfilesCard = ({ allProfilesReducer }) => {
         <SimpleGrid columns={1} spacing={2}>
             {
                 response?.map((e) => (
+                    <Link to={`/profile/${e?.user?._id}`}>
                     <Card overflow={"hidden"} variant={"elevated"} key={e?._id} cursor={"pointer"} transition={"0.3s"} border={"2px solid transparent"} _hover={{
                         border: "2px solid #82AAE3",
                         transition: "0.3s"
@@ -23,6 +25,7 @@ const AllProfilesCard = ({ allProfilesReducer }) => {
                             </HStack>
                         </CardBody>
                     </Card>
+                    </Link>
                 ))
             }
         </SimpleGrid>
@@ -37,6 +40,7 @@ const AllProfilesCard = ({ allProfilesReducer }) => {
                     loading ? (
                         <>
                             <Stack>
+                                <Skeleton height='70px' />
                                 <Skeleton height='70px' />
                                 <Skeleton height='70px' />
                                 <Skeleton height='70px' />

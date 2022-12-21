@@ -19,6 +19,7 @@ import AddEdu from './pages/Profile/AddEdu';
 import ViewPublicProfile from './pages/Profile/ViewPublicProfile';
 import HomePage from './pages/HomePage/HomePage';
 import PostById from './pages/PostById/PostById';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/dashboard/add-education" element={<AddEdu />} />
           <Route exact path="/profile/:id" element={<ViewPublicProfile />} />
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </Provider>
   );

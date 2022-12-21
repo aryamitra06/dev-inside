@@ -20,7 +20,7 @@ export default function EditProfile() {
 
     return (
         <Fragment>
-            <Container maxW={"7xl"} mt={4}>
+            <Container maxW={"6xl"} mt={3}>
                 <Text fontSize={"3xl"} fontWeight={"bold"} mb={3}>Edit Profile</Text>
                 <>
                     {
