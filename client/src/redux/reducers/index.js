@@ -1,12 +1,13 @@
 import { combineReducers } from "redux";
 import { logInReducer, signUpReducer } from "./authReducer";
 import { postReducer } from "./postReducer";
-import { addEduReducer, addExpReducer, createProfileReducer, deleteEduReducer, deleteExpReducer, editProfileReducer, myProfileReducer, profileByIdReducer } from "./profileReducer";
+import { addEduReducer, addExpReducer, allProfilesReducer, createProfileReducer, deleteEduReducer, deleteExpReducer, editProfileReducer, myProfileReducer, profileByIdReducer } from "./profileReducer";
 import { toggleReducer } from "./utilsReducer";
 export const rootReducer = combineReducers({
     signup: signUpReducer,
     login: logInReducer,
     getprofile: myProfileReducer,
+    allprofiles: allProfilesReducer,
     createprofile: createProfileReducer,
     editprofile: editProfileReducer,
     addexp: addExpReducer,
@@ -15,5 +16,6 @@ export const rootReducer = combineReducers({
     deleteedu: deleteEduReducer,
     profilebyid: profileByIdReducer,
     togglevalue: toggleReducer,
-    postReducer: postReducer
+    postReducer: postReducer //main and only one post reducer
+    // @TODO: MAKE ONLY ONE PROFILE REDUCER
 });

@@ -18,7 +18,7 @@ import AddExp from './pages/Profile/AddExp';
 import AddEdu from './pages/Profile/AddEdu';
 import ViewPublicProfile from './pages/Profile/ViewPublicProfile';
 import HomePage from './pages/HomePage/HomePage';
-import PostById from './pages/Post/PostById';
+import PostById from './pages/PostById/PostById';
 
 function App() {
   return (

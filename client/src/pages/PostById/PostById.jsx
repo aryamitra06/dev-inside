@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import { Container, Grid, GridItem } from "@chakra-ui/react";
-import PostByIdCard from '../../components/Post/PostByIdCard';
-import PostProfileOverviewCard from '../../components/Post/PostProfileOverviewCard';
+import PostByIdCard from '../../components/PostById/PostByIdCard';
+import PostProfileOverviewCard from '../../components/PostById/PostProfileOverviewCard';
 import { useDispatch, useSelector } from "react-redux";
 import { postByIdAction } from "../../redux/actions/postAction";
 import { profileByIdAction } from '../../redux/actions/profileAction';

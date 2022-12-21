@@ -1,6 +1,6 @@
-import { Tag, Alert, AlertIcon, Skeleton, Stack, Input, Box } from "@chakra-ui/react";
+import { Tag, Alert, AlertIcon, Skeleton, Stack, Input, Box, SimpleGrid } from "@chakra-ui/react";
 import React, { Fragment } from "react";
-import PostCard from "../../components/Post/PostCard";
+import PostCard from "../PostById/PostCard";
 
 export default function AllPosts({ postReducer }) {
   const { posts, postsLoading, error, isLikeUpdating, isDeleting } = postReducer;
@@ -37,13 +37,13 @@ export default function AllPosts({ postReducer }) {
                   </Stack>
                 </>
               ) : (
-                <>
+                <SimpleGrid columns={1} spacing={3}>
                   {
                     posts?.map((e) => (
                       <PostCard key={e?._id} postData={e} isLikeUpdating={isLikeUpdating} isDeleting={isDeleting}/>
                     ))
                   }
-                </>
+                </SimpleGrid>
               )
             }
           </>

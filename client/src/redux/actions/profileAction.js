@@ -1,6 +1,6 @@
 import axios from "axios";
 import { tokenGetter } from "../../utils/tokenExtractor";
-import { MY_PROFILE_REQUEST, MY_PROFILE_SUCCESS, MY_PROFILE_FAIL, CREATE_PROFILE_REQUEST, CREATE_PROFILE_SUCCESS, CREATE_PROFILE_FAIL, EDIT_PROFILE_REQUEST, EDIT_PROFILE_SUCCESS, EDIT_PROFILE_FAIL, ADD_EXP_REQUEST, ADD_EXP_SUCCESS, ADD_EXP_FAIL, ADD_EDU_REQUEST, ADD_EDU_SUCCESS, ADD_EDU_FAIL, DELETE_EXP_REQUEST, DELETE_EXP_SUCCESS, DELETE_EXP_FAIL, DELETE_EDU_REQUEST, DELETE_EDU_SUCCESS, DELETE_EDU_FAIL, PROFILE_BY_ID_FAIL, PROFILE_BY_ID_REQUEST, PROFILE_BY_ID_SUCCESS } from "../constants/types";
+import { MY_PROFILE_REQUEST, MY_PROFILE_SUCCESS, MY_PROFILE_FAIL, CREATE_PROFILE_REQUEST, CREATE_PROFILE_SUCCESS, CREATE_PROFILE_FAIL, EDIT_PROFILE_REQUEST, EDIT_PROFILE_SUCCESS, EDIT_PROFILE_FAIL, ADD_EXP_REQUEST, ADD_EXP_SUCCESS, ADD_EXP_FAIL, ADD_EDU_REQUEST, ADD_EDU_SUCCESS, ADD_EDU_FAIL, DELETE_EXP_REQUEST, DELETE_EXP_SUCCESS, DELETE_EXP_FAIL, DELETE_EDU_REQUEST, DELETE_EDU_SUCCESS, DELETE_EDU_FAIL, PROFILE_BY_ID_FAIL, PROFILE_BY_ID_REQUEST, PROFILE_BY_ID_SUCCESS, ALL_PROFILES_REQUEST, ALL_PROFILES_SUCCESS, ALL_PROFILES_FAIL } from "../constants/types";
 
 export const myProfileAction = () => async (dispatch) => {
     try {
@@ -79,5 +79,15 @@ export const profileByIdAction = (id) => async (dispatch) => {
         dispatch({ type: PROFILE_BY_ID_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: PROFILE_BY_ID_FAIL, payload: error.response.data });
+    }
+}
+
+export const allProfilesAction = () => async (dispatch) => {
+    try {
+        dispatch({ type: ALL_PROFILES_REQUEST });
+        const response = await axios.get("http://localhost:5000/allprofiles");
+        dispatch({ type: ALL_PROFILES_SUCCESS, payload: response.data });
+    } catch (error) {
+        dispatch({ type: ALL_PROFILES_FAIL, payload: error.response.data })
     }
 }

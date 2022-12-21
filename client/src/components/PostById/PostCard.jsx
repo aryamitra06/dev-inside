@@ -108,7 +108,7 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
 
     return (
         <Fragment>
-            <Card mb={3} >
+            <Card>
                 <CardHeader>
                     <Flex spacing='4'>
                         <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
