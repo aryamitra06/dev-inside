@@ -27,22 +27,33 @@ import {
     Stack,
     Skeleton,
     Alert,
-    AlertIcon
+    AlertIcon,
+    Modal,
+    ModalHeader,
+    ModalContent,
+    ModalOverlay,
+    ModalCloseButton,
+    ModalBody,
+    ModalFooter,
+    HStack,
+    Input,
+    Tooltip
 } from "@chakra-ui/react";
 import { GoGlobe } from "react-icons/go";
 import CommentSection from './CommentSection';
 import { Link, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHandsClapping, faComments, faShare } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandsClapping, faComments, faShare } from '@fortawesome/free-solid-svg-icons';
 import { idGetter } from '../../utils/tokenExtractor';
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiFillCopy } from "react-icons/ai";
 import { addLikeAction, deletePostAction, unLikeAction } from '../../redux/actions/postAction';
 import { useDispatch } from 'react-redux';
 
 const PostByIdCard = ({ postReducer }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen: isOpenDelete, onOpen: onOpenDelete, onClose: onCloseDelete } = useDisclosure();
+    const { isOpen: isOpenShare, onOpen: onOpenShare, onClose: onCloseShare } = useDisclosure();
     const cancelRef = React.useRef()
 
     const { post, postLoading, error, isLikeUpdating, isDeleting } = postReducer;
@@ -59,16 +70,16 @@ const PostByIdCard = ({ postReducer }) => {
         dispatch(unLikeAction(_id));
     }
 
-    const deletePost = async() => {
+    const deletePost = async () => {
         await dispatch(deletePostAction(_id));
         await navigate("/");
     }
 
     const DeleteDialog = () => (
         <AlertDialog
-            isOpen={isOpen}
+            isOpen={isOpenDelete}
             leastDestructiveRef={cancelRef}
-            onClose={onClose}
+            onClose={onCloseDelete}
             isCentered
         >
             <AlertDialogOverlay backdropFilter='blur(10px)'>
@@ -80,7 +91,7 @@ const PostByIdCard = ({ postReducer }) => {
                         Are you sure? You can't undo this action afterwards.
                     </AlertDialogBody>
                     <AlertDialogFooter>
-                        <Button ref={cancelRef} onClick={onClose} isDisabled={isDeleting}>
+                        <Button ref={cancelRef} onClick={onCloseDelete} isDisabled={isDeleting}>
                             Cancel
                         </Button>
                         <Button colorScheme='red' onClick={deletePost} ml={3} isDisabled={isDeleting}>
@@ -90,6 +101,26 @@ const PostByIdCard = ({ postReducer }) => {
                 </AlertDialogContent>
             </AlertDialogOverlay>
         </AlertDialog>
+    )
+
+    const ShareDialog = () => (
+        <Modal onClose={onCloseShare} isOpen={isOpenShare} isCentered>
+            <ModalOverlay backdropFilter='blur(10px)' />
+            <ModalContent>
+                <ModalHeader>Share</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                    <HStack>
+                        <Input value={`http://localhost:3000/post/${user}/${_id}`} id="inputField"/>
+                        <Tooltip label="Copy to clipboard">
+                        <IconButton icon={<AiFillCopy/>} onClick={()=> navigator.clipboard.writeText(document.getElementById("inputField").value)}/>
+                        </Tooltip>
+                    </HStack>
+                </ModalBody>
+                <ModalFooter>
+                </ModalFooter>
+            </ModalContent>
+        </Modal>
     )
 
     return (
@@ -135,7 +166,7 @@ const PostByIdCard = ({ postReducer }) => {
                                                             <MenuButton as={IconButton} icon={<BsThreeDotsVertical />}>
                                                             </MenuButton>
                                                             <MenuList>
-                                                                <MenuItem icon={<AiFillDelete />} onClick={onOpen}>Delete</MenuItem>
+                                                                <MenuItem icon={<AiFillDelete />} onClick={onOpenDelete}>Delete</MenuItem>
                                                             </MenuList>
                                                         </Menu>
                                                     )
@@ -159,13 +190,14 @@ const PostByIdCard = ({ postReducer }) => {
                                             <Button variant='outline' leftIcon={<FontAwesomeIcon icon={faComments} />} width={"100%"}>
                                                 Discuss ({comments?.length})
                                             </Button>
-                                            <Button variant='outline' leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
+                                            <Button onClick={onOpenShare} variant='outline' leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
                                                 Share
                                             </Button>
                                         </Box>
                                     </Card>
                                     <CommentSection postReducer={postReducer} />
                                     {DeleteDialog()}
+                                    {ShareDialog()}
                                 </Fragment>
                             )
                         }

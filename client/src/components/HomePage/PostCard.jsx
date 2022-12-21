@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     Card,
     CardBody,
-    CardHeader,
     Flex,
     Avatar,
     Box,
@@ -24,13 +23,24 @@ import {
     AlertDialogOverlay,
     AlertDialogContent,
     AlertDialogHeader,
-    AlertDialogFooter
+    AlertDialogFooter,
+    Modal,
+    ModalHeader,
+    ModalContent,
+    ModalOverlay,
+    ModalCloseButton,
+    ModalBody,
+    ModalFooter,
+    HStack,
+    Input,
+    Tooltip,
+    CardHeader
 } from "@chakra-ui/react";
 import { GoGlobe } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { faHandsClapping, faComments, faShare } from "@fortawesome/free-solid-svg-icons";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiFillCopy } from "react-icons/ai";
 import { addLikeAction, deletePostAction, unLikeAction } from "../../redux/actions/postAction";
 import moment from "moment";
 import readingTime from "reading-time/lib/reading-time";
@@ -38,7 +48,8 @@ import readingTime from "reading-time/lib/reading-time";
 export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen: isOpenDelete, onOpen: onOpenDelete, onClose: onCloseDelete } = useDisclosure();
+    const { isOpen: isOpenShare, onOpen: onOpenShare, onClose: onCloseShare } = useDisclosure();
     const cancelRef = React.useRef();
     const { _id, user, cover, title, desc, name, avatar, likes, comments, date } = postData;
     const [expandText, setExpandText] = useState(desc?.slice(0, 300));
@@ -80,9 +91,9 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
 
     const DeleteDialog = () => (
         <AlertDialog
-            isOpen={isOpen}
+            isOpen={isOpenDelete}
             leastDestructiveRef={cancelRef}
-            onClose={onClose}
+            onClose={onCloseDelete}
             isCentered
         >
             <AlertDialogOverlay backdropFilter='blur(10px)'>
@@ -94,7 +105,7 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
                         Are you sure? You can't undo this action afterwards.
                     </AlertDialogBody>
                     <AlertDialogFooter>
-                        <Button ref={cancelRef} onClick={onClose} isDisabled={isDeleting}>
+                        <Button ref={cancelRef} onClick={onCloseDelete} isDisabled={isDeleting}>
                             Cancel
                         </Button>
                         <Button colorScheme='red' onClick={deletePost} ml={3} isDisabled={isDeleting}>
@@ -104,6 +115,26 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
                 </AlertDialogContent>
             </AlertDialogOverlay>
         </AlertDialog>
+    )
+
+    const ShareDialog = () => (
+        <Modal onClose={onCloseShare} isOpen={isOpenShare} isCentered>
+            <ModalOverlay backdropFilter='blur(10px)' />
+            <ModalContent>
+                <ModalHeader>Share</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                    <HStack>
+                        <Input value={`http://localhost:3000/post/${user}/${_id}`} id="inputField" />
+                        <Tooltip label="Copy to clipboard">
+                            <IconButton icon={<AiFillCopy />} onClick={() => navigator.clipboard.writeText(document.getElementById("inputField").value)} />
+                        </Tooltip>
+                    </HStack>
+                </ModalBody>
+                <ModalFooter>
+                </ModalFooter>
+            </ModalContent>
+        </Modal>
     )
 
     return (
@@ -124,7 +155,7 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
                                     <MenuButton as={IconButton} icon={<BsThreeDotsVertical />} size={"sm"}>
                                     </MenuButton>
                                     <MenuList>
-                                        <MenuItem onClick={onOpen} icon={<AiFillDelete />}>Delete</MenuItem>
+                                        <MenuItem onClick={onOpenDelete} icon={<AiFillDelete />}>Delete</MenuItem>
                                     </MenuList>
                                 </Menu>
                             )
@@ -167,12 +198,13 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
                     <Button onClick={fullPostNavigator} variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faComments} />} width={"100%"}>
                         Discuss ({comments?.length})
                     </Button>
-                    <Button variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
+                    <Button onClick={onOpenShare} variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
                         Share
                     </Button>
                 </Box>
             </Card>
             {DeleteDialog()}
+            {ShareDialog()}
         </Fragment>
     )
 }

@@ -1,6 +1,6 @@
 import { Tag, Alert, AlertIcon, Skeleton, Stack, Input, Box, SimpleGrid } from "@chakra-ui/react";
 import React, { Fragment } from "react";
-import PostCard from "../PostById/PostCard";
+import PostCard from "./PostCard";
 
 export default function AllPosts({ postReducer }) {
   const { posts, postsLoading, error, isLikeUpdating, isDeleting } = postReducer;
