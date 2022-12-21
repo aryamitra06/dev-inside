@@ -32,13 +32,13 @@ const PostProfileOverviewCard = ({ data }) => {
                   </Center>
                   <CardBody>
                     <Link to={`/profile/${response?.user?._id}`}><Button colorScheme={"blue"} w={"100%"} mb={3}>View Profile</Button></Link>
-                    <Text color={"gray.500"} fontSize={"sm"}>{response?.bio}</Text>
+                    <Text fontSize={"sm"}>{response?.bio}</Text>
                     <Tag mt={3} mb={2} colorScheme="blue">Location</Tag>
-                    <Text color={"gray.500"} fontSize={"sm"}>{response?.location || <>Not available</>}</Text>
+                    <Text fontSize={"sm"}>{response?.location || <>Not available</>}</Text>
                     <Tag mt={3} mb={2} colorScheme="blue">Work</Tag>
-                    <Text color={"gray.500"} fontSize={"sm"}>{response?.status} {response?.company && <>at</>} {response?.company}</Text>
+                    <Text fontSize={"sm"}>{response?.status} {response?.company && <>at</>} {response?.company}</Text>
                     <Tag mt={3} mb={2} colorScheme="blue">Joined</Tag>
-                    <Text color={"gray.500"} fontSize={"sm"}>{moment(response?.date).format("MMM Do YY")}</Text>
+                    <Text fontSize={"sm"}>{moment(response?.date).format("MMM Do YY")}</Text>
                   </CardBody>
                 </Card>
               )

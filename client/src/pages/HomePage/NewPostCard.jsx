@@ -22,7 +22,7 @@ export default function NewPostCard() {
             {(idGetter() && (
             <Card variant={"outline"} mb={3}>
                 <CardBody display={"flex"} alignItems={"center"} justifyContent={"center"} gap={3}>
-                    <Avatar bgGradient='linear(to-l, #85E7FC, #90CDF4)' src={avatarGetter()} />
+                    <Avatar p={"3px"} bgGradient='linear(to-l, #85E7FC, #90CDF4)' src={avatarGetter()} />
                     <Card width={"100%"} height={"40px"} variant={"filled"} borderRadius={"md"} display={"flex"} justifyContent={"center"} cursor={"pointer"} onClick={onOpen}><Text ml={3} fontSize={"sm"}>Write something about coding!</Text></Card>
                 </CardBody>
             </Card>

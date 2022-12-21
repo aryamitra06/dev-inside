@@ -46,7 +46,7 @@ const PostByIdCard = ({ postReducer }) => {
     const cancelRef = React.useRef()
 
     const { post, postLoading, error, isLikeUpdating, isDeleting } = postReducer;
-    const { _id, name, avatar, likes, title, desc, cover, user, date } = post;
+    const { _id, name, avatar, likes, comments, title, desc, cover, user, date } = post;
 
     const stats = readingTime(desc || "");
     const hasLoggedInUserLiked = likes?.some(user => user['user'] === idGetter());
@@ -157,7 +157,7 @@ const PostByIdCard = ({ postReducer }) => {
                                                 )
                                             }
                                             <Button variant='outline' leftIcon={<FontAwesomeIcon icon={faComments} />} width={"100%"}>
-                                                Discuss
+                                                Discuss ({comments?.length})
                                             </Button>
                                             <Button variant='outline' leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
                                                 Share
