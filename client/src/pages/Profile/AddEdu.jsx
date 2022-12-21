@@ -14,7 +14,7 @@ export default function AddEdu() {
 
   return (
     <Fragment>
-      <Container maxW={"6xl"} mt={3}>
+      <Container maxW={"6xl"} mt={3} minH={"72vh"}>
         <AddEduForm />
       </Container>
     </Fragment>

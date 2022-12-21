@@ -31,7 +31,7 @@ export default function ViewPublicProfile() {
 
     return (
         <Fragment>
-            <Container maxW={"6xl"} mt={3}>
+            <Container maxW={"6xl"} mt={3} minH={"72vh"}>
                 {
                     error && (
                         <Alert status='error'>
