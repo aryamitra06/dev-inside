@@ -18,7 +18,7 @@ const AllProfilesCard = ({ allProfilesReducer }) => {
                                 <Avatar size={"md"} p={"3px"} bgGradient='linear(to-l, #85E7FC, #90CDF4)' src={e?.user?.avatar} />
                                 <Box display={"flex"} flexDirection={"column"} gap={1}>
                                     <Text fontWeight={"bold"}>{e?.user?.name}</Text>
-                                    <Tag colorScheme={"blue"}>{e?.status} at {e?.company}</Tag>
+                                    <Tag colorScheme={"blue"} width={"max-content"}>{e?.status} {e?.company && <>at</>} {e?.company}</Tag>
                                 </Box>
                             </HStack>
                         </CardBody>
