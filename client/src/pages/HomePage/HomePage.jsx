@@ -31,7 +31,7 @@ export default function HomePage() {
                             <AllPosts postReducer={postReducer} />
                         </Box>
                     </GridItem>
-                    <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 8, xl: 4 }} display={{ base: "block", sm: "block", md: "block", lg: "block", xl: "block" }}>
+                    <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 4, xl: 4 }} display={{ base: "block", sm: "block", md: "block", lg: "block", xl: "block" }}>
                         <Box mb={{ base: 4, sm: 4, md: 4, lg: 0, xl: 0 }}>
                             <AllProfilesCard allProfilesReducer={allProfilesReducer}/>
                         </Box>
