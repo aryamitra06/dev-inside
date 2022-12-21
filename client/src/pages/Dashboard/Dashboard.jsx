@@ -155,7 +155,7 @@ export default function Dashboard() {
 
     return (
         <Fragment>
-            <Container maxW={"7xl"} mt={4}>
+            <Container maxW={"6xl"} mt={3}>
                 <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
                     <Text fontSize={"3xl"} fontWeight={"bold"}>Dashboard</Text>
                     {
