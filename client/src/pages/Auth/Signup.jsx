@@ -59,7 +59,7 @@ export default function Signup() {
     <Fragment>
       <form onSubmit={(e) => onSubmit(e)}>
         <Flex
-          minH={'90vh'}
+          minH={'73.4vh'}
           align={'center'}
           justify={'center'}
           bg={useColorModeValue('gray.50', 'gray.800')}>
@@ -68,8 +68,8 @@ export default function Signup() {
               <Heading fontSize={'4xl'} textAlign={'center'}>
                 Sign up to your account
               </Heading>
-              <Text fontSize={'lg'} color={'gray.300'}>
-                Join the biggest developer community 👩‍💻
+              <Text fontSize={'lg'}>
+                Join the better Stackoverflow! 🔥👩‍💻
               </Text>
             </Stack>
             <Box

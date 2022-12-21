@@ -50,14 +50,14 @@ export default function Login() {
         <Fragment>
         <form onSubmit={(e) => onSubmit(e)}>
             <Flex
-                minH={'90vh'}
+                minH={'73.4vh'}
                 align={'center'}
                 justify={'center'}
                 bg={useColorModeValue('gray.50', 'gray.800')}>
                 <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                     <Stack>
                         <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-                        <Text fontSize={'lg'} color={'gray.600'}>
+                        <Text fontSize={'lg'}>
                             Welcome back! 🎉
                         </Text>
                     </Stack>
