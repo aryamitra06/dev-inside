@@ -99,13 +99,19 @@ export const profileReducer = (state = initialState, action) => {
             return { ...state, profile: null, error: payload, isFormSubmitting: false };
         default:
             return state;
+        //@profile by id
+        case PROFILE_BY_ID_REQUEST:
+            return { ...state, profileByIdLoading: true };
+        case PROFILE_BY_ID_SUCCESS:
+            return { ...state, profileById: payload, profileByIdLoading: false };
+        case PROFILE_BY_ID_FAIL:
+            return { ...state, error: payload, profileByIdLoading: false };
         //@desc
         //edit profile
         case EDIT_PROFILE_REQUEST:
             return { ...state, isFormSubmitting: true };
         case EDIT_PROFILE_SUCCESS:
-            console.log({ ...state.profile, payload });
-            return { ...state, profile: { ...state.profile, payload }, isFormSubmitting: false };
+            return { ...state, profile: { ...state.profile, ...payload }, isFormSubmitting: false };
         case EDIT_PROFILE_FAIL:
             return { ...state, error: payload, isFormSubmitting: false };
         //@desc
@@ -116,12 +122,5 @@ export const profileReducer = (state = initialState, action) => {
             return { ...state, profiles: payload, profilesLoading: false };
         case ALL_PROFILES_FAIL:
             return { ...state, profiles: [], error: payload, profilesLoading: false };
-        //@profile by id
-        case PROFILE_BY_ID_REQUEST:
-            return {...state, profileByIdLoading: true};
-        case PROFILE_BY_ID_SUCCESS:
-            return {...state, profileById: payload, profileByIdLoading: false};
-        case PROFILE_BY_ID_FAIL:
-            return {...state, error: payload, profileByIdLoading: false};
     }
 }

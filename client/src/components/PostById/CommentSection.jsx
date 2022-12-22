@@ -32,8 +32,6 @@ function CommentSection({ postReducer }) {
     const { post, isFormSubmitting, isDeleting } = postReducer;
     const { _id, comments } = post;
 
-    console.log(post);
-
     const displaySubmitBtn = () => {
         setShowBtn(true);
     }

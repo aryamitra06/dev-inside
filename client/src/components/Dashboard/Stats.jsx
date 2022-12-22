@@ -10,7 +10,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { Box } from '@chakra-ui/react';
+import { Box, Card, CardBody, SimpleGrid } from '@chakra-ui/react';
 
 export default function Stats() {
     ChartJS.register(
@@ -24,6 +24,7 @@ export default function Stats() {
     );
     const options = {
         responsive: true,
+        width: "100%",
         plugins: {
             legend: {
                 display: false
@@ -38,7 +39,7 @@ export default function Stats() {
         datasets: [
             {
                 label: 'Dataset 1',
-                data: [11, 43, 24, 52, 13, 5, 34, 23, 7, 12, 23,5],
+                data: [11, 43, 24, 52, 13, 5, 34, 23, 7, 12, 23, 5],
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
@@ -46,8 +47,19 @@ export default function Stats() {
     };
 
     return (
-        <Box maxW={"xl"} mt={8}>
-            <Line options={options} data={data} />
+        <Box maxW={"100%"} mt={8}>
+            <SimpleGrid columns={{ base: 1, sm: 1, md: 1, lg: 2, xl: 2 }} spacing={3}>
+                <Card variant={"filled"}>
+                    <CardBody>
+                        <Line options={options} data={data} />
+                    </CardBody>
+                </Card>
+                <Card variant={"filled"}>
+                    <CardBody>
+                        <Line options={options} data={data} />
+                    </CardBody>
+                </Card>
+            </SimpleGrid>
         </Box>
     )
 }

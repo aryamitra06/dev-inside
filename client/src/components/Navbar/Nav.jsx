@@ -44,8 +44,7 @@ export default function Nav() {
     localStorage.removeItem('token');
     window.location.href = "/login";
   }
-
-  console.log(avatarGetter());
+  
   const Navbar = () => {
     return (
       <Flex h={14} alignItems={'center'} justifyContent={'space-between'}>
