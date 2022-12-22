@@ -8,7 +8,7 @@ export const signUpAction = (formData) => async (dispatch) => {
         dispatch({ type: SIGN_UP_SUCCESS, payload: response.data });
         setTimeout(() => { window.location.href = "/" });
     } catch (error) {
-        dispatch({ type: SIGN_UP_FAIL, payload: error.response.data })
+        dispatch({ type: SIGN_UP_FAIL, payload: error.response.data });
     }
 }
 
@@ -19,6 +19,6 @@ export const logInAction = (formData) => async (dispatch) => {
         dispatch({ type: LOG_IN_SUCCESS, payload: response.data });
         setTimeout(() => { window.location.href = "/" });
     } catch (error) {
-        dispatch({ type: LOG_IN_FAIL, payload: error.response.data })
+        dispatch({ type: LOG_IN_FAIL, payload: error.response.data });
     }
 }

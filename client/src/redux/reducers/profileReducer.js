@@ -141,3 +141,25 @@ export const allProfilesReducer = (state = initialState1, action) => {
             return state;
     }
 }
+
+const initialState = {
+    profile: {},
+    profiles: [],
+    profileLoading: true,
+    profilesLoading: true,
+    error: null,
+    isFormSubmitting: false,
+    isDeleting: false
+}
+export const profileReducer = (state = initialState, action) => {
+    switch(action.type) {
+        case MY_PROFILE_REQUEST:
+            return {...state};
+        case MY_PROFILE_SUCCESS:
+            return {...state, profile: action.payload, profileLoading: false};
+        case MY_PROFILE_FAIL:
+            return {...state, profile: null, profileLoading: false}
+        default:
+            return state;
+    }
+}
