@@ -2,16 +2,15 @@ import { Card, CardBody, SimpleGrid, Text, Alert, AlertIcon, Skeleton, Stack, HS
 import React, { Fragment, memo } from 'react'
 import { Link } from 'react-router-dom';
 
-const AllProfilesCard = ({ allProfilesReducer }) => {
-    const { error, loading, response } = allProfilesReducer;
-    console.log(response);
+const AllProfilesCard = ({ profileReducer }) => {
+    const { error, profiles, profilesLoading } = profileReducer;
 
     const ProfilesCard = () => (
         <SimpleGrid columns={1} spacing={2}>
             {
-                response?.map((e) => (
-                    <Link to={`/profile/${e?.user?._id}`}>
-                    <Card overflow={"hidden"} variant={"elevated"} key={e?._id} cursor={"pointer"} transition={"0.3s"} border={"2px solid transparent"} _hover={{
+                profiles?.map((e) => (
+                    <Link to={`/profile/${e?.user?._id}`} key={e?._id}>
+                    <Card overflow={"hidden"} variant={"elevated"} cursor={"pointer"} transition={"0.3s"} border={"2px solid transparent"} _hover={{
                         border: "2px solid #82AAE3",
                         transition: "0.3s"
                     }}>
@@ -32,12 +31,12 @@ const AllProfilesCard = ({ allProfilesReducer }) => {
     )
     return (
         <Fragment>
-            <Card variant={"filled"} overflow={"hidden"} borderRadius={"xl"} height={"500px"} overflowY={"auto"}>
+            <Card variant={"filled"} overflow={"hidden"} borderRadius={"xl"}>
             <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"13px"} />
             <Box p={3}>
                 <Text fontSize={"xl"} fontWeight={"bold"} mb={3}>TOP DEVINSIDERS</Text>
                 {
-                    loading ? (
+                    profilesLoading ? (
                         <>
                             <Stack>
                                 <Skeleton height='70px' />

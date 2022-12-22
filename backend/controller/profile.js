@@ -42,7 +42,6 @@ export const createProfile = async (req, res) => {
     const { company, website, location, bio, status, githubusername, skills, youtube, facebook, twitter, instagram, linkedin } = req.body;
     const profileFields = {};
     profileFields.user = req.user.id;
-    profileFields.isProfileCreated = true;
     if (company) profileFields.company = company;
     if (website) profileFields.website = website;
     if (location) profileFields.location = location;
@@ -96,7 +95,7 @@ export const updateProfile = async (req, res) => {
             { user: req.user.id },
             { $set: profileFields },
             { new: true })
-        return res.status(200).json({ success: true, error: false });
+        return res.status(200).json(profileFields);
     } catch (error) {
         return res.status(400).json({ success: false, error: true });
     }

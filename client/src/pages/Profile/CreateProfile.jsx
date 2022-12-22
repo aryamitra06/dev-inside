@@ -8,22 +8,23 @@ import { myProfileAction } from '../../redux/actions/profileAction';
 export default function CreateProfile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const profile = useSelector((state) => state.getprofile);
+    const profileReducer = useSelector((state) => state.profileReducer);
+    const { profile } = profileReducer;
     useEffect(() => {
         dispatch(myProfileAction());
         if (!tokenGetter()) {
             navigate("/");
         }
-        else if (profile.response.isProfileCreated === true) {
+        else if (profile?.isProfileCreated === true) {
             navigate("/");
         }
-    }, [navigate, dispatch, profile.response.isProfileCreated])
+    }, [navigate, dispatch, profile?.isProfileCreated])
 
     return (
         <Fragment>
             <Container maxW={"6xl"} mt={3} minH={"72vh"}>
                 <Text fontSize={"3xl"} fontWeight={"bold"} mb={3}>Create Profile</Text>
-                <CreateProfileForm/>
+                <CreateProfileForm profileReducer={profileReducer}/>
             </Container>
         </Fragment>
     )

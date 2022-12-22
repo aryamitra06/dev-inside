@@ -26,6 +26,7 @@ export const editProfileAction = (formData) => async (dispatch) => {
     try {
         dispatch({ type: EDIT_PROFILE_REQUEST });
         const response = await axios.put("http://localhost:5000/editprofile", formData, { headers: { authorization: tokenGetter() } });
+        console.log(response.data);
         dispatch({ type: EDIT_PROFILE_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: EDIT_PROFILE_FAIL, payload: error.response.data });

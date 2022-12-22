@@ -1,11 +1,10 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import {Card, CardBody, Box, Text, IconButton, Button, Menu, MenuButton, MenuList, MenuItem, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay} from '@chakra-ui/react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { MdSchool } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
-import { toggleAction } from "../../redux/actions/utilsAction";
 import { deleteEduAction } from '../../redux/actions/profileAction';
 
 export default function EduCard({ data }) {
@@ -17,12 +16,6 @@ export default function EduCard({ data }) {
     const deleteEduHandler = () => {
         dispatch(deleteEduAction(data?._id));
     }
-
-    useEffect(() => {
-        if (deleteRes.success === true) {
-            dispatch(toggleAction(prev => !prev));
-        }
-    }, [deleteRes.success, dispatch])
 
     const ActionMenu = () => (
         <Menu>

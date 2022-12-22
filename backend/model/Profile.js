@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
 
 const profileSchema = mongoose.Schema({
-    isProfileCreated: {
-        type: Boolean
-    },
     user: {
         //step 1: we put the req.user.id into user during creating profile
         //req.user.id that populates from user schema using _id field

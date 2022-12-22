@@ -8,12 +8,10 @@ import greetingTime from "greeting-time";
 import { myProfileAction } from '../../redux/actions/profileAction';
 import ExpCard from '../../components/Dashboard/ExpCard';
 import EduCard from '../../components/Dashboard/EduCard';
-import { stateReseter } from '../../redux/actions/utilsAction';
-import { tokenGetter } from '../../utils/tokenExtractor';
+import { nameGetter, tokenGetter } from '../../utils/tokenExtractor';
 import Stats from '../../components/Dashboard/Stats';
 
 export default function Dashboard() {
-    const toggleState = useSelector((state) => state.togglevalue);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -22,23 +20,20 @@ export default function Dashboard() {
             navigate("/");
         }
         dispatch(myProfileAction());
-        dispatch(stateReseter());
-    }, [dispatch, navigate, toggleState]);
+    }, [dispatch, navigate]);
 
-    const profile = useSelector((state) => state.getprofile);
+    const profileReducer = useSelector((state) => state.profileReducer);
 
-    const profileRes = profile?.response;
-    const isProfileCreated = profile?.response?.isProfileCreated;
-    const profileError = profile?.error;
+    const { error, profile, profileLoading } = profileReducer;
 
     //server error
     const ErrorMsg = () => (
         <Fragment>
             {
-                profileError && (
+                error && (
                     <Alert status='error' mt={3}>
                         <AlertIcon />
-                        {profileError?.msg}
+                        {error?.msg}
                     </Alert>
                 )
             }
@@ -48,8 +43,8 @@ export default function Dashboard() {
         return (
             <Fragment>
                 {
-                    (isProfileCreated !== true) && (
-                        <Alert status='error' mt={2}>
+                    (profile?.msg) && (
+                        <Alert status='error' mt={3}>
                             <AlertIcon />
                             Profile is not created.
                         </Alert>
@@ -64,7 +59,7 @@ export default function Dashboard() {
             <Fragment>
                 <HStack mt={5}>
                     {
-                        isProfileCreated !== true ? (
+                        profile?.msg ? (
                             <Link to={"/dashboard/create-profile"}><Button colorScheme={"blue"} variant={"outline"}>Create Profile</Button></Link>
                         ) : (
                             <>
@@ -87,9 +82,9 @@ export default function Dashboard() {
                         <Button colorScheme={"blue"} variant={"outline"} mb={4} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Experience</Button>
                     </Box>
                 </Link>
-                <SimpleGrid columns={{base: 1, sm: 1, md: 2, lg: 2, xl: 2}} spacing={3}>
+                <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={3}>
                     {
-                        profileRes?.experience?.length === 0 && (
+                        profile?.experience?.length === 0 && (
                             <Alert status='warning'>
                                 <AlertIcon />
                                 Not available
@@ -97,7 +92,7 @@ export default function Dashboard() {
                         )
                     }
                     {
-                        profileRes?.experience?.map((e) => (
+                        profile?.experience?.map((e) => (
                             <ExpCard key={e._id} data={e} />
                         ))
                     }
@@ -111,12 +106,12 @@ export default function Dashboard() {
             <>
                 <Link to={"/dashboard/add-education"}>
                     <Box display={"flex"} justifyContent={"flex-end"}>
-                    <Button colorScheme={"blue"} variant={"outline"} mb={4} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Education</Button>
+                        <Button colorScheme={"blue"} variant={"outline"} mb={4} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Education</Button>
                     </Box>
                 </Link>
-                <SimpleGrid columns={{base: 1, sm: 1, md: 2, lg: 2, xl: 2}} spacing={3}>
+                <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={3}>
                     {
-                        profileRes?.education?.length === 0 && (
+                        profile?.education?.length === 0 && (
                             <Alert status='warning'>
                                 <AlertIcon />
                                 Not available
@@ -124,7 +119,7 @@ export default function Dashboard() {
                         )
                     }
                     {
-                        profileRes?.education?.map((e) => (
+                        profile?.education?.map((e) => (
                             <EduCard key={e._id} data={e} />
                         ))
                     }
@@ -159,24 +154,18 @@ export default function Dashboard() {
                 <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
                     <Text fontSize={"3xl"} fontWeight={"bold"}>Dashboard</Text>
                     {
-                        isProfileCreated === true && (
-                            <Link to={`/profile/${profileRes?.user?._id}`}><Button leftIcon={<AiFillEye />} size={"sm"} isDisabled={profile.loading}>View Public</Button></Link>
+                        !profile?.msg && (
+                            <Link to={`/profile/${profile?.user?._id}`}><Button leftIcon={<AiFillEye />} size={"sm"} isDisabled={profileLoading}>View Public</Button></Link>
                         )
                     }
                 </Box>
                 {ErrorMsg()}
                 <Box display={"flex"} gap={1}>
-                    {
-                        isProfileCreated === true && (
-                            <>
-                                <Text fontSize={{ base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl" }} mt={1} color={'gray.400'} fontWeight={"bold"}>{greetingTime(new Date())},</Text>
-                                {profile.loading ? <Skeleton width={20} height={5} mt={3} /> : <Text fontSize={{ base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl" }} mt={1} color={'gray.400'} fontWeight={"bold"}>{profile?.response?.user?.name}</Text>}
-                            </>
-                        )
-                    }
+                    <Text fontSize={{ base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl" }} mt={1} color={'gray.400'} fontWeight={"bold"}>{greetingTime(new Date())},</Text>
+                    <Text fontSize={{ base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl" }} mt={1} color={'gray.400'} fontWeight={"bold"}>{nameGetter()}</Text>
                 </Box>
                 {
-                    profile.loading ? (
+                    profileLoading ? (
                         <>
                             <Stack mt={3}>
                                 <HStack>
@@ -195,10 +184,10 @@ export default function Dashboard() {
                         </>
                     ) : (
                         <>
-                            {!profileError && ProfileCreatedCheker()}
-                            {<Stats/>}
-                            {!profileError && ProfileActions()}
-                            {isProfileCreated === true && ProfileTabs()}
+                            {!error && ProfileCreatedCheker()}
+                            {!profile?.msg && <Stats />}
+                            {!error && ProfileActions()}
+                            {!profile?.msg && ProfileTabs()}
                         </>
                     )
                 }

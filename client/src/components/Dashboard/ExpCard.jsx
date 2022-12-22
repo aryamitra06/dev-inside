@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import { Card, CardBody, Box, Text, IconButton, Button, Menu, MenuButton, MenuList, MenuItem, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay } from '@chakra-ui/react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import moment from "moment";
@@ -6,7 +6,6 @@ import { MdWork } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteExpAction } from '../../redux/actions/profileAction';
-import { toggleAction } from "../../redux/actions/utilsAction";
 
 export default function ExpCard({ data }) {
     const dispatch = useDispatch();
@@ -17,12 +16,6 @@ export default function ExpCard({ data }) {
     const deleteExpHandler = () => {
         dispatch(deleteExpAction(data?._id));
     }
-
-    useEffect(() => {
-        if (deleteRes.success === true) {
-            dispatch(toggleAction(prev => !prev));
-        }
-    }, [deleteRes.success, dispatch])
 
     const ActionMenu = () => (
         <Menu>

@@ -2,17 +2,19 @@ import React, { Fragment, useEffect } from 'react'
 import { Alert, AlertIcon, Container, Text, Skeleton, SimpleGrid } from '@chakra-ui/react'
 import EditProfileForm from '../../components/Profile/EditProfileForm'
 import { useNavigate } from "react-router-dom";
-import { idGetter } from '../../utils/tokenExtractor';
+import { tokenGetter } from '../../utils/tokenExtractor';
 import { useSelector, useDispatch } from 'react-redux';
 import { myProfileAction } from '../../redux/actions/profileAction';
 export default function EditProfile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const profile = useSelector((state) => state.getprofile);
+
+    const profileReducer = useSelector((state) => state.profileReducer);
+    const { profile, profileLoading } = profileReducer;
 
     useEffect(() => {
         dispatch(myProfileAction());
-        if (!idGetter()) {
+        if (!tokenGetter()) {
             navigate("/");
         }
     }, [navigate, dispatch])
@@ -24,7 +26,7 @@ export default function EditProfile() {
                 <Text fontSize={"3xl"} fontWeight={"bold"} mb={3}>Edit Profile</Text>
                 <>
                     {
-                        profile.loading ? (
+                        profileLoading ? (
                             <>
                                 <SimpleGrid columns={2} gap={5}>
                                     <Skeleton height={"150px"} />
@@ -40,30 +42,20 @@ export default function EditProfile() {
                         ) : (
                             <>
                                 {
-                                    !profile?.error?.msg && profile?.response?.isProfileCreated !== true ? (
+                                    !profile?.error?.msg ? (
+                                        <EditProfileForm profileReducer={profileReducer} />
+                                    ) : (
                                         <Alert status='error'>
                                             <AlertIcon />
-                                            Please create your profile before edit.
+                                            {profile?.error?.msg}
                                         </Alert>
-                                    ) : (
-                                        <>
-                                            {!profile?.error?.msg ? (
-                                                <EditProfileForm profile={profile} />
-                                            ) : (
-                                                <Alert status='error'>
-                                                    <AlertIcon />
-                                                    {profile?.error?.msg}
-                                                </Alert>
-                                            )
-                                            }
-                                        </>
                                     )
                                 }
                             </>
                         )
                     }
-                </>
-            </Container>
-        </Fragment>
+            </>
+        </Container>
+        </Fragment >
     )
 }

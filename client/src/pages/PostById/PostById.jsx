@@ -17,7 +17,7 @@ export default function PostById() {
 
 
     const postReducer = useSelector((state) => state.postReducer);
-    const profileRes = useSelector((state) => state.profilebyid);
+    const profileReducer = useSelector((state) => state.profileReducer);
 
     return (
         <Fragment>
@@ -31,7 +31,7 @@ export default function PostById() {
                         <PostByIdCard postReducer = {postReducer} />
                     </GridItem>
                     <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 4, xl: 4 }}>
-                        <PostProfileOverviewCard data={profileRes} />
+                        <PostProfileOverviewCard profileReducer={profileReducer} />
                     </GridItem>
                 </Grid>
             </Container>

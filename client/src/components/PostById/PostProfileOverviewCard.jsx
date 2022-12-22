@@ -2,12 +2,12 @@ import { Avatar, Box, Button, Card, CardBody, Center, Tag, Text, Alert, AlertIco
 import React, { Fragment, memo } from 'react'
 import { Link } from "react-router-dom";
 import moment from 'moment';
-const PostProfileOverviewCard = ({ data }) => {
-  const { response, loading, error } = data;
+const PostProfileOverviewCard = ({ profileReducer }) => {
+  const { profileById, profileByIdLoading, error } = profileReducer;
   return (
     <Fragment>
       {
-        loading ? (
+        profileByIdLoading ? (
           <Stack>
             <Skeleton height={"200px"} />
             <Skeleton height={"100px"} />
@@ -25,20 +25,20 @@ const PostProfileOverviewCard = ({ data }) => {
                 <Card variant={"filled"} borderRadius={"xl"} overflow={"hidden"} mb={5}>
                   <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"13px"} />
                   <Box display={"flex"} alignItems={"center"} flexDirection={"column"} justifyContent={"center"} mt={6}>
-                    <Link to={`/profile/${response?.user?._id}`}><Avatar src={response?.user?.avatar} size={"lg"} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} shadow={"md"} /></Link>
-                    <Link to={`/profile/${response?.user?._id}`}><Text mt={1} fontSize={"xl"} fontWeight={"bold"}>{response?.user?.name}</Text></Link>
+                    <Link to={`/profile/${profileById?.user?._id}`}><Avatar src={profileById?.user?.avatar} size={"lg"} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} shadow={"md"} /></Link>
+                    <Link to={`/profile/${profileById?.user?._id}`}><Text mt={1} fontSize={"xl"} fontWeight={"bold"}>{profileById?.user?.name}</Text></Link>
                   </Box>
                   <Center>
                   </Center>
                   <CardBody>
-                    <Link to={`/profile/${response?.user?._id}`}><Button colorScheme={"blue"} w={"100%"} mb={3}>View Profile</Button></Link>
-                    <Text fontSize={"sm"}>{response?.bio}</Text>
+                    <Link to={`/profile/${profileById?.user?._id}`}><Button colorScheme={"blue"} w={"100%"} mb={3}>View Profile</Button></Link>
+                    <Text fontSize={"sm"}>{profileById?.bio}</Text>
                     <Tag mt={3} mb={2} colorScheme="blue">Location</Tag>
-                    <Text fontSize={"sm"}>{response?.location || <>Not available</>}</Text>
+                    <Text fontSize={"sm"}>{profileById?.location || <>Not available</>}</Text>
                     <Tag mt={3} mb={2} colorScheme="blue">Work</Tag>
-                    <Text fontSize={"sm"}>{response?.status} {response?.company && <>at</>} {response?.company}</Text>
+                    <Text fontSize={"sm"}>{profileById?.status} {profileById?.company && <>at</>} {profileById?.company}</Text>
                     <Tag mt={3} mb={2} colorScheme="blue">Joined</Tag>
-                    <Text fontSize={"sm"}>{moment(response?.date).format("MMM Do YY")}</Text>
+                    <Text fontSize={"sm"}>{moment(profileById?.date).format("MMM Do YY")}</Text>
                   </CardBody>
                 </Card>
               )

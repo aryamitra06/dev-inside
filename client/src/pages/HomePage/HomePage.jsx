@@ -16,7 +16,7 @@ export default function HomePage() {
     }, [dispatch])
 
     const postReducer = useSelector((state) => state.postReducer);
-    const allProfilesReducer = useSelector((state) => state.allprofiles);
+    const profileReducer = useSelector((state)=> state.profileReducer);
     return (
         <Fragment>
             <Container maxW={"6xl"} mt={3} minH={"72vh"}>
@@ -33,7 +33,7 @@ export default function HomePage() {
                     </GridItem>
                     <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 4, xl: 4 }} display={{ base: "block", sm: "block", md: "block", lg: "block", xl: "block" }}>
                         <Box mb={{ base: 4, sm: 4, md: 4, lg: 0, xl: 0 }}>
-                            <AllProfilesCard allProfilesReducer={allProfilesReducer}/>
+                            <AllProfilesCard profileReducer={profileReducer}/>
                         </Box>
                     </GridItem>
                 </Grid>

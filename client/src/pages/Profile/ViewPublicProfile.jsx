@@ -12,8 +12,8 @@ export default function ViewPublicProfile() {
         dispatch(profileByIdAction(id));
     }, [dispatch, id])
 
-    const profile = useSelector((state) => state.profilebyid);
-    const { error, loading, response } = profile;
+    const profileReducer = useSelector((state) => state.profileReducer);
+    const { error, profileById, profileByIdLoading } = profileReducer;
 
     const ProfileSkeleton = () => (
         <Fragment>
@@ -41,13 +41,13 @@ export default function ViewPublicProfile() {
                     )
                 }
                 {
-                    (loading) ? (
+                    (profileByIdLoading) ? (
                         ProfileSkeleton()
                     ) : (
                         <>
                             {
                                 !error && (
-                                    <ProfileCard data={response} />
+                                    <ProfileCard data = {profileById} />
                                 )
                             }
                         </>
