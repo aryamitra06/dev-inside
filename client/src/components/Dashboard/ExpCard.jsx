@@ -9,12 +9,14 @@ import { deleteExpAction } from '../../redux/actions/profileAction';
 
 export default function ExpCard({ data }) {
     const dispatch = useDispatch();
-    const deleteRes = useSelector((state) => state.deleteexp);
+    const profileReducer = useSelector((state) => state.profileReducer);
+    const { isDeleting } = profileReducer;
     const { isOpen, onOpen, onClose } = useDisclosure();
     const cancelRef = React.useRef();
 
-    const deleteExpHandler = () => {
-        dispatch(deleteExpAction(data?._id));
+    const deleteExpHandler = async () => {
+        await dispatch(deleteExpAction(data?._id));
+        await onclose();
     }
 
     const ActionMenu = () => (
@@ -51,10 +53,10 @@ export default function ExpCard({ data }) {
                     </AlertDialogBody>
 
                     <AlertDialogFooter>
-                        <Button ref={cancelRef} onClick={onClose} isDisabled={deleteRes.loading === true}>
+                        <Button ref={cancelRef} onClick={onClose} isDisabled={isDeleting}>
                             Cancel
                         </Button>
-                        <Button colorScheme='red' onClick={deleteExpHandler} ml={3} isDisabled={deleteRes.loading === true}>
+                        <Button colorScheme='red' onClick={deleteExpHandler} ml={3} isDisabled={isDeleting}>
                             Delete
                         </Button>
                     </AlertDialogFooter>

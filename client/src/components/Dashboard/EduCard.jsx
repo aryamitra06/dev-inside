@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import {Card, CardBody, Box, Text, IconButton, Button, Menu, MenuButton, MenuList, MenuItem, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay} from '@chakra-ui/react';
+import { Card, CardBody, Box, Text, IconButton, Button, Menu, MenuButton, MenuList, MenuItem, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay } from '@chakra-ui/react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,12 +9,14 @@ import { deleteEduAction } from '../../redux/actions/profileAction';
 
 export default function EduCard({ data }) {
     const dispatch = useDispatch();
-    const deleteRes = useSelector((state) => state.deleteedu);
+    const profileReducer = useSelector((state) => state.profileReducer);
+    const { isDeleting } = profileReducer;
     const { isOpen, onOpen, onClose } = useDisclosure();
     const cancelRef = React.useRef();
 
-    const deleteEduHandler = () => {
-        dispatch(deleteEduAction(data?._id));
+    const deleteEduHandler = async () => {
+        await dispatch(deleteEduAction(data?._id));
+        await onclose();
     }
 
     const ActionMenu = () => (
@@ -51,10 +53,10 @@ export default function EduCard({ data }) {
                     </AlertDialogBody>
 
                     <AlertDialogFooter>
-                        <Button ref={cancelRef} onClick={onClose} isDisabled={deleteRes.loading === true}>
+                        <Button ref={cancelRef} onClick={onClose} isDisabled={isDeleting}>
                             Cancel
                         </Button>
-                        <Button colorScheme='red' onClick={deleteEduHandler} ml={3} isDisabled={deleteRes.loading === true}>
+                        <Button colorScheme='red' onClick={deleteEduHandler} ml={3} isDisabled={isDeleting}>
                             Delete
                         </Button>
                     </AlertDialogFooter>

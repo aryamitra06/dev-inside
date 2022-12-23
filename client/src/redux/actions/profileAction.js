@@ -55,8 +55,8 @@ export const addEduAction = (formData) => async (dispatch) => {
 export const deleteExpAction = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_EXP_REQUEST });
-        const response = await axios.delete(`http://localhost:5000/deleteexperience/${id}`, { headers: { authorization: tokenGetter() } });
-        dispatch({ type: DELETE_EXP_SUCCESS, payload: response.data });
+        await axios.delete(`http://localhost:5000/deleteexperience/${id}`, { headers: { authorization: tokenGetter() } });
+        dispatch({ type: DELETE_EXP_SUCCESS, payload: id });
     } catch (error) {
         dispatch({ type: DELETE_EXP_FAIL, payload: error.response.data });
     }
@@ -66,7 +66,7 @@ export const deleteEduAction = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_EDU_REQUEST });
         const response = await axios.delete(`http://localhost:5000/deleteeducation/${id}`, { headers: { authorization: tokenGetter() } });
-        dispatch({ type: DELETE_EDU_SUCCESS, payload: response.data });
+        dispatch({ type: DELETE_EDU_SUCCESS, payload: id });
     } catch (error) {
         dispatch({ type: DELETE_EDU_FAIL, payload: error.response.data });
     }

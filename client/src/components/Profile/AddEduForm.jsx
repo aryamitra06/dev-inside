@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { addEduAction } from '../../redux/actions/profileAction';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 export default function AddEduForm() {
     const navigate = useNavigate();
@@ -37,7 +36,7 @@ export default function AddEduForm() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         if (disableToDate === true) {
             formData.to = "";
@@ -46,16 +45,12 @@ export default function AddEduForm() {
         else {
             formData.current = false;
         }
-        dispatch(addEduAction(formData));
+        await dispatch(addEduAction(formData));
+        await navigate("/dashboard");
     }
 
-    const response = useSelector((state) => state.addedu);
-
-    useEffect(()=>{
-        if(response.success === true){
-            navigate("/dashboard");
-        }
-    }, [response.success, navigate])
+    const profileReducer = useSelector((state) => state.profileReducer);
+    const { isFormSubmitting } = profileReducer;
 
     return (
         <Fragment>
@@ -64,39 +59,39 @@ export default function AddEduForm() {
                 <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={5}>
                     <FormControl isRequired>
                         <FormLabel>School</FormLabel>
-                        <Input type='text' name='school' value={school} onChange={(e) => onChange(e)} isDisabled={response.loading} />
+                        <Input type='text' name='school' value={school} onChange={(e) => onChange(e)} isDisabled={isFormSubmitting} />
                         <FormHelperText>Could be the name of your school</FormHelperText>
                     </FormControl>
                     <FormControl isRequired>
                         <FormLabel>Degree</FormLabel>
-                        <Input type='text' name='degree' value={degree} onChange={(e) => onChange(e)} isDisabled={response.loading} />
+                        <Input type='text' name='degree' value={degree} onChange={(e) => onChange(e)} isDisabled={isFormSubmitting} />
                         <FormHelperText>Could be the degree you've earned from school</FormHelperText>
                     </FormControl>
                     <FormControl isRequired>
                         <FormLabel>Field of Study</FormLabel>
-                        <Input type='text' name='fieldofstudy' value={fieldofstudy} onChange={(e) => onChange(e)} isDisabled={response.loading} />
+                        <Input type='text' name='fieldofstudy' value={fieldofstudy} onChange={(e) => onChange(e)} isDisabled={isFormSubmitting} />
                         <FormHelperText>Could be your field of study</FormHelperText>
                     </FormControl>
-                    <FormControl>
+                    <FormControl isRequired>
                         <FormLabel>From Date</FormLabel>
-                        <Input type='date' name='from' value={from} onChange={(e) => onChange(e)} isDisabled={response.loading} />
+                        <Input type='date' name='from' value={from} onChange={(e) => onChange(e)} isDisabled={isFormSubmitting} />
                         <FormHelperText>Could be your start date of the institute</FormHelperText>
                     </FormControl>
-                    <FormControl>
+                    <FormControl isRequired>
                         <FormLabel>To Date</FormLabel>
-                        <Input type='date' name='to' isDisabled={disableToDate || response.loading} value={to} onChange={(e) => onChange(e)} />
+                        <Input type='date' name='to' isDisabled={disableToDate || isFormSubmitting} value={to} onChange={(e) => onChange(e)} />
                         <FormHelperText>Could be your end date of the institute</FormHelperText>
-                        <Checkbox mt={2} onChange={(e) => handleCurrentJobChange(e)} isDisabled={response.loading}>Current Institute</Checkbox>
+                        <Checkbox mt={2} onChange={(e) => handleCurrentJobChange(e)} isDisabled={isFormSubmitting}>Current Institute</Checkbox>
                     </FormControl>
                     <FormControl>
                         <FormLabel>Description</FormLabel>
-                        <Textarea type='text' name='description' value={description} onChange={(e) => onChange(e)} isDisabled={response.loading} />
+                        <Textarea type='text' name='description' value={description} onChange={(e) => onChange(e)} isDisabled={isFormSubmitting} />
                         <FormHelperText>Tell us a little about your study and experience</FormHelperText>
                     </FormControl>
                 </SimpleGrid>
                 <Box display={"flex"} justifyContent={"flex-end"} gap={2} mb={3} mt={3}>
-                    <Link to={"/dashboard"}><Button isDisabled={response.loading}>Back to Dashboard</Button></Link>
-                    <Button colorScheme='blue' type='submit' isDisabled={response.loading}>Save</Button>
+                    <Link to={"/dashboard"}><Button isDisabled={isFormSubmitting}>Back to Dashboard</Button></Link>
+                    <Button colorScheme='blue' type='submit' isDisabled={isFormSubmitting}>Save</Button>
                 </Box>
             </form>
         </Fragment>

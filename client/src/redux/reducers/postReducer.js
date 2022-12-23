@@ -72,7 +72,6 @@ export const postReducer = (state = initialState, action) => {
         case REMOVE_COMMENT_REQUEST:
             return { ...state, isDeleting: true };
         case REMOVE_COMMENT_SUCCESS:
-            console.log(action.payload);
             return { ...state, post: { ...state.post, comments: state.post.comments.filter((comment) => comment._id !== action.payload) }, isDeleting: false };
         case REMOVE_COMMENT_FAIL:
             return { ...state, isDeleting: false };
