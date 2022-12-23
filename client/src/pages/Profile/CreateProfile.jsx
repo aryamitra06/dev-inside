@@ -15,6 +15,7 @@ export default function CreateProfile() {
         if (!tokenGetter()) {
             navigate("/");
         }
+        //if profile is already created then navigate to homepage
         else if (profile?.isProfileCreated === true) {
             navigate("/");
         }
