@@ -41,19 +41,12 @@ export default function CreateProfileForm({ profileReducer }) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        await dispatch(createProfileAction(formData));
-        await navigate("/dashboard");
+        dispatch(createProfileAction(formData, navigate));
     }
 
-    const { isFormSubmitting, navigateOnSuccess } = profileReducer;
-
-    React.useEffect(() => {
-        if (navigateOnSuccess) {
-            navigate("/dashboard");
-        }
-    }, [navigateOnSuccess])
+    const { isFormSubmitting } = profileReducer;
 
     return (
         <Fragment>

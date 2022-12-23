@@ -12,11 +12,12 @@ export const myProfileAction = () => async (dispatch) => {
     }
 }
 
-export const createProfileAction = (formData) => async (dispatch) => {
+export const createProfileAction = (formData, navigate) => async (dispatch) => {
     try {
         dispatch({ type: CREATE_PROFILE_REQUEST });
         const response = await axios.post("http://localhost:5000/createprofile", formData, { headers: { authorization: tokenGetter() } });
         dispatch({ type: CREATE_PROFILE_SUCCESS, payload: response.data });
+        navigate("/dashboard");
     } catch (error) {
         dispatch({ type: CREATE_PROFILE_FAIL, payload: error.response.data });
     }
