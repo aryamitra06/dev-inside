@@ -10,6 +10,7 @@ import ExpCard from '../../components/Dashboard/ExpCard';
 import EduCard from '../../components/Dashboard/EduCard';
 import { nameGetter, tokenGetter } from '../../utils/tokenExtractor';
 import Stats from '../../components/Dashboard/Stats';
+import ServerErrorPage from "../Error/ServerErrorPage";
 
 export default function Dashboard() {
     const dispatch = useDispatch();
@@ -27,26 +28,14 @@ export default function Dashboard() {
     const { error, profile, profileLoading } = profileReducer;
 
     //server error
-    const ErrorMsg = () => (
-        <Fragment>
-            {
-                error && (
-                    <Alert status='error' mt={3}>
-                        <AlertIcon />
-                        {error?.msg}
-                    </Alert>
-                )
-            }
-        </Fragment>
-    )
     const ProfileCreatedCheker = () => {
         return (
             <Fragment>
                 {
                     (profile?.msg) && (
-                        <Alert status='error' mt={3}>
+                        <Alert status='info' mt={3}>
                             <AlertIcon />
-                            Profile is not created.
+                            {profile?.msg}
                         </Alert>
                     )
                 }
@@ -59,7 +48,7 @@ export default function Dashboard() {
             <Fragment>
                 <HStack mt={5}>
                     {
-                        profile?.msg ? (
+                        (profile?.msg) ? (
                             <Link to={"/dashboard/create-profile"}><Button colorScheme={"blue"} variant={"outline"}>Create Profile</Button></Link>
                         ) : (
                             <>
@@ -85,7 +74,7 @@ export default function Dashboard() {
                 <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={3}>
                     {
                         profile?.experience?.length === 0 && (
-                            <Alert status='warning'>
+                            <Alert status='info'>
                                 <AlertIcon />
                                 Not available
                             </Alert>
@@ -112,7 +101,7 @@ export default function Dashboard() {
                 <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={3}>
                     {
                         profile?.education?.length === 0 && (
-                            <Alert status='warning'>
+                            <Alert status='info'>
                                 <AlertIcon />
                                 Not available
                             </Alert>
@@ -150,49 +139,52 @@ export default function Dashboard() {
 
     return (
         <Fragment>
-            <Container maxW={"6xl"} mt={3} minH={"72vh"}>
-                <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-                    <Text fontSize={"3xl"} fontWeight={"bold"}>Dashboard</Text>
-                    {
-                        !profile?.msg && (
-                            <Link to={`/profile/${profile?.user?._id}`}><Button leftIcon={<AiFillEye />} size={"sm"} isDisabled={profileLoading}>View Public</Button></Link>
-                        )
-                    }
-                </Box>
-                {ErrorMsg()}
-                <Box display={"flex"} gap={1}>
-                    <Text fontSize={{ base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl" }} mt={1} color={'gray.400'} fontWeight={"bold"}>{greetingTime(new Date())},</Text>
-                    <Text fontSize={{ base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl" }} mt={1} color={'gray.400'} fontWeight={"bold"}>{nameGetter()}</Text>
-                </Box>
-                {
-                    profileLoading ? (
-                        <>
-                            <Stack mt={3}>
-                                <HStack>
-                                    <Skeleton width={{ base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%" }} height={"40px"} />
-                                    <Skeleton width={{ base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%" }} height={"40px"} />
-                                    <Skeleton width={{ base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%" }} height={"40px"} />
-                                </HStack>
-                                <HStack>
-                                    <Skeleton width={{ base: "35%", sm: "20%", md: "20%", lg: "20%", xl: "20%" }} height={"50px"} />
-                                    <Skeleton width={{ base: "35%", sm: "20%", md: "20%", lg: "20%", xl: "20%" }} height={"50px"} />
-                                </HStack>
-                                <Skeleton width={{ base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%" }} height={"100px"} />
-                                <Skeleton width={{ base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%" }} height={"100px"} />
-                                <Skeleton width={{ base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%" }} height={"100px"} />
-                            </Stack>
-                        </>
-                    ) : (
-                        <>
-                            {!error && ProfileCreatedCheker()}
-                            {!profile?.msg && <Stats />}
-                            {!error && ProfileActions()}
-                            {!profile?.msg && ProfileTabs()}
-                        </>
-                    )
-                }
+            {
+                error ? (<ServerErrorPage statusCode={500} />) : (
+                    <Container maxW={"6xl"} mt={3} minH={"72vh"}>
+                        <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
+                            <Text fontSize={"3xl"} fontWeight={"bold"}>Dashboard</Text>
+                            {
+                                !profile?.msg && (
+                                    <Link to={`/profile/${profile?.user?._id}`}><Button leftIcon={<AiFillEye />} size={"sm"} isDisabled={profileLoading}>View Public</Button></Link>
+                                )
+                            }
+                        </Box>
+                        <Box display={"flex"} gap={1}>
+                            <Text fontSize={{ base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl" }} mt={1} color={'gray.400'} fontWeight={"bold"}>{greetingTime(new Date())},</Text>
+                            <Text fontSize={{ base: "lg", sm: "md", md: "xl", lg: "xl", xl: "xl" }} mt={1} color={'gray.400'} fontWeight={"bold"}>{nameGetter()}</Text>
+                        </Box>
+                        {
+                            profileLoading ? (
+                                <>
+                                    <Stack mt={3}>
+                                        <HStack>
+                                            <Skeleton width={{ base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%" }} height={"40px"} />
+                                            <Skeleton width={{ base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%" }} height={"40px"} />
+                                            <Skeleton width={{ base: "25%", sm: "10%", md: "10%", lg: "10%", xl: "10%" }} height={"40px"} />
+                                        </HStack>
+                                        <HStack>
+                                            <Skeleton width={{ base: "35%", sm: "20%", md: "20%", lg: "20%", xl: "20%" }} height={"50px"} />
+                                            <Skeleton width={{ base: "35%", sm: "20%", md: "20%", lg: "20%", xl: "20%" }} height={"50px"} />
+                                        </HStack>
+                                        <Skeleton width={{ base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%" }} height={"100px"} />
+                                        <Skeleton width={{ base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%" }} height={"100px"} />
+                                        <Skeleton width={{ base: "100%", sm: "70%", md: "70%", lg: "70%", xl: "70%" }} height={"100px"} />
+                                    </Stack>
+                                </>
+                            ) : (
+                                <>
+                                    {ProfileCreatedCheker()}
+                                    {!profile?.msg && <Stats />}
+                                    {ProfileActions()}
+                                    {!profile?.msg && ProfileTabs()}
+                                </>
+                            )
+                        }
 
-            </Container>
-        </Fragment>
+                    </Container>
+                )
+            }
+        </Fragment >
     )
 }

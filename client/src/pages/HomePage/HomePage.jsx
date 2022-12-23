@@ -6,7 +6,7 @@ import AllPosts from '../../components/HomePage/AllPosts';
 import NewPostCard from '../../components/HomePage/NewPostCard';
 import AllProfilesCard from '../../components/HomePage/AllProfilesCard';
 import { allProfilesAction } from '../../redux/actions/profileAction';
-
+import ServerErrorPage from "../Error/ServerErrorPage";
 export default function HomePage() {
     const dispatch = useDispatch();
 
@@ -16,28 +16,35 @@ export default function HomePage() {
     }, [dispatch])
 
     const postReducer = useSelector((state) => state.postReducer);
-    const profileReducer = useSelector((state)=> state.profileReducer);
+    const profileReducer = useSelector((state) => state.profileReducer);
+
+    const { error } = postReducer;
+
     return (
         <Fragment>
-            <Container maxW={"6xl"} mt={3} minH={"72vh"}>
-                <Grid
-                    templateRows='repeat(1, 1fr)'
-                    templateColumns='repeat(12, 1fr)'
-                    gap={3}
-                >
-                    <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 8, xl: 8 }}>
-                        <NewPostCard />
-                        <Box mb={{ base: 0, sm: 0, md: 0, lg: 3, xl: 3 }}>
-                            <AllPosts postReducer={postReducer} />
-                        </Box>
-                    </GridItem>
-                    <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 4, xl: 4 }} display={{ base: "block", sm: "block", md: "block", lg: "block", xl: "block" }}>
-                        <Box mb={{ base: 4, sm: 4, md: 4, lg: 0, xl: 0 }}>
-                            <AllProfilesCard profileReducer={profileReducer}/>
-                        </Box>
-                    </GridItem>
-                </Grid>
-            </Container>
+            {
+                error ? (<ServerErrorPage />) : (
+                    <Container maxW={"6xl"} mt={3} minH={"72vh"}>
+                        <Grid
+                            templateRows='repeat(1, 1fr)'
+                            templateColumns='repeat(12, 1fr)'
+                            gap={3}
+                        >
+                            <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 8, xl: 8 }}>
+                                <NewPostCard />
+                                <Box mb={{ base: 0, sm: 0, md: 0, lg: 3, xl: 3 }}>
+                                    <AllPosts postReducer={postReducer} />
+                                </Box>
+                            </GridItem>
+                            <GridItem rowSpan={1} colSpan={{ base: 12, sm: 12, md: 12, lg: 4, xl: 4 }} display={{ base: "block", sm: "block", md: "block", lg: "block", xl: "block" }}>
+                                <Box mb={{ base: 4, sm: 4, md: 4, lg: 0, xl: 0 }}>
+                                    <AllProfilesCard profileReducer={profileReducer} />
+                                </Box>
+                            </GridItem>
+                        </Grid>
+                    </Container>
+                )
+            }
         </Fragment>
     )
 }

@@ -2,12 +2,14 @@ import { MY_PROFILE_REQUEST, MY_PROFILE_SUCCESS, MY_PROFILE_FAIL, CREATE_PROFILE
 
 const initialState = {
     profile: {},
-    profiles: [],
-    profileById: {},
     profileLoading: true,
+
+    profiles: [],
     profilesLoading: true,
+
+    profileById: {},
     profileByIdLoading: true,
-    error: null,
+
     isFormSubmitting: false,
     isDeleting: false
 }
@@ -21,7 +23,7 @@ export const profileReducer = (state = initialState, action) => {
         case MY_PROFILE_SUCCESS:
             return { ...state, profile: payload, profileLoading: false };
         case MY_PROFILE_FAIL:
-            return { ...state, profile: null, error: payload, profileLoading: false }
+            return { ...state, error: payload, profileLoading: false }
         //@desc
         //creating a new profile
         case CREATE_PROFILE_REQUEST:
