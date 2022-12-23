@@ -11,7 +11,8 @@ const initialState = {
     profileByIdLoading: true,
 
     isFormSubmitting: false,
-    isDeleting: false
+    isDeleting: false,
+    navigateOnSuccess: false
 }
 export const profileReducer = (state = initialState, action) => {
     const { payload, type } = action;
@@ -27,11 +28,11 @@ export const profileReducer = (state = initialState, action) => {
         //@desc
         //creating a new profile
         case CREATE_PROFILE_REQUEST:
-            return { ...state, isFormSubmitting: true };
+            return { ...state, isFormSubmitting: true, navigateOnSuccess: false };
         case CREATE_PROFILE_SUCCESS:
-            return { ...state, profile: { ...state.profile, ...payload }, isFormSubmitting: false };
+            return { ...state, profile: { ...state.profile, ...payload }, isFormSubmitting: false, navigateOnSuccess: true };
         case CREATE_PROFILE_FAIL:
-            return { ...state, profile: null, error: payload, isFormSubmitting: false };
+            return { ...state, profile: null, error: payload, isFormSubmitting: false, navigateOnSuccess: false };
         default:
             return state;
         //@profile by id

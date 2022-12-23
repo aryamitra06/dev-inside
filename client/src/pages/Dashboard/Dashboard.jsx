@@ -27,7 +27,7 @@ export default function Dashboard() {
 
     const { error, profile, profileLoading } = profileReducer;
 
-    //server error
+
     const ProfileCreatedCheker = () => {
         return (
             <Fragment>

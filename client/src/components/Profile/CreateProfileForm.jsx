@@ -47,7 +47,13 @@ export default function CreateProfileForm({ profileReducer }) {
         await navigate("/dashboard");
     }
 
-    const { isFormSubmitting } = profileReducer;
+    const { isFormSubmitting, navigateOnSuccess } = profileReducer;
+
+    React.useEffect(() => {
+        if (navigateOnSuccess) {
+            navigate("/dashboard");
+        }
+    }, [navigateOnSuccess])
 
     return (
         <Fragment>

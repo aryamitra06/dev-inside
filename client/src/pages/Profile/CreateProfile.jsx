@@ -19,6 +19,7 @@ export default function CreateProfile() {
         else if (profile?.isProfileCreated === true) {
             navigate("/");
         }
+        
     }, [navigate, dispatch, profile?.isProfileCreated])
 
     return (
