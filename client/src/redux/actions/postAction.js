@@ -21,11 +21,13 @@ export const postByIdAction = (id) => async (dispatch) => {
         dispatch({ type: POST_BY_ID_FAIL, payload: error.response.data });
     }
 }
-export const newPostAction = (formData) => async (dispatch) => {
+export const newPostAction = (formData, onClose, resetPostHandler) => async (dispatch) => {
     try {
         dispatch({ type: NEW_POST_REQUEST });
         const response = await axios.post("http://localhost:5000/newpost", formData, { headers: { authorization: tokenGetter() } });
         dispatch({ type: NEW_POST_SUCCESS, payload: response.data });
+        onClose();
+        resetPostHandler();
     } catch (error) {
         dispatch({ type: NEW_POST_FAIL, payload: error.response.data });
     }

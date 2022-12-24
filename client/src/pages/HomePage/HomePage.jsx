@@ -21,7 +21,7 @@ export default function HomePage() {
     return (
         <Fragment>
             {
-                (postReducer?.error || profileReducer?.error) ? (<ServerErrorPage />) : (
+                (postReducer?.error || profileReducer?.error) ? (<ServerErrorPage statusCode={500}/>) : (
                     <Container maxW={"6xl"} mt={3} minH={"72vh"}>
                         <Grid
                             templateRows='repeat(1, 1fr)'

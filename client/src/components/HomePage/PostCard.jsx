@@ -91,6 +91,7 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
 
     const DeleteDialog = () => (
         <AlertDialog
+            closeOnOverlayClick={!isDeleting}
             isOpen={isOpenDelete}
             leastDestructiveRef={cancelRef}
             onClose={onCloseDelete}
