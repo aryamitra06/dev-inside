@@ -20,7 +20,7 @@ export default function CreateProfile() {
         }
     }, [navigate, dispatch])
     
-    const isProfileEmpty = isEmpty(profile);
+    const isProfileEmpty = isEmpty(profile || {});
     return (
         <Fragment>
             {

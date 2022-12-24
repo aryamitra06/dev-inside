@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect } from 'react'
-import { Container, Text, Skeleton, SimpleGrid } from '@chakra-ui/react'
+import { Container, Text, Skeleton, SimpleGrid, Alert, AlertIcon } from '@chakra-ui/react'
 import EditProfileForm from '../../components/Profile/EditProfileForm'
 import { useNavigate } from "react-router-dom";
 import { tokenGetter } from '../../utils/tokenExtractor';
 import { useSelector, useDispatch } from 'react-redux';
 import { myProfileAction } from '../../redux/actions/profileAction';
 import ServerErrorPage from "../Error/ServerErrorPage";
+import { isEmpty } from "../../utils/objEmptyChecker";
 
 export default function EditProfile() {
     const navigate = useNavigate();
@@ -14,18 +15,16 @@ export default function EditProfile() {
     const profileReducer = useSelector((state) => state.profileReducer);
     const { profileLoading, error, profile } = profileReducer;
 
-    console.log(profile);
 
     useEffect(() => {
         dispatch(myProfileAction());
         if (!tokenGetter()) {
             navigate("/");
         }
-        else if (profile?.msg) {
-            navigate("/");
-        }
-    }, [navigate, dispatch, profile?.msg])
+    }, [navigate, dispatch])
 
+    const isProfileEmpty = isEmpty(profile || {});
+    console.log(profile);
 
     return (
         <Fragment>
@@ -52,7 +51,19 @@ export default function EditProfile() {
                                     </>
                                 ) : (
                                     <>
-                                        {<EditProfileForm profileReducer={profileReducer} />}
+                                        {
+                                            isProfileEmpty ? (
+                                                <Alert status='info'>
+                                                    <AlertIcon />
+                                                    Create a profile before edit
+                                                </Alert>
+                                            ) : (
+                                                <>
+                                                    {<EditProfileForm profileReducer={profileReducer} />}
+
+                                                </>
+                                            )
+                                        }
                                     </>
                                 )
                             }
