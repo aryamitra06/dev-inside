@@ -7,9 +7,6 @@ export const getMyProfile = async (req, res) => {
         //@desc
         //@"user" is the column name which we are populating
         const profile = await Profile.findOne({ user: req.user.id }).populate("user", ['name', 'avatar']);
-        if (!profile) {
-            return res.status(200).json({ msg: 'No profile found' });
-        }
         return res.json(profile);
     } catch (error) {
         res.status(500).json({ msg: "Server Error" });

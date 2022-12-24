@@ -11,6 +11,7 @@ import EduCard from '../../components/Dashboard/EduCard';
 import { nameGetter, tokenGetter } from '../../utils/tokenExtractor';
 import Stats from '../../components/Dashboard/Stats';
 import ServerErrorPage from "../Error/ServerErrorPage";
+import {isEmpty} from "../../utils/objEmptyChecker";
 
 export default function Dashboard() {
     const dispatch = useDispatch();
@@ -27,15 +28,17 @@ export default function Dashboard() {
 
     const { error, profile, profileLoading } = profileReducer;
 
+    const isProfileEmpty = isEmpty(profile || {});
+
 
     const ProfileCreatedCheker = () => {
         return (
             <Fragment>
                 {
-                    (profile?.msg) && (
+                    (isProfileEmpty) && (
                         <Alert status='info' mt={3}>
                             <AlertIcon />
-                            {profile?.msg}
+                            Profile not created.
                         </Alert>
                     )
                 }
@@ -48,7 +51,7 @@ export default function Dashboard() {
             <Fragment>
                 <HStack mt={5}>
                     {
-                        (profile?.msg) ? (
+                        (isProfileEmpty) ? (
                             <Link to={"/dashboard/create-profile"}><Button colorScheme={"blue"} variant={"outline"}>Create Profile</Button></Link>
                         ) : (
                             <>
@@ -175,9 +178,9 @@ export default function Dashboard() {
                             ) : (
                                 <>
                                     {ProfileCreatedCheker()}
-                                    {!profile?.msg && <Stats />}
+                                    {!isProfileEmpty && <Stats />}
                                     {ProfileActions()}
-                                    {!profile?.msg && ProfileTabs()}
+                                    {!isProfileEmpty && ProfileTabs()}
                                 </>
                             )
                         }

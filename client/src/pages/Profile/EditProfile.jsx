@@ -12,14 +12,19 @@ export default function EditProfile() {
     const dispatch = useDispatch();
 
     const profileReducer = useSelector((state) => state.profileReducer);
-    const { profileLoading, error } = profileReducer;
+    const { profileLoading, error, profile } = profileReducer;
+
+    console.log(profile);
 
     useEffect(() => {
         dispatch(myProfileAction());
         if (!tokenGetter()) {
             navigate("/");
         }
-    }, [navigate, dispatch])
+        else if (profile?.msg) {
+            navigate("/");
+        }
+    }, [navigate, dispatch, profile?.msg])
 
 
     return (
