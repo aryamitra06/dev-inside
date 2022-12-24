@@ -43,10 +43,9 @@ function CommentSection({ postReducer }) {
     const resetCommentHandler = () => {
         resetComment.current.value = "";
     }
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        await dispatch(addCommentAction(_id, formData));
-        await resetCommentHandler();
+        dispatch(addCommentAction(_id, formData, resetCommentHandler));
     }
 
     const deleteComment = (postId, commentId) => {

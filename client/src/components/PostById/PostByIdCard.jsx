@@ -70,13 +70,13 @@ const PostByIdCard = ({ postReducer }) => {
         dispatch(unLikeAction(_id));
     }
 
-    const deletePost = async () => {
-        await dispatch(deletePostAction(_id));
-        await navigate("/");
+    const deletePost = () => {
+        dispatch(deletePostAction(_id, navigate));
     }
 
     const DeleteDialog = () => (
         <AlertDialog
+            closeOnOverlayClick={!isDeleting}
             isOpen={isOpenDelete}
             leastDestructiveRef={cancelRef}
             onClose={onCloseDelete}
@@ -111,9 +111,9 @@ const PostByIdCard = ({ postReducer }) => {
                 <ModalCloseButton />
                 <ModalBody>
                     <HStack>
-                        <Input value={`http://localhost:3000/post/${user}/${_id}`} id="inputField"/>
+                        <Input value={`http://localhost:3000/post/${user}/${_id}`} id="inputField" />
                         <Tooltip label="Copy to clipboard">
-                        <IconButton icon={<AiFillCopy/>} onClick={()=> navigator.clipboard.writeText(document.getElementById("inputField").value)}/>
+                            <IconButton icon={<AiFillCopy />} onClick={() => navigator.clipboard.writeText(document.getElementById("inputField").value)} />
                         </Tooltip>
                     </HStack>
                 </ModalBody>

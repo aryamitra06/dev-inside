@@ -51,21 +51,23 @@ export const unLikeAction = (postId) => async (dispatch) => {
     }
 }
 
-export const deletePostAction = (postId) => async (dispatch) => {
+export const deletePostAction = (postId, navigate) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_POST_REQUEST });
         await axios.delete(`/post/delete/${postId}`, { headers: { authorization: tokenGetter() } });
         dispatch({ type: DELETE_POST_SUCCESS, payload: postId });
+        navigate("/");
     } catch (error) {
         dispatch({ type: DELETE_POST_FAIL, payload: error.response.data });
     }
 }
 
-export const addCommentAction = (postId, formData) => async (dispatch) => {
+export const addCommentAction = (postId, formData, resetCommentHandler) => async (dispatch) => {
     try {
         dispatch({ type: ADD_COMMENT_REQUEST });
         const response = await axios.post(`/comment/new/${postId}`, formData, { headers: { authorization: tokenGetter() } });
         dispatch({ type: ADD_COMMENT_SUCCESS, payload: response.data });
+        resetCommentHandler();
     } catch (error) {
         dispatch({ type: ADD_COMMENT_FAIL, payload: error.response.data });
     }

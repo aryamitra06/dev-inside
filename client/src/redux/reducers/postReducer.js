@@ -65,7 +65,7 @@ export const postReducer = (state = initialState, action) => {
         case ADD_COMMENT_SUCCESS:
             return { ...state, post: { ...state.post, comments: action.payload.comments }, isFormSubmitting: false };
         case ADD_COMMENT_FAIL:
-            return { ...state, isFormSubmitting: false };
+            return { ...state, error: action.payload, isFormSubmitting: false };
 
         //@desc
         //delete comment by postid and commentid
@@ -74,7 +74,7 @@ export const postReducer = (state = initialState, action) => {
         case REMOVE_COMMENT_SUCCESS:
             return { ...state, post: { ...state.post, comments: state.post.comments.filter((comment) => comment._id !== action.payload) }, isDeleting: false };
         case REMOVE_COMMENT_FAIL:
-            return { ...state, isDeleting: false };
+            return { ...state, error: action.payload, isDeleting: false };
         default:
             return state;
     }
