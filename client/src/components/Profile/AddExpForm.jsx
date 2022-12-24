@@ -36,7 +36,7 @@ export default function AddExpForm() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    const onSubmit = async(e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         if (disableToDate === true) {
             formData.to = "";
@@ -45,8 +45,7 @@ export default function AddExpForm() {
         else {
             formData.current = false;
         }
-        await dispatch(addExpAction(formData));
-        await navigate("/dashboard");
+        dispatch(addExpAction(formData, navigate));
     }
 
     const profileReducer = useSelector((state) => state.profileReducer);

@@ -11,7 +11,7 @@ import EduCard from '../../components/Dashboard/EduCard';
 import { nameGetter, tokenGetter } from '../../utils/tokenExtractor';
 import Stats from '../../components/Dashboard/Stats';
 import ServerErrorPage from "../Error/ServerErrorPage";
-import {isEmpty} from "../../utils/objEmptyChecker";
+import { isEmpty } from "../../utils/objEmptyChecker";
 
 export default function Dashboard() {
     const dispatch = useDispatch();
@@ -148,7 +148,7 @@ export default function Dashboard() {
                         <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
                             <Text fontSize={"3xl"} fontWeight={"bold"}>Dashboard</Text>
                             {
-                                !profile?.msg && (
+                                !isProfileEmpty && (
                                     <Link to={`/profile/${profile?.user?._id}`}><Button leftIcon={<AiFillEye />} size={"sm"} isDisabled={profileLoading}>View Public</Button></Link>
                                 )
                             }
@@ -178,7 +178,7 @@ export default function Dashboard() {
                             ) : (
                                 <>
                                     {ProfileCreatedCheker()}
-                                    {!isProfileEmpty && <Stats />}
+                                    {/* {!isProfileEmpty && <Stats />} */}
                                     {ProfileActions()}
                                     {!isProfileEmpty && ProfileTabs()}
                                 </>

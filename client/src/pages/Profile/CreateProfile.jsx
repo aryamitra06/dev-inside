@@ -12,7 +12,7 @@ export default function CreateProfile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const profileReducer = useSelector((state) => state.profileReducer);
-    const { profile, error, loading } = profileReducer;
+    const { profile, error } = profileReducer;
     useEffect(() => {
         dispatch(myProfileAction());
         if (!tokenGetter()) {

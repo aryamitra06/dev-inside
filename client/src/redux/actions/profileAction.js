@@ -33,21 +33,23 @@ export const editProfileAction = (formData) => async (dispatch) => {
     }
 }
 
-export const addExpAction = (formData) => async (dispatch) => {
+export const addExpAction = (formData, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADD_EXP_REQUEST });
         const response = await axios.put("http://localhost:5000/addexperience", formData, { headers: { authorization: tokenGetter() } });
         dispatch({ type: ADD_EXP_SUCCESS, payload: response.data });
+        navigate("/dashboard");
     } catch (error) {
         dispatch({ type: ADD_EXP_FAIL, payload: error.response.data });
     }
 }
 
-export const addEduAction = (formData) => async (dispatch) => {
+export const addEduAction = (formData, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADD_EDU_REQUEST });
         const response = await axios.put("http://localhost:5000/addeducation", formData, { headers: { authorization: tokenGetter() } });
         dispatch({ type: ADD_EDU_SUCCESS, payload: response.data });
+        navigate("/dashboard");
     } catch (error) {
         dispatch({ type: ADD_EDU_FAIL, payload: error.response.data });
     }
@@ -66,7 +68,7 @@ export const deleteExpAction = (id) => async (dispatch) => {
 export const deleteEduAction = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_EDU_REQUEST });
-        const response = await axios.delete(`http://localhost:5000/deleteeducation/${id}`, { headers: { authorization: tokenGetter() } });
+        await axios.delete(`http://localhost:5000/deleteeducation/${id}`, { headers: { authorization: tokenGetter() } });
         dispatch({ type: DELETE_EDU_SUCCESS, payload: id });
     } catch (error) {
         dispatch({ type: DELETE_EDU_FAIL, payload: error.response.data });

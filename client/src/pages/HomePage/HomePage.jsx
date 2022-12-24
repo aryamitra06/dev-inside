@@ -18,12 +18,10 @@ export default function HomePage() {
     const postReducer = useSelector((state) => state.postReducer);
     const profileReducer = useSelector((state) => state.profileReducer);
 
-    const { error } = postReducer;
-
     return (
         <Fragment>
             {
-                error ? (<ServerErrorPage />) : (
+                (postReducer?.error || profileReducer?.error) ? (<ServerErrorPage />) : (
                     <Container maxW={"6xl"} mt={3} minH={"72vh"}>
                         <Grid
                             templateRows='repeat(1, 1fr)'
