@@ -5,10 +5,11 @@ import { useDispatch } from "react-redux";
 import { editProfileAction } from "../../redux/actions/profileAction";
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
+import ServerErrorPage from '../../pages/Error/ServerErrorPage';
 
 export default function EditProfileForm({ profileReducer }) {
     const dispatch = useDispatch();
-    const { profile, isFormSubmitting } = profileReducer;
+    const { profile, isFormSubmitting, error } = profileReducer;
     const [formData, setFormData] = useState({
         company: "",
         website: "",
@@ -68,6 +69,10 @@ export default function EditProfileForm({ profileReducer }) {
 
     return (
         <>
+        {
+            error ? (
+                <ServerErrorPage statusCode={500}/> 
+            ) : (
             <form onSubmit={(e) => onSubmit(e)}>
                 <SimpleGrid columns={{ base: 1, sm: 1, md: 1, lg: 1 }} >
                     <FormControl>
@@ -159,6 +164,9 @@ export default function EditProfileForm({ profileReducer }) {
                     <Button colorScheme='blue' type='submit' isDisabled={isFormSubmitting}>Save</Button>
                 </Box>
             </form>
+
+            )
+        }
         </>
     )
 }
