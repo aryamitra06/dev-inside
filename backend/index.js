@@ -20,7 +20,7 @@ app.use('/', profileService);
 app.use('/', postServices);
 
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const DB_URI = "mongodb+srv://Aryamitra:arya123@dev-inside-db.1b4g9yd.mongodb.net/db?retryWrites=true&w=majority"
 
 mongoose.set("strictQuery", false);
