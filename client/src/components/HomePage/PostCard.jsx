@@ -126,7 +126,7 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
                 <ModalCloseButton />
                 <ModalBody>
                     <HStack>
-                        <Input value={`http://localhost:3000/post/${user}/${_id}`} id="inputField" />
+                        <Input value={`https://devinside.netlify.app/post/${user}/${_id}`} id="inputField" />
                         <Tooltip label="Copy to clipboard">
                             <IconButton icon={<AiFillCopy />} onClick={() => navigator.clipboard.writeText(document.getElementById("inputField").value)} />
                         </Tooltip>
