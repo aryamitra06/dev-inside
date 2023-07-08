@@ -55,7 +55,7 @@ router.post("/createprofile", auth, createProfile);
 @access: Private
 @desc: Updating existing profile
 */
-router.put("/editprofile", auth, updateProfile);
+router.post("/editprofile", auth, updateProfile);
 
 /*
 @route: /deleteprofile
@@ -63,7 +63,7 @@ router.put("/editprofile", auth, updateProfile);
 @access: Private
 @desc: Deleting profile
 */
-router.delete("/deleteprofile", auth, deleteProfile);
+router.post("/deleteprofile", auth, deleteProfile);
 
 /*
 @route: /addexperience
@@ -71,7 +71,7 @@ router.delete("/deleteprofile", auth, deleteProfile);
 @access: Private
 @desc: Add profile experience
 */
-router.put("/addexperience", auth, addProfileExperience)
+router.post("/addexperience", auth, addProfileExperience)
 
 /*
 @route: /deleteexperience
@@ -79,7 +79,7 @@ router.put("/addexperience", auth, addProfileExperience)
 @access: Private
 @desc: Delete profile experience
 */
-router.delete("/deleteexperience/:id", auth, deleteProfileExperience)
+router.post("/deleteexperience/:id", auth, deleteProfileExperience)
 
 /*
 @route: /addeducation
@@ -87,7 +87,7 @@ router.delete("/deleteexperience/:id", auth, deleteProfileExperience)
 @access: Private
 @desc: Add profile education
 */
-router.put("/addeducation", auth, addProfileEducation)
+router.post("/addeducation", auth, addProfileEducation)
 
 /*
 @route: /deleteeducation/:id
@@ -95,7 +95,7 @@ router.put("/addeducation", auth, addProfileEducation)
 @access: Private
 @desc: Delete profile education
 */
-router.delete("/deleteeducation/:id", auth, deleteProfileEducation);
+router.post("/deleteeducation/:id", auth, deleteProfileEducation);
 
 /*
 @route: /github/:username
