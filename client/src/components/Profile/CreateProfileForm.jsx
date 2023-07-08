@@ -77,12 +77,11 @@ export default function CreateProfileForm({ profileReducer }) {
                     <FormControl isRequired>
                         <FormLabel>professional Status</FormLabel>
                         <Select placeholder='Select option' name='status' value={status} onChange={(e) => onChange(e)} isDisabled={isFormSubmitting}>
-                            <option value='Junior Software Developer'>Junior Software Developer</option>
-                            <option value='Senior Software Developer'>Senior Software Developer</option>
-                            <option value='Manager'>Manager</option>
                             <option value='Student'>Student</option>
-                            <option value='Instructor'>Instructor</option>
                             <option value='Intern'>Intern</option>
+                            <option value='Software Engineer'>Software Engineer</option>
+                            <option value='Instructor'>Instructor</option>
+                            <option value='Manager'>Manager</option>
                             <option value='Other'>Other</option>
                         </Select>
                         <FormHelperText>Give us an idea of where your are at in your career</FormHelperText>
