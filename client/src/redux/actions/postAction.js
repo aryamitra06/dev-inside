@@ -5,7 +5,7 @@ import { tokenGetter } from "../../utils/tokenExtractor";
 export const allPostsAction = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_POSTS_REQUEST });
-        const response = await axios.get("http://localhost:5000/posts");
+        const response = await axios.get("https://devinside-backend-service.onrender.com/posts");
         dispatch({ type: ALL_POSTS_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: ALL_POSTS_FAIL, payload: error.response.data });
@@ -15,7 +15,7 @@ export const allPostsAction = () => async (dispatch) => {
 export const postByIdAction = (id) => async (dispatch) => {
     try {
         dispatch({ type: POST_BY_ID_REQUEST });
-        const response = await axios.get(`http://localhost:5000/post/${id}`);
+        const response = await axios.get(`https://devinside-backend-service.onrender.com/post/${id}`);
         dispatch({ type: POST_BY_ID_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: POST_BY_ID_FAIL, payload: error.response.data });
@@ -24,7 +24,7 @@ export const postByIdAction = (id) => async (dispatch) => {
 export const newPostAction = (formData, onClose, resetPostHandler) => async (dispatch) => {
     try {
         dispatch({ type: NEW_POST_REQUEST });
-        const response = await axios.post("http://localhost:5000/newpost", formData, { headers: { authorization: tokenGetter() } });
+        const response = await axios.post("https://devinside-backend-service.onrender.com/newpost", formData, { headers: { authorization: tokenGetter() } });
         dispatch({ type: NEW_POST_SUCCESS, payload: response.data });
         onClose();
         resetPostHandler();
