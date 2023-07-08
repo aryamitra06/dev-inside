@@ -34,7 +34,7 @@ router.get("/post/:id", getPostById);
 @access: Private
 @desc: Deleting post by id
 */
-router.post("/post/delete/:id", auth, deletePost);
+router.delete("/post/delete/:id", auth, deletePost);
 
 /*
 @route: /comment/new/:id
@@ -50,7 +50,7 @@ router.post("/comment/new/:id", auth, addNewComment);
 @access: Private
 @desc: Deleting a comment
 */
-router.post("/comment/delete/:post_id/:comment_id", auth, deleteComment);
+router.delete("/comment/delete/:post_id/:comment_id", auth, deleteComment);
 
 /*
 @route: /like/new/:id
@@ -58,7 +58,7 @@ router.post("/comment/delete/:post_id/:comment_id", auth, deleteComment);
 @access: Private
 @desc: Liking a post
 */
-router.post("/like/new/:id", auth, likePost);
+router.put("/like/new/:id", auth, likePost);
 
 /*
 @route: /unlike/:id
@@ -66,6 +66,6 @@ router.post("/like/new/:id", auth, likePost);
 @access: Private
 @desc: Unliking a post
 */
-router.post("/unlike/:id", auth, unlikePost);
+router.put("/unlike/:id", auth, unlikePost);
 
 export default router;

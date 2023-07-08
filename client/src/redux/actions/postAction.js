@@ -36,7 +36,7 @@ export const newPostAction = (formData, onClose, resetPostHandler) => async (dis
 export const addLikeAction = (postId) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_LIKES_REQUEST });
-        const response = await axios.post(`/like/new/${postId}`, postId, { headers: { authorization: tokenGetter() } });
+        const response = await axios.put(`/like/new/${postId}`, postId, { headers: { authorization: tokenGetter() } });
         dispatch({ type: UPDATE_LIKES_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: UPDATE_LIKES_FAIL, payload: error.response.data });
@@ -46,7 +46,7 @@ export const addLikeAction = (postId) => async (dispatch) => {
 export const unLikeAction = (postId) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_LIKES_REQUEST });
-        const response = await axios.post(`/unlike/${postId}`, postId, { headers: { authorization: tokenGetter() } });
+        const response = await axios.put(`/unlike/${postId}`, postId, { headers: { authorization: tokenGetter() } });
         dispatch({ type: UPDATE_LIKES_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: UPDATE_LIKES_FAIL, payload: error.response.data });
@@ -56,7 +56,7 @@ export const unLikeAction = (postId) => async (dispatch) => {
 export const deletePostAction = (postId, navigate) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_POST_REQUEST });
-        await axios.post(`/post/delete/${postId}`, { headers: { authorization: tokenGetter() } });
+        await axios.delete(`/post/delete/${postId}`, { headers: { authorization: tokenGetter() } });
         dispatch({ type: DELETE_POST_SUCCESS, payload: postId });
         navigate("/");
     } catch (error) {
@@ -78,7 +78,7 @@ export const addCommentAction = (postId, formData, resetCommentHandler) => async
 export const deleteCommentAction = (postId, commentId) => async (dispatch) => {
     try {
         dispatch({ type: REMOVE_COMMENT_REQUEST });
-        await axios.post(`/comment/delete/${postId}/${commentId}`, { headers: { authorization: tokenGetter() } });
+        await axios.delete(`/comment/delete/${postId}/${commentId}`, { headers: { authorization: tokenGetter() } });
         dispatch({ type: REMOVE_COMMENT_SUCCESS, payload: commentId });
     } catch (error) {
         dispatch({ type: REMOVE_COMMENT_FAIL, payload: error.response.data });

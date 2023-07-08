@@ -26,7 +26,7 @@ export const createProfileAction = (formData, navigate) => async (dispatch) => {
 export const editProfileAction = (formData) => async (dispatch) => {
     try {
         dispatch({ type: EDIT_PROFILE_REQUEST });
-        const response = await axios.post("https://devinside-backend-service.onrender.com/editprofile", formData, { headers: { authorization: tokenGetter() } });
+        const response = await axios.put("https://devinside-backend-service.onrender.com/editprofile", formData, { headers: { authorization: tokenGetter() } });
         dispatch({ type: EDIT_PROFILE_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: EDIT_PROFILE_FAIL, payload: error.response.data });
@@ -36,7 +36,7 @@ export const editProfileAction = (formData) => async (dispatch) => {
 export const addExpAction = (formData, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADD_EXP_REQUEST });
-        const response = await axios.post("https://devinside-backend-service.onrender.com/addexperience", formData, { headers: { authorization: tokenGetter() } });
+        const response = await axios.put("https://devinside-backend-service.onrender.com/addexperience", formData, { headers: { authorization: tokenGetter() } });
         dispatch({ type: ADD_EXP_SUCCESS, payload: response.data });
         navigate("/dashboard");
     } catch (error) {
@@ -47,7 +47,7 @@ export const addExpAction = (formData, navigate) => async (dispatch) => {
 export const addEduAction = (formData, navigate) => async (dispatch) => {
     try {
         dispatch({ type: ADD_EDU_REQUEST });
-        const response = await axios.post("https://devinside-backend-service.onrender.com/addeducation", formData, { headers: { authorization: tokenGetter() } });
+        const response = await axios.put("https://devinside-backend-service.onrender.com/addeducation", formData, { headers: { authorization: tokenGetter() } });
         dispatch({ type: ADD_EDU_SUCCESS, payload: response.data });
         navigate("/dashboard");
     } catch (error) {
@@ -58,7 +58,7 @@ export const addEduAction = (formData, navigate) => async (dispatch) => {
 export const deleteExpAction = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_EXP_REQUEST });
-        await axios.post(`https://devinside-backend-service.onrender.com/deleteexperience/${id}`, { headers: { authorization: tokenGetter() } });
+        await axios.delete(`https://devinside-backend-service.onrender.com/deleteexperience/${id}`, { headers: { authorization: tokenGetter() } });
         dispatch({ type: DELETE_EXP_SUCCESS, payload: id });
     } catch (error) {
         dispatch({ type: DELETE_EXP_FAIL, payload: error.response.data });
@@ -68,7 +68,7 @@ export const deleteExpAction = (id) => async (dispatch) => {
 export const deleteEduAction = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_EDU_REQUEST });
-        await axios.post(`https://devinside-backend-service.onrender.com/deleteeducation/${id}`, { headers: { authorization: tokenGetter() } });
+        await axios.delete(`https://devinside-backend-service.onrender.com/deleteeducation/${id}`, { headers: { authorization: tokenGetter() } });
         dispatch({ type: DELETE_EDU_SUCCESS, payload: id });
     } catch (error) {
         dispatch({ type: DELETE_EDU_FAIL, payload: error.response.data });
