@@ -103,6 +103,7 @@ export default function EditProfileForm({ profileReducer }) {
                         <option value='Student'>Student</option>
                             <option value='Intern'>Intern</option>
                             <option value='Software Engineer'>Software Engineer</option>
+                            <option value='Analyst'>Analyst</option>
                             <option value='Instructor'>Instructor</option>
                             <option value='Manager'>Manager</option>
                             <option value='Other'>Other</option>

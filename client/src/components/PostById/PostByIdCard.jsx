@@ -143,6 +143,7 @@ const PostByIdCard = ({ postReducer }) => {
                                 <Fragment>
 
                                     <Card overflow={"hidden"}>
+                                    <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"5px"} />
                                         {
                                             cover && (
                                                 <Image
@@ -179,19 +180,19 @@ const PostByIdCard = ({ postReducer }) => {
                                             {
                                                 hasLoggedInUserLiked ? (
                                                     <Button onClick={unLikePost} isDisabled={isLikeUpdating || !idGetter()} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="solid" colorScheme={"blue"} fontWeight={"bold"} leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
-                                                        Clap ({likes?.length})
+                                                        <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>Clap&nbsp;</Box>{likes?.length}
                                                     </Button>
                                                 ) : (
                                                     <Button onClick={likePost} isDisabled={isLikeUpdating || !idGetter()} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="outline" leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
-                                                        Clap ({likes?.length})
+                                                        <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>Clap&nbsp;</Box>{likes?.length > 0 && likes?.length}
                                                     </Button>
                                                 )
                                             }
-                                            <Button variant='outline' leftIcon={<FontAwesomeIcon icon={faComments} />} width={"100%"}>
-                                                Discuss ({comments?.length})
+                                            <Button variant='outline' leftIcon={<FontAwesomeIcon icon={faComments} />} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} width={"100%"}>
+                                                <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>Discuss&nbsp;</Box>{comments?.length > 0 && comments?.length}
                                             </Button>
-                                            <Button onClick={onOpenShare} variant='outline' leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
-                                                Share
+                                            <Button onClick={onOpenShare} variant='outline' leftIcon={<FontAwesomeIcon icon={faShare} />} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} width={"100%"}>
+                                                <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>Share</Box>
                                             </Button>
                                         </Box>
                                     </Card>

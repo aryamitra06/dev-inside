@@ -80,6 +80,8 @@ export default function AddExpForm() {
                         <FormLabel>To Date</FormLabel>
                         <Input type='date' name='to' isDisabled={disableToDate || isFormSubmitting} value={to} onChange={(e) => onChange(e)} />
                         <FormHelperText>Could be your end date of the company</FormHelperText>
+                    </FormControl>
+                    <FormControl>
                         <Checkbox mt={2} onChange={(e) => handleCurrentJobChange(e)} isDisabled={isFormSubmitting}>Current Job</Checkbox>
                     </FormControl>
                     <FormControl>

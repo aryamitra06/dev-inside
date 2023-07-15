@@ -141,6 +141,7 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
     return (
         <Fragment>
             <Card>
+                <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"5px"} borderRadius={"0.375rem 0.375rem 0  0"}/>
                 <CardHeader>
                     <Flex spacing='4'>
                         <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
@@ -170,7 +171,7 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
                     </Text>
                 </CardBody>
                 <Text display={"flex"} justifyContent={"flex-end"} p={5}>
-                    {expandText?.length === 300 && <Button size={"sm"} onClick={readMoreHandler}>Read More</Button>}
+                    {expandText?.length === 300 && <Button size={"sm"} onClick={readMoreHandler} variant={"outline"}>Read More</Button>}
                     {showLessBtn && <Button size={"sm"} onClick={showLessHandler}>Show Less</Button>}
                 </Text>
                 {
@@ -187,20 +188,20 @@ export default function PostCard({ postData, isLikeUpdating, isDeleting }) {
                 <Box display={"flex"} alignItems={"center"} justifyContent={"space-around"} gap={2} p={2}>
                     {
                         hasLoggedInUserLiked ? (
-                            <Button onClick={unLikePost} isDisabled={isLikeUpdating || !tokenGetter()} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="solid" colorScheme={"blue"} fontWeight={"bold"} leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
-                                Clap ({likes?.length})
+                            <Button onClick={unLikePost} isDisabled={isLikeUpdating || !idGetter()} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="solid" colorScheme={"blue"} fontWeight={"bold"} leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
+                                <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>Clap&nbsp;</Box>{likes?.length}
                             </Button>
                         ) : (
-                            <Button onClick={likePost} isDisabled={isLikeUpdating || !tokenGetter()} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="outline" leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
-                                Clap ({likes?.length})
+                            <Button onClick={likePost} isDisabled={isLikeUpdating || !idGetter()} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="outline" leftIcon={<FontAwesomeIcon icon={faHandsClapping} />} width={"100%"}>
+                                <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>Clap </Box>{likes?.length > 0 && likes?.length}
                             </Button>
                         )
                     }
                     <Button onClick={fullPostNavigator} variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faComments} />} width={"100%"}>
-                        Discuss ({comments?.length})
+                        <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>Discuss&nbsp;</Box>{comments?.length > 0 && comments?.length}
                     </Button>
                     <Button onClick={onOpenShare} variant='outline' size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<FontAwesomeIcon icon={faShare} />} width={"100%"}>
-                        Share
+                        <Box display={{ base: "none", sm: "none", md: "block", lg: "block", xl: "block" }}>Share</Box>
                     </Button>
                 </Box>
             </Card>

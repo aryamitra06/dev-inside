@@ -45,7 +45,7 @@ export default function AddEduForm() {
         else {
             formData.current = false;
         }
-        await dispatch(addEduAction(formData));
+        await dispatch(addEduAction(formData, navigate));
         await navigate("/dashboard");
     }
 
@@ -81,6 +81,8 @@ export default function AddEduForm() {
                         <FormLabel>To Date</FormLabel>
                         <Input type='date' name='to' isDisabled={disableToDate || isFormSubmitting} value={to} onChange={(e) => onChange(e)} />
                         <FormHelperText>Could be your end date of the institute</FormHelperText>
+                    </FormControl>
+                    <FormControl>
                         <Checkbox mt={2} onChange={(e) => handleCurrentJobChange(e)} isDisabled={isFormSubmitting}>Current Institute</Checkbox>
                     </FormControl>
                     <FormControl>

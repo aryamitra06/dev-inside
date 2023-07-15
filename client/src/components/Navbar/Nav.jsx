@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import {
   Box,
   Flex,
@@ -32,9 +31,11 @@ import logo_light_mode from "../../static/logo_light_mode.svg";
 import SettingsModal from './SettingsModal';
 import { Link } from 'react-router-dom';
 import { idGetter, tokenGetter, nameGetter, avatarGetter } from '../../utils/tokenExtractor';
-import { BiNews } from "react-icons/bi";
+import { BiLogIn, BiNews } from "react-icons/bi";
 import { AiOutlineLogout, AiFillEye, AiFillSetting } from "react-icons/ai";
 import { MdOutlineAutoGraph } from "react-icons/md";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faColonSign } from '@fortawesome/free-solid-svg-icons';
 
 export default function Nav() {
   const { colorMode } = useColorMode();
@@ -44,7 +45,7 @@ export default function Nav() {
     localStorage.removeItem('token');
     window.location.href = "/login";
   }
-  
+
   const Navbar = () => {
     return (
       <Flex h={14} alignItems={'center'} justifyContent={'space-between'}>
@@ -127,7 +128,11 @@ export default function Nav() {
               </HStack>
             ) : (
               <>
-                <Link to={"/login"}><Button colorScheme='blue' variant={"outline"} size={"sm"}>Login</Button></Link>
+                <Link to={"/login"}>
+                  <Button size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} variant="outline" colorScheme={"blue"} fontWeight={"bold"} leftIcon={<BiLogIn/>} >
+                    Login
+                  </Button>
+                </Link>
               </>
             )
           }
@@ -138,7 +143,7 @@ export default function Nav() {
 
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} position={"sticky"} top={0} zIndex={1}>
+      <Box style={{backdropFilter: "blur(14px)"}} px={4} position={"sticky"} top={0} zIndex={1}>
         <Container maxW={{ sm: "7xl", md: "7xl", lg: "7xl", xl: "7xl" }} display={{ base: "none", sm: "block", md: "block", lg: "block", xl: "block" }}>
           {Navbar()}
         </Container>

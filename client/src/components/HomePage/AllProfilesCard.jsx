@@ -32,7 +32,7 @@ const AllProfilesCard = ({ profileReducer }) => {
     return (
         <Fragment>
             <Card variant={"filled"} overflow={"hidden"} borderRadius={"xl"}>
-            <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"13px"} />
+            <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"5px"} />
             <Box p={3}>
                 <Text fontSize={"xl"} fontWeight={"bold"} mb={3}>TOP DEVINSIDERS</Text>
                 {

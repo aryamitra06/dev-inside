@@ -23,7 +23,7 @@ const PostProfileOverviewCard = ({ profileReducer }) => {
                 </Alert>
               ) : (
                 <Card variant={"filled"} borderRadius={"xl"} overflow={"hidden"} mb={5}>
-                  <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"13px"} />
+                  <Box bgGradient='linear(to-l, #5433FF, #20BDFF)' height={"5px"} />
                   <Box display={"flex"} alignItems={"center"} flexDirection={"column"} justifyContent={"center"} mt={6}>
                     <Link to={`/profile/${profileById?.user?._id}`}><Avatar src={profileById?.user?.avatar} size={"lg"} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} shadow={"md"} /></Link>
                     <Link to={`/profile/${profileById?.user?._id}`}><Text mt={1} fontSize={"xl"} fontWeight={"bold"}>{profileById?.user?.name}</Text></Link>

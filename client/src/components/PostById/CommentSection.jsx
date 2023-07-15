@@ -58,7 +58,7 @@ function CommentSection({ postReducer }) {
                 comments?.map((e) => (
                     <Box pl={5} pr={5} mb={3} key={e?._id}>
                         <Box display={"flex"} gap={3}>
-                            <Avatar size={"sm"} src={e?.avatar} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"}/>
+                            <Avatar size={"sm"} src={e?.avatar} bgGradient='linear(to-l, #85E7FC, #90CDF4)' p={"3px"} />
                             <Box width={"100%"}>
                                 <Card variant={"outline"} p={3}>
                                     <HStack justifyContent={"space-between"}>
@@ -87,7 +87,12 @@ function CommentSection({ postReducer }) {
     )
     return (
         <Fragment>
-            <Text fontSize={"2xl"} fontWeight={"bold"} p={5}>Discussions ({comments?.length})</Text>
+            <Text fontSize={"2xl"} fontWeight={"bold"} p={5}>Discussions {comments?.length > 0 && `(${comments?.length})`}</Text>
+            {
+                comments?.length === 0 && tokenGetter() && (
+                    <Text fontSize={"md"} pt={0} pb={5} pl={5} pr={5} style={{fontStyle: "italic"}}>Be the first to start discussion!</Text>
+                )
+            }
             {
                 tokenGetter() ? (
                     <Box pl={5} pr={5} mb={3}>

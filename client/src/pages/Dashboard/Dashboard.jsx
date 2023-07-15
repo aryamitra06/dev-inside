@@ -71,7 +71,7 @@ export default function Dashboard() {
             <>
                 <Link to={"/dashboard/add-experience"}>
                     <Box display={"flex"} justifyContent={"flex-end"}>
-                        <Button colorScheme={"blue"} variant={"outline"} mb={4} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Experience</Button>
+                        <Button colorScheme={"blue"} variant={"ghost"} mb={4} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Experience</Button>
                     </Box>
                 </Link>
                 <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={3}>
@@ -98,7 +98,7 @@ export default function Dashboard() {
             <>
                 <Link to={"/dashboard/add-education"}>
                     <Box display={"flex"} justifyContent={"flex-end"}>
-                        <Button colorScheme={"blue"} variant={"outline"} mb={4} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Education</Button>
+                        <Button colorScheme={"blue"} variant={"ghost"} mb={4} size={{ base: "sm", sm: "sm", md: "md", lg: "md", xl: "md" }} leftIcon={<MdAdd />}>Education</Button>
                     </Box>
                 </Link>
                 <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }} spacing={3}>
